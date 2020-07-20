@@ -2,8 +2,23 @@ body {
   background-color: #c19c9c;
   width: 100vw;
 }
+.appTitle {
+  width: 637px;
+  height: 76px;
+
+  font-family: Strong;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 64px;
+  line-height: 76px;
+
+  /* Gray 1 */
+
+  color: #333333;
+  mix-blend-mode: darken;
+}
 .mainPage {
-  align-self: center;
+  align-self: flex-start;
   margin: auto;
 
   width: 1200px;
@@ -18,6 +33,23 @@ body {
 .btnAddNew {
   width: 490px;
   height: 65px;
-
+  font-size: 35px;
   background: #d3c9c9;
+}
+.btnAddNew button:hover {
+  background: #363333;
+}
+.mainbackground {
+  width: 1200px;
+  height: 1024px;
+
+  background: rgba(255, 255, 255, 0.78);
+  /* Yellow */
+
+  border: 1px solid #f2c94c;
+  box-sizing: border-box;
+  margin: auto;
+}
+.leftSide {
+  width: 600px;
 }
