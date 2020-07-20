@@ -53,3 +53,9 @@ body {
 .leftSide {
   width: 600px;
 }
+.upcomingCards {
+  width: 491px;
+  height: 114px;
+
+  background: #e2dcdc;
+}
