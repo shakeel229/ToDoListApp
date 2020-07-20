@@ -1,0 +1,23 @@
+body {
+  background-color: #c19c9c;
+  width: 100vw;
+}
+.mainPage {
+  align-self: center;
+  margin: auto;
+
+  width: 1200px;
+  height: 1024px;
+
+  background: rgba(255, 255, 255, 0.78);
+  /* Yellow */
+
+  border: 1px solid #f2c94c;
+  box-sizing: border-box;
+}
+.btnAddNew {
+  width: 490px;
+  height: 65px;
+
+  background: #d3c9c9;
+}
