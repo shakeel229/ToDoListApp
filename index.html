@@ -21,29 +21,107 @@
     <title>To Do List App</title>
   </head>
 <body>
-  <div class="mainbackground">
-    <div class="mb-20">
-      <div class="row justify-content-center ">
-        <div class="col-xs-12 mb-20">
-      
-          <h1 class="text-center AppTitle" style="width: 100% ; background-color: blueviolet; border-radius: 0.2em;"> Task Planner </h1>
-       </div>
+  <div class="mainbackground mb-20">
+    <!-- expirement of divs -->
+    <!-- expirement of divs -->
+    <div style="width: 100%;">
+      <div class="mb-20">
+        <div class="row justify-content-center ">
+          <div class="col-xs-12 mb-20">
+        
+            <h1 class="text-center AppTitle" style="width: 100% ; background-color: blueviolet; border-radius: 0.2em;"> Task Planner </h1>
+         </div>
+      </div>
+      <div style="width: 50%; margin-left: 10px; float: left; background: green;"> 
+        <button class="AddNewBtn with-shadow colorStyle" data-toggle="modal" data-target="#NewTask" ><strong>Add New Task</strong></button>
+        <h2>Today's Tasks</h2>
+        <!-- Second row starts here that has two columns 1. Today's second task 2. Second upcoming task of teh week-->
+<div class="row ml-4 no-gutters" >
+  <div class="col-sm-12 ">
+    <div class="card">
+      <div class="card-header" id="head2">
+        <h2 class="mb-0 text-left" style="text-decoration: none;">
+          <button id="b2"class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
+            <strong><h5 class="text-center" style="text-decoration: none;">Grocery Shopping</h5></strong> 
+          </button>
+        </h2>
+      </div>
+      <div id="collapse2" class="collapse" aria-labelledby="head2" >
+        <div class="card-body" style="width: rem;" >
+          <h5 class="card-title">This is Important!</h5>
+          <ul class="list-group ">
+            <li class="list-group-item">Assigned to : Ayushi Karn</li>
+            <li class="list-group-item">Time : 01:00 PM</li>
+            <li class="list-group-item">
+               <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Status
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" href="#">TO DO</a>
+                  <a class="dropdown-item" href="#">In progress</a>
+                  <a class="dropdown-item" href="#">REVIEW</a>
+                  <a class="dropdown-item" href="#">DONE</a>
+                </div>
+              </div>
+            </li>
+            <li class="list-group-item"><button class="btn btn-primary">Edit</button></li>
+          </ul>
+          
+        </div>
+      </div>
     </div>
+   </div>
   
-<!-- left side div -->
+</div>
+      </div>
+      <div style="margin-left: 50%;  background: blue;"> 
+        <h1> </h1><br>
+        <h1> </h1><br>
+        <h2 class="text-center">Upcoming Tasks</h2>
+        <div class="col-sm-12">
+          <div class="card mx-4">
+            <div class="card-header" id="head22">
+              <h2 class="mb-0 text-left" style="text-decoration: none;">
+                <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapse22" aria-expanded="false" aria-controls="collapse22">
+                  <strong><h3 style="text-decoration: none;">Thursday</h3></strong> 
+                </button>
+              </h2>
+            </div>
+            <div id="collapse22" class="collapse" aria-labelledby="head22" >
+              <div class="card-body" style="width: rem;" >
+                <h5 class="card-title">Meet Adam</h5>
+                <ul class="list-group ">
+                  <li class="list-group-item">Assigned to : Ayushi Karn</li>
+                  <li class="list-group-item"> Time : 11:00 AM</li>
+                  <li class="list-group-item">Status : TO DO</li>
+                  <li class="list-group-item"><button class="btn btn-primary">Edit</button></li>
+                </ul>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+    <!-- expirement of divs -->
+
+    
+  
+<!-- left side div
   <div class="row ml-4 no-gutters my-20">
     <div class="col-sm-6">
-      <!-- <button class="btnAddNew">Add New <i class="fas fa-plus"></i></i></button> -->
+      
       <button class="AddNewBtn with-shadow colorStyle" data-toggle="modal" data-target="#NewTask" ><strong>Add New Task</strong></button>
       <h2>Today's Tasks</h2>
     </div>
-<!-- upcoming side part on right -->
-    <div class="col-sm-6" id="UP">
+ upcoming side part on right -->
+    <!-- <div class="col-sm-6" id="UP">
       <h2 class="align-text-bottom">Upcoming Tasks</h2>
     </div>
-  </div>
+  </div> --> 
 <!-- column on left side with the task card details -->
-  </div>
+  <!-- </div> -->
 <!-- First Row starts here that has two columns 1. Today's first task 2. first upcoming task of teh week-->
   <div class="row ml-4 no-gutters" >
     <div class="col-md-6 ">
@@ -105,7 +183,7 @@
       </div>
     </div>
   </div>
-<!-- First Row Ends here -->
+
 <!-- Second row starts here that has two columns 1. Today's second task 2. Second upcoming task of teh week-->
 <div class="row ml-4 no-gutters" >
   <div class="col-md-6 ">
