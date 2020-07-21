@@ -30,15 +30,50 @@ body {
   border: 1px solid #f2c94c;
   box-sizing: border-box;
 }
-.btnAddNew {
-  width: 580px;
-  height: 65px;
-  font-size: 35px;
-  background: #d3c9c9;
+/* ADD NEW TASK BUTTON ALL CSS   */
+.AddNewBtn {
+  letter-spacing: 1px;
+  font-size: 12px;
+  display: inline-block;
+  position: relative;
+  border-radius: 2px;
+  overflow: hidden;
+  -webkit-transition: 0.2s ease-out;
+  transition: 0.2s ease-out;
+  font-family: sans-serif;
+  cursor: pointer;
+  border: none;
+  padding: 12px 20px 12px 20px;
+  margin: 5px;
+  background-color: transparent;
+  text-align: center;
+  color: #444;
 }
-.btnAddNew button:hover {
-  background: #363333;
+.AddNewBtn:focus {
+  outline: none;
 }
+.with-shadow {
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.35), 0 1px 1px 0 rgba(0, 0, 0, 0.59);
+  background-color: rgba(255, 255, 255, 0.3);
+}
+.AddNewBtn:hover {
+  box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.3), 0 15px 15px 0 rgba(0, 0, 0, 0.4);
+  background-color: #fff !important;
+  color: #222 !important;
+}
+.AddNewBtn:active {
+  -webkit-transition: 0.05s ease-out;
+  transition: 0.05s ease-out;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.44), 0 1px 1px 0 rgba(0, 0, 0, 0.68);
+}
+.colorStyle {
+  background-color: #4caf50;
+  color: white;
+  font-size: large;
+  border-radius: 2rem;
+}
+/* end of button css */
+
 .mainbackground {
   width: 1200px;
   height: 1024px;
@@ -59,13 +94,12 @@ body {
 
   background: #e2dcdc;
 }
-#UP{
+#UP {
   padding-top: 20px;
   text-align: bottom;
 }
-#head1{
+#head1 {
   text-decoration: none;
-  
 }
 
 #cardcol1 {
@@ -85,12 +119,12 @@ body {
   background: #d3c9c9;
 }
 
-#head1{
+#head1 {
   text-decoration: none;
   color: #363333;
 }
 
-#collapse1{
+#collapse1 {
   text-decoration: none;
   color: #333333;
 }
@@ -100,32 +134,26 @@ body {
   text-decoration: none;
   color: #363333;
 }
-#b1{
+#b1 {
   text-decoration: none;
   color: #363333;
-
 }
-#b2{
+#b2 {
   text-decoration: none;
   color: #363333;
-
 }
-#b3{
+#b3 {
   text-decoration: none;
   color: #363333;
-
 }
-#b4{
+#b4 {
   text-decoration: none;
   color: #363333;
-
 }
-#b5{
+#b5 {
   text-decoration: none;
   color: #363333;
-
 }
-
 
 #head2 {
   background-color: lightseagreen;
@@ -150,19 +178,32 @@ body {
 }
 
 .card-body {
-  background-color:lightgoldenrodyellow;
+  background-color: lightgoldenrodyellow;
 }
 
-.list-group-item{
-  background-color:lightgoldenrodyellow;
+.list-group-item {
+  background-color: lightgoldenrodyellow;
 }
 
-#head32{
+#head32 {
   background-color: lightskyblue;
 }
-#head22{
+#head22 {
   background-color: lightskyblue;
 }
-#head11{
+#head11 {
   background-color: lightskyblue;
+}
+
+/* forms fields changing BACKGROUND color */
+input:not(:placeholder-shown) {
+  background-color: #96d3ec !important;
+}
+
+input:placeholder-shown {
+  background-color: #96d3ec !important;
+}
+input,
+textarea {
+  background-color: #96d3ec !important;
 }
