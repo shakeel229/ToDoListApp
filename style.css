@@ -31,7 +31,7 @@ body {
   box-sizing: border-box;
 }
 .btnAddNew {
-  width: 490px;
+  width: 580px;
   height: 65px;
   font-size: 35px;
   background: #d3c9c9;
@@ -58,4 +58,111 @@ body {
   height: 114px;
 
   background: #e2dcdc;
+}
+#UP{
+  padding-top: 20px;
+  text-align: bottom;
+}
+#head1{
+  text-decoration: none;
+  
+}
+
+#cardcol1 {
+  list-style: none;
+  border: none;
+  background: #d3c9c9;
+}
+#cardcol2 {
+  list-style: none;
+  border: none;
+  background: #d3c9c9;
+}
+
+#cardcol3 {
+  list-style: none;
+  border: none;
+  background: #d3c9c9;
+}
+
+#head1{
+  text-decoration: none;
+  color: #363333;
+}
+
+#collapse1{
+  text-decoration: none;
+  color: #333333;
+}
+
+#head1 {
+  background-color: lightcoral;
+  text-decoration: none;
+  color: #363333;
+}
+#b1{
+  text-decoration: none;
+  color: #363333;
+
+}
+#b2{
+  text-decoration: none;
+  color: #363333;
+
+}
+#b3{
+  text-decoration: none;
+  color: #363333;
+
+}
+#b4{
+  text-decoration: none;
+  color: #363333;
+
+}
+#b5{
+  text-decoration: none;
+  color: #363333;
+
+}
+
+
+#head2 {
+  background-color: lightseagreen;
+  text-decoration: none;
+  color: #363333;
+}
+
+#head3 {
+  background-color: lightgreen;
+  text-decoration: none;
+  color: #363333;
+}
+#head4 {
+  background-color: lightpink;
+  text-decoration: none;
+  color: #363333;
+}
+#head5 {
+  background-color: lightsalmon;
+  text-decoration: none;
+  color: #363333;
+}
+
+.card-body {
+  background-color:lightgoldenrodyellow;
+}
+
+.list-group-item{
+  background-color:lightgoldenrodyellow;
+}
+
+#head32{
+  background-color: lightskyblue;
+}
+#head22{
+  background-color: lightskyblue;
+}
+#head11{
+  background-color: lightskyblue;
 }

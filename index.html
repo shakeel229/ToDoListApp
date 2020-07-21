@@ -20,75 +20,300 @@
     <link rel="stylesheet" href="style.css" />
     <title>To Do List App</title>
   </head>
-  <body>
+<body>
   <div class="mainbackground">
-    <div >
-      <div class="row justify-content-center">
-        <div class="col-xs-12">
+    <div class="mb-20">
+      <div class="row justify-content-center ">
+        <div class="col-xs-12 mb-20">
       
         <h1 class="text-center">To Do List App</h1>
+       </div>
     </div>
-  </div>
-  <!-- left side div -->
-  <div class="row ml-4">
+  
+<!-- left side div -->
+  <div class="row ml-4 no-gutters my-20">
     <div class="col-sm-6">
       <button class="btnAddNew">Add New <i class="fas fa-plus"></i></i></button>
-      <h2>Today</h2>
+      <h2>Today's Tasks</h2>
     </div>
-    <!-- upcoming side part on right -->
-    <div class="col-sm-6">
-    <p> </p><br/>
-      <h2>Upcoming Tasks</h2>
+<!-- upcoming side part on right -->
+    <div class="col-sm-6" id="UP">
+      <h2 class="align-text-bottom">Upcoming Tasks</h2>
     </div>
-    <!-- column on left side with the task card details -->
-    <div class="col-sm-6">
-      <ul class= "row no-gutters " >
-          
-        <li class= "col-sm-6 card "> 
-          <h3>Task Title goes here.</h3>
-         </li>
-        <li lass= "col-md-3 card"> 
-          <a href="#" class="btn btn-primary btn-lg ">View Details</a>
-        </li>
-         
-      </ul> 
-    </div>
-    <!-- upcoming side part 2 card shown -->
-    
-    <div class="col-sm-6">
-     
-      <div class="card mr-4">
-        <div class="card-header">
-          <strong> Wednesday 08/07/2020 </strong>
+  </div>
+<!-- column on left side with the task card details -->
+  </div>
+<!-- First Row starts here that has two columns 1. Today's first task 2. first upcoming task of teh week-->
+  <div class="row ml-4 no-gutters" >
+    <div class="col-md-6 ">
+      <div class="card">
+        <div class="card-header" id="head1">
+          <h2 class="mb-0 text-left" style="text-decoration: none;">
+            <button id="b1" class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
+              <strong><h5 class="text-center" style="text-decoration: none;">Visit Doctor</h5></strong> 
+            </button>
+          </h2>
         </div>
-        <div class="card-body">
-          <h5 class="card-title">Go for Car Wash</h5>
-          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+        <div id="collapse1" class="collapse show" aria-labelledby="head1" >
+          <div class="card-body" style="width: rem;" >
+            <h5 class="card-title">This is urgent!</h5>
+            <ul class="list-group ">
+              <li class="list-group-item">Assigned to: Shakeel Anjum</li>
+              <li class="list-group-item">Time : 11:00 AM</li>
+              <li class="list-group-item">
+                 <div class="dropdown">
+                  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Status
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">TO DO</a>
+                    <a class="dropdown-item" href="#">In progress</a>
+                    <a class="dropdown-item" href="#">REVIEW</a>
+                    <a class="dropdown-item" href="#">DONE</a>
+                  </div>
+                </div>
+              </li>
+              <li class="list-group-item"><button class="btn btn-primary">Edit</button></li>
+            </ul>
+            
+          </div>
+        </div>
+      </div>
+     </div>
+     <div class="col-sm-6">
+      <div class="card mx-4">
+        <div class="card-header" id="head11">
+          <h2 class="mb-0 text-left" style="text-decoration: none;">
+            <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapse11" aria-expanded="false" aria-controls="collapse11">
+              <strong><h3 style="text-decoration: none;">Wednesday</h3></strong> 
+            </button>
+          </h2>
+        </div>
+        <div id="collapse11" class="collapse" aria-labelledby="head11" >
+          <div class="card-body" style="width: rem;" >
+            <h5 class="card-title">Attend Conference</h5>
+            <ul class="list-group ">
+              <li class="list-group-item">Assigned to : Ayushi Karn</li>
+              <li class="list-group-item"> Time : 11:00 AM</li>
+              <li class="list-group-item">Status : TO DO</li>
+              <li class="list-group-item"><button class="btn btn-primary">Edit</button></li>
+            </ul>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- First Row Ends here -->
+<!-- Second row starts here that has two columns 1. Today's second task 2. Second upcoming task of teh week-->
+<div class="row ml-4 no-gutters" >
+  <div class="col-md-6 ">
+    <div class="card">
+      <div class="card-header" id="head2">
+        <h2 class="mb-0 text-left" style="text-decoration: none;">
+          <button id="b2"class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
+            <strong><h5 class="text-center" style="text-decoration: none;">Grocery Shopping</h5></strong> 
+          </button>
+        </h2>
+      </div>
+      <div id="collapse2" class="collapse" aria-labelledby="head2" >
+        <div class="card-body" style="width: rem;" >
+          <h5 class="card-title">This is Important!</h5>
+          <ul class="list-group ">
+            <li class="list-group-item">Assigned to : Ayushi Karn</li>
+            <li class="list-group-item">Time : 01:00 PM</li>
+            <li class="list-group-item">
+               <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Status
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" href="#">TO DO</a>
+                  <a class="dropdown-item" href="#">In progress</a>
+                  <a class="dropdown-item" href="#">REVIEW</a>
+                  <a class="dropdown-item" href="#">DONE</a>
+                </div>
+              </div>
+            </li>
+            <li class="list-group-item"><button class="btn btn-primary">Edit</button></li>
+          </ul>
           
         </div>
       </div>
-      <!-- <button class="upcomingCards"><strong class="text-left">Wednesday 08/07/2020</strong></button> -->
-
+    </div>
+   </div>
+   <div class="col-sm-6">
+    <div class="card mx-4">
+      <div class="card-header" id="head22">
+        <h2 class="mb-0 text-left" style="text-decoration: none;">
+          <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapse22" aria-expanded="false" aria-controls="collapse22">
+            <strong><h3 style="text-decoration: none;">Thursday</h3></strong> 
+          </button>
+        </h2>
       </div>
-  </div>
-  <!-- left side card div -->
-  <div class="row ml-4" style="width: 50%; float: left; ">
-    <div class="col">
-      <ul class= "row no-gutters " >
+      <div id="collapse22" class="collapse" aria-labelledby="head22" >
+        <div class="card-body" style="width: rem;" >
+          <h5 class="card-title">Meet Adam</h5>
+          <ul class="list-group ">
+            <li class="list-group-item">Assigned to : Ayushi Karn</li>
+            <li class="list-group-item"> Time : 11:00 AM</li>
+            <li class="list-group-item">Status : TO DO</li>
+            <li class="list-group-item"><button class="btn btn-primary">Edit</button></li>
+          </ul>
           
-        <li class= "col-sm-6 card "> 
-          <h3>Task Title goes here.</h3>
-         </li>
-        <li lass= "col-md-3 card align-self-end"> 
-          <a href="#" class="btn btn-primary btn-lg ">View Details</a>
-        </li>
-         
-      </ul> 
+        </div>
+      </div>
     </div>
   </div>
-
-
 </div>
+<!-- Second Row Ends here -->
+<!-- Third Row starts with the third task title for today and Third upcoming task-->
+<div class="row ml-4 no-gutters" >
+  <div class="col-md-6 ">
+    <div class="card">
+      <div class="card-header" id="head3">
+        <h2 class="mb-0 text-left" style="text-decoration: none;">
+          <button id="b3"class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
+            <strong><h5 class="text-center" style="text-decoration: none;">Call uncle Sam</h5></strong> 
+          </button>
+        </h2>
+      </div>
+      <div id="collapse3" class="collapse" aria-labelledby="head3" >
+        <div class="card-body" style="width: rem;" >
+          <h5 class="card-title">This is not so urgent!</h5>
+          <ul class="list-group ">
+            <li class="list-group-item">Assigned to : Shakeel Anjum</li>
+            <li class="list-group-item">Time : 07:00 PM</li>
+            <li class="list-group-item">
+               <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Status
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" href="#">TO DO</a>
+                  <a class="dropdown-item" href="#">In progress</a>
+                  <a class="dropdown-item" href="#">REVIEW</a>
+                  <a class="dropdown-item" href="#">DONE</a>
+                </div>
+              </div>
+            </li>
+            <li class="list-group-item"><button class="btn btn-primary">Edit</button></li>
+          </ul>
+          
+        </div>
+      </div>
+    </div>
+   </div>
+   <div class="col-sm-6">
+    <div class="card mx-4">
+      <div class="card-header" id="head32">
+        <h2 class="mb-0 text-left" style="text-decoration: none;">
+          <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapse32" aria-expanded="false" aria-controls="collapse32">
+            <strong><h3 style="text-decoration: none;">Friday</h3></strong> 
+          </button>
+        </h2>
+      </div>
+      <div id="collapse32" class="collapse" aria-labelledby="head32" >
+        <div class="card-body" style="width: rem;" >
+          <h5 class="card-title">Go for Car Wash</h5>
+          <ul class="list-group ">
+            <li class="list-group-item">Assignee : Shakeel Anjum</li>
+            <li class="list-group-item"> Time : 11:00 AM</li>
+            <li class="list-group-item">Status : TO DO</li>
+            <li class="list-group-item"><button class="btn btn-primary">Edit</button></li>
+          </ul>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+ <!-- Third Row Ends here--> 
+
+ <!--Forth Row Starts here-->
+ <div class="row ml-4 no-gutters" >
+  <div class="col-md-6 ">
+     <div class="card">
+       <div class="card-header" id="head4">
+          <h2 class="mb-0 text-left" style="text-decoration: none;">
+          <button id ="b4"class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
+          <strong><h5 class="text-center" style="text-decoration: none;">Clean the Kitchen</h5></strong> 
+        </button>
+      </h2>
+       </div>
+    <div id="collapse4" class="collapse" aria-labelledby="head4" >
+      <div class="card-body" style="width: rem;" >
+        <h5 class="card-title">This is urgent!</h5>
+        <ul class="list-group ">
+          <li class="list-group-item">Assigned to : Ayushi Karn</li>
+          <li class="list-group-item">Time : 06:00 PM</li>
+          <li class="list-group-item">
+             <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Status
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="#">TO DO</a>
+                <a class="dropdown-item" href="#">In progress</a>
+                <a class="dropdown-item" href="#">REVIEW</a>
+                <a class="dropdown-item" href="#">DONE</a>
+              </div>
+            </div>
+          </li>
+          <li class="list-group-item"><button class="btn btn-primary">Edit</button></li>
+        </ul>
+        
+      </div>
+    </div>
+  </div>
+ </div>
+</div>
+ <!--Forth Row ends here-->
+ <!--Fifth Row Starts here -->
+ <div class="row ml-4 no-gutters" >
+  <div class="col-md-6 ">
+     <div class="card">
+       <div class="card-header" id="head5">
+          <h2 class="mb-0 text-left" style="text-decoration: none;">
+          <button id ="b5"class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapse5" aria-expanded="false" aria-controls="collapse5">
+          <strong><h5 class="text-center" style="text-decoration: none;">Write Daily Journal</h5></strong> 
+        </button>
+      </h2>
+       </div>
+    <div id="collapse5" class="collapse" aria-labelledby="head5" >
+      <div class="card-body" style="width: rem;" >
+        <h5 class="card-title">This is urgent!</h5>
+        <ul class="list-group ">
+          <li class="list-group-item">Assigned to : Ayushi Karn</li>
+          <li class="list-group-item">Time : 09:00 PM</li>
+          <li class="list-group-item">
+             <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Status
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="#">TO DO</a>
+                <a class="dropdown-item" href="#">In progress</a>
+                <a class="dropdown-item" href="#">REVIEW</a>
+                <a class="dropdown-item" href="#">DONE</a>
+              </div>
+            </div>
+          </li>
+          <li class="list-group-item"><button class="btn btn-primary">Edit</button></li>
+        </ul>
+        
+      </div>
+    </div>
+  </div>
+ </div>
+</div>
+
+
+
+ <!--Fifth Row Ends here -->
+</div>
+</div>
+
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
