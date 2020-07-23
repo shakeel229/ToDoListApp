@@ -38,7 +38,7 @@
   <div class="row ml-4 no-gutters my-20">
     <div class="col-sm-6">
       
-      <button class="AddNewBtn with-shadow colorStyle" data-toggle="modal" data-target="#NewTask" ><strong>Add New Task</strong></button>
+      <button  class="AddNewBtn with-shadow colorStyle" data-toggle="modal" data-target="#NewTask" ><strong>Add New Task</strong></button>
       <h2>Today's Tasks</h2>
     </div>
 <!-- upcoming side part on right -->
@@ -55,7 +55,7 @@
         <div class="card-header" id="head1">
           <h2 class="mb-0 text-left" style="text-decoration: none;">
             <button id="b1" class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
-              <strong><h5 class="text-center" style="text-decoration: none;">Visit Doctor</h5></strong> 
+              <strong><h5 id ="crdtitle1" class="text-center" style="text-decoration: none;">Visit Doctor</h5></strong> 
             </button>
           </h2>
         </div>
@@ -63,8 +63,8 @@
           <div class="card-body" style="width: rem;" >
             <h5 class="card-title">This is urgent!</h5>
             <ul class="list-group ">
-              <li class="list-group-item">Assigned to: Shakeel Anjum</li>
-              <li class="list-group-item">Time : 11:00 AM</li>
+              <li class="list-group-item" id ="assignedto1">Assigned to: Shakeel Anjum</li>
+              <li class="list-group-item" id="time1">Time : 11:00 AM</li>
               <li class="list-group-item">
                  <div class="dropdown">
                   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -78,7 +78,7 @@
                   </div>
                 </div>
               </li>
-              <li class="list-group-item"><button class="btn btn-primary">Edit</button></li>
+              <li class="list-group-item"><button class="btn btn-primary" data-toggle="modal" data-target = "#NewTask" id="Ebtn1">Edit</button></li>
             </ul>
             
           </div>
@@ -332,7 +332,7 @@
           </div>
           <div class="modal-body">
             <form>
-              <div class="form-group">
+              <div class="form-group" id="title">
                 <label for="Title">Title :</label>
                 <input
                   type="text"
@@ -416,5 +416,6 @@
       integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
       crossorigin="anonymous"
     ></script>
+    <script src="./script.js"></script>
   </body>
 </html>
