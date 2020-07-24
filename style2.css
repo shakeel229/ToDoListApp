@@ -1,0 +1,129 @@
+@import src(https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700);
+
+
+
+* {
+  margin: 0px;
+  padding: 0px;
+  outline: none;
+  -webkit-transition: 0.5s;
+  -moz-transition: 0.5s;
+  -ms-transition: 0.5s;
+  -o-transition: 0.5s;
+  transition: 0.5s;
+}
+body {
+  background: #e2e1e0;
+}
+/* title header of application
+ */
+.titleHeader {
+  font-family: Strong;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 60px;
+  line-height: 76px;
+  background-color: #222527;
+  padding: 10px;
+  /* Gray 1 */
+
+  color: #18a3fc;
+  mix-blend-mode: darken;
+}
+/* left menu css starts form here */
+aside {
+  float: left;
+  height: 100vh;
+  width: 160px;
+  background: #222527;
+}
+
+ul {
+  padding: 0px;
+  margin: 0px;
+  border-bottom: 1px solid #1c1f21;
+}
+
+ul li {
+  list-style-type: none;
+  color: #5a5b5b;
+  padding: 10px;
+  border-bottom: 1px solid #272a2c;
+  border-top: 1px solid #1c1f21;
+  overflow: auto;
+  cursor: pointer;
+  text-align: center;
+}
+
+ul li:first-child {
+  border-top: none;
+  margin-top: 100px;
+}
+
+.fa {
+  color: #18a3fc;
+  display: block;
+}
+
+ul li:hover .fa {
+  color: #0f82da;
+}
+
+ul li:hover .linktitle {
+  text-align: center;
+  color: #6c6d6e;
+}
+
+ul li div {
+  float: left;
+}
+
+.icons {
+  padding: 10px;
+}
+
+.linktitle {
+  line-height: 35px;
+  padding-left: 10px;
+  text-align: center !important;
+}
+
+/* Reponsive menu code */
+@media all and (max-width: 600px) {
+  aside {
+    width: 60px;
+    padding: 0px 10px;
+  }
+
+  ul li {
+    overflow: hidden;
+    padding: 0px 10px;
+  }
+
+  .linktitle {
+    position: absolute;
+    z-index: -1;
+    left: -50px;
+    padding: 29px 15px;
+    line-height: 0px;
+    background: #222527;
+  }
+
+  ul li:hover .linktitle {
+    left: 50px;
+  }
+  .icons {
+    padding: 20px 10px;
+  }
+  .titleHeader {
+    font-size: 50px;
+  }
+  ul li:hover .icons {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+/* left menu code ending  */
