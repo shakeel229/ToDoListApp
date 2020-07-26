@@ -20,6 +20,7 @@ body {
 .titleHeader {
   font-family: Strong;
   font-style: normal;
+  text-align: center;
   font-weight: normal;
   font-size: 60px;
   line-height: 76px;
@@ -37,12 +38,17 @@ aside {
   width: 160px;
   background: #222527;
 }
+section {
+  float: right;
+}
 .mainSection {
   background: #fff;
   border-radius: 2px;
-  display: inline-block;
+  display: block;
 
-  margin: 3rem;
+  margin-top: 1rem;
+  margin-left: 1rem;
+
   position: relative;
   width: 300px;
   box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
@@ -123,10 +129,11 @@ ul li div {
     left: 50px;
   }
   .icons {
-    padding: 20px 10px;
+    padding: 10px 10px;
   }
   .titleHeader {
-    font-size: 50px;
+    font-size: 40px;
+    line-height: 50px;
   }
   ul li:hover .icons {
     -webkit-transform: rotate(360deg);
