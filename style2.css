@@ -12,6 +12,9 @@
   -o-transition: 0.5s;
   transition: 0.5s;
 }
+h1 {
+  margin-bottom: 0rem;
+}
 body {
   background: #e2e1e0;
 }
@@ -26,31 +29,30 @@ body {
   line-height: 76px;
   background-color: #222527;
   padding: 10px;
-  /* Gray 1 */
 
   color: #18a3fc;
   mix-blend-mode: darken;
 }
 /* left menu css starts form here */
 aside {
-  float: left;
   height: 100vh;
-  width: 160px;
+  width: 165px;
+  float: left;
+
   background: #222527;
 }
 section {
-  float: right;
+  position: absolute;
+  margin-top: 20px;
+  margin-right: 20px;
+  width: 88%;
+  left: 170px;
+  height: 100vh;
 }
 .mainSection {
   background: #fff;
   border-radius: 2px;
-  display: block;
-
-  margin-top: 1rem;
-  margin-left: 1rem;
-
-  position: relative;
-  width: 300px;
+  /* margin-left: 10px !important; */
   box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
 }
 
@@ -73,7 +75,6 @@ ul li {
 
 ul li:first-child {
   border-top: none;
-  margin-top: 100px;
 }
 
 .fa {
@@ -110,6 +111,9 @@ ul li div {
     width: 60px;
     padding: 0px 10px;
   }
+  section {
+    left: 70px;
+  }
 
   ul li {
     overflow: hidden;
@@ -127,6 +131,8 @@ ul li div {
 
   ul li:hover .linktitle {
     left: 50px;
+    visibility: visible;
+    z-index: 1;
   }
   .icons {
     padding: 10px 10px;
