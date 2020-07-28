@@ -44,16 +44,20 @@ aside {
 section {
   position: absolute;
   margin-top: 20px;
+  margin-left: 10px;
   margin-right: 20px;
-  width: 88%;
+  width: 85%;
   left: 170px;
-  height: 100vh;
+  margin-bottom: 20px;
 }
 .mainSection {
   background: #fff;
   border-radius: 2px;
   /* margin-left: 10px !important; */
   box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+}
+.Padding20 {
+  padding-left: 20px;
 }
 
 ul {
@@ -104,7 +108,21 @@ ul li div {
   padding-left: 10px;
   text-align: center !important;
 }
-
+#head1 {
+  background-color: lightcoral;
+  text-decoration: none;
+  color: #363333;
+}
+@media all and (max-width: 992px) {
+  section {
+    width: 86%;
+  }
+}
+@media all and (max-width: 768px) {
+  section {
+    width: 73%;
+  }
+}
 /* Reponsive menu code */
 @media all and (max-width: 600px) {
   aside {
@@ -112,6 +130,7 @@ ul li div {
     padding: 0px 10px;
   }
   section {
+    width: 78%;
     left: 70px;
   }
 
@@ -150,3 +169,47 @@ ul li div {
   }
 }
 /* left menu code ending  */
+
+/* ADD NEW TASK BUTTON ALL CSS   */
+.AddNewBtn {
+  letter-spacing: 1px;
+  font-size: 12px;
+  display: inline-block;
+  position: relative;
+  border-radius: 2px;
+  overflow: hidden;
+  -webkit-transition: 0.2s ease-out;
+  transition: 0.2s ease-out;
+  font-family: sans-serif;
+  cursor: pointer;
+  border: none;
+  padding: 12px 20px 12px 20px;
+  margin: 20px;
+  background-color: transparent;
+  text-align: center;
+  color: #444;
+}
+.AddNewBtn:focus {
+  outline: none;
+}
+.with-shadow {
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.35), 0 1px 1px 0 rgba(0, 0, 0, 0.59);
+  background-color: rgba(255, 255, 255, 0.3);
+}
+.AddNewBtn:hover {
+  box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.3), 0 15px 15px 0 rgba(0, 0, 0, 0.4);
+  background-color: #fff !important;
+  color: #222 !important;
+}
+.AddNewBtn:active {
+  -webkit-transition: 0.05s ease-out;
+  transition: 0.05s ease-out;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.44), 0 1px 1px 0 rgba(0, 0, 0, 0.68);
+}
+.colorStyle {
+  background-color: #4caf50;
+  color: white;
+  font-size: large;
+  border-radius: 2rem;
+}
+/* end of button css */
