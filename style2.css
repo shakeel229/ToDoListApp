@@ -66,13 +66,13 @@ section {
   padding-left: 20px;
 }
 
-ul {
+.navi {
   padding: 0px;
   margin: 0px;
   border-bottom: 1px solid #1c1f21;
 }
 
-ul li {
+.navi li {
   list-style-type: none;
   color: #5a5b5b;
   padding: 10px;
@@ -83,7 +83,7 @@ ul li {
   text-align: center;
 }
 
-ul li:first-child {
+.navi li:first-child {
   border-top: none;
 }
 
@@ -101,7 +101,7 @@ ul li:hover .linktitle {
   color: #6c6d6e;
 }
 
-ul li div {
+.navi li div {
   float: left;
 }
 
