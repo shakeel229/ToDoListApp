@@ -78,8 +78,9 @@ function addtask(name, description, assignee, date, status) {
       </div>
     </div>
   </div>`;
-<script>
-delBtn${count}.addEventListener('click',)
+  // <script>
+  {
+    /* delBtn${count}.addEventListener('click',)
 const taskCard = document.querySelector("#${count}");
 console.log(taskCard);
 const deleteBtn = document.querySelector("#delBtn");
@@ -88,8 +89,9 @@ function deleteCard() {
   taskCard.outerHTML = "";
   console.log("del clicked");
 }
-deleteBtn.addEventListener("click", deleteCard);
-</script>
+deleteBtn.addEventListener("click", deleteCard); */
+  }
+  // </script>;
   const myFragment = document.createRange().createContextualFragment(myHTML);
 
   taskcontainer.append(myFragment);
