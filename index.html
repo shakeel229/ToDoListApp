@@ -241,23 +241,26 @@
               </button>
             </div>
             <div class="modal-body">
-              <form id="frm1">
+              <form id="frm1" novalidate>
                 <div class="form-group" id="title">
                   <label for="Title">Title :</label>
                   <input
                     type="text"
-                    class="form-control"
+                    class="form-control "
                     placeholder="The subject of task goes here"
-                    id="TitleField"
-                  />
+                    id="TitleField" 
+                  /><div class=" d-block" id ="errorMsg">
+                      <p id="msg"></p>
+                  </div>
                 </div>
+                
                 <div class="form-group">
                   <label for="Description">Task Description :</label>
                   <textarea
                     class="form-control"
                     id="DescriptionField"
                     placeholder="Give us detailed description of the task"
-                  ></textarea>
+                  ></textarea><div ></div>
                 </div>
                 <div class="form-group">
                   <label for="Assignee">Assigned to :</label>
@@ -265,8 +268,8 @@
                     type="text"
                     class="form-control"
                     placeholder="name of assignee "
-                    id="AssigneeField"
-                  />
+                    id="AssigneeField" 
+                  /><div ></div>
                 </div>
                 <div class="form-group">
                   <label for="Status">Status :</label>
@@ -292,8 +295,8 @@
                     type="time"
                     
                     value="--:-- --"
-                    id="n"
-                  ></input>
+                    id="n" 
+                  ></input><div ></div>
                 </div>
               </form>
             </div>

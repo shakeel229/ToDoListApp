@@ -1,10 +1,12 @@
 
 const taskcontainer = document.querySelector("#task")
+
 let edibtn1 = document.querySelector("#Ebtn1");
 let modelt = document.querySelector(".modal-title");
 
 let count = 5;
 //Accessing Modal Fields //
+
 let title = document.getElementById("TitleField").form.value;
 let desc = document.getElementById("DescriptionField").form.value;
 
@@ -31,14 +33,15 @@ console.log(submit);
 submit.addEventListener("click" , submitButtonClicked);
 
 function submitButtonClicked(){
-    const name = document.querySelector("#TitleField").value;
-    const description = document.querySelector("#DescriptionField").value;
-    const assignee = document.getElementById("AssigneeField").value;
-    const status = document.getElementById("status").value;
-    const date = document.getElementById("date").value;
-
+const name = document.querySelector("#TitleField").value;
+const description = document.querySelector("#DescriptionField").value;
+const assignee = document.getElementById("AssigneeField").value;
+const status = document.getElementById("status").value;
+const date = document.getElementById("date").value;
+     
     console.log({ name, description, assignee, status, date }); 
     addtask(name, description, assignee, date, status);
+    
     
 }
 
@@ -87,5 +90,86 @@ function addtask(name, description, assignee, date, status){
   
   count++;
 
-    console.log({name, description, assignee, status, date});
+    //console.log({name, description, assignee, status, date});
 }
+
+let taskTitle = document.querySelector("#TitleField");
+let validmsg = document.querySelector("#errorMsg");
+
+
+var paragraph = document.createElement('p');
+validmsg.append(paragraph);
+
+
+console.log(taskTitle);
+
+
+taskTitle.addEventListener("input" , titleValidation);
+
+function titleValidation () {
+  let taskTitleval = document.querySelector("#TitleField").value;
+  let msg = document.querySelector("#msg");
+  console.log(msg);
+  console.log(taskTitleval);
+   if( taskTitleval==""){
+       taskTitle.classList.add("is-invalid");
+       validmsg.classList.add("invalid-feedback");
+       console.log(taskTitleval);
+       msg.innerHTML = "Invalid-input it can't be blank";
+
+   }
+   else if( taskTitleval.length < 4 ) {
+    taskTitle.classList.add("is-invalid");
+    validmsg.classList.add("invalid-feedback");
+    console.log("going to else if");
+    msg.innerHTML = "Invalid-input it can't be short";
+   }
+   else if(taskTitleval.length > 4){
+    taskTitle.classList.remove("is-invalid");
+    validmsg.classList.remove("invalid-feedback");
+    taskTitle.classList.add("is-valid");
+    validmsg.classList.add("valid-feedback");
+    console.log("going to else");
+    msg.innerHTML = "All good!";
+    
+
+   }
+}
+
+function titleValidation () {
+  let taskTitleval = document.querySelector("#TitleField").value;
+  let msg = document.querySelector("#msg");
+  console.log(msg);
+  console.log(taskTitleval);
+   if( taskTitleval==""){
+       taskTitle.classList.add("is-invalid");
+       validmsg.classList.add("invalid-feedback");
+       console.log(taskTitleval);
+       msg.innerHTML = "Invalid-input it can't be blank";
+
+   }
+   else if( taskTitleval.length < 4 ) {
+    taskTitle.classList.add("is-invalid");
+    validmsg.classList.add("invalid-feedback");
+    console.log("going to else if");
+    msg.innerHTML = "Invalid-input it can't be short";
+   }
+   else if(taskTitleval.length > 4){
+    taskTitle.classList.remove("is-invalid");
+    validmsg.classList.remove("invalid-feedback");
+    taskTitle.classList.add("is-valid");
+    validmsg.classList.add("valid-feedback");
+    console.log("going to else");
+    msg.innerHTML = "All good!";
+    
+
+   }
+}
+
+
+
+
+
+
+
+
