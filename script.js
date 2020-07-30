@@ -38,6 +38,8 @@ const description = document.querySelector("#DescriptionField").value;
 const assignee = document.getElementById("AssigneeField").value;
 const status = document.getElementById("status").value;
 const date = document.getElementById("date").value;
+  
+    validateInputs();
      
     console.log({ name, description, assignee, status, date }); 
     addtask(name, description, assignee, date, status);
@@ -93,83 +95,99 @@ function addtask(name, description, assignee, date, status){
     //console.log({name, description, assignee, status, date});
 }
 
-let taskTitle = document.querySelector("#TitleField");
-let validmsg = document.querySelector("#errorMsg");
+// below code deals with the validation of the form//
+const form = document.querySelector('#form');
+const taskName = document.querySelector('#TitleField');
+const taskDesc = document.querySelector('#DescriptionField');
+const taskAssignee = document.querySelector('#AssigneeField');
+const taskStatus = document.querySelector('#status');
+const taskDate = document.querySelector('#date');
 
 
-var paragraph = document.createElement('p');
-validmsg.append(paragraph);
+function validateInputs() {
+  const taskNameValue = taskName.value.trim();
+  const taskDescValue = taskDesc.value.trim();
+  const taskAssigneeValue = taskAssignee.value.trim();
+  const taskStatusValue = taskStatus.value.trim();
+  const taskDateValue = taskDate.value;
+  console.log(taskName);
+   console.log(taskDesc);
+  
+/*validates for the taskName*/
+  if (taskNameValue === '' ){
+     setErrorFor(taskName , 'Task Name cannot be blank');
+     $('#submit').attr('disabled',true);
+  }
 
-
-console.log(taskTitle);
-
-
-taskTitle.addEventListener("input" , titleValidation);
-
-function titleValidation () {
-  let taskTitleval = document.querySelector("#TitleField").value;
-  let msg = document.querySelector("#msg");
-  console.log(msg);
-  console.log(taskTitleval);
-   if( taskTitleval==""){
-       taskTitle.classList.add("is-invalid");
-       validmsg.classList.add("invalid-feedback");
-       console.log(taskTitleval);
-       msg.innerHTML = "Invalid-input it can't be blank";
-
-   }
-   else if( taskTitleval.length < 4 ) {
-    taskTitle.classList.add("is-invalid");
-    validmsg.classList.add("invalid-feedback");
-    console.log("going to else if");
-    msg.innerHTML = "Invalid-input it can't be short";
-   }
-   else if(taskTitleval.length > 4){
-    taskTitle.classList.remove("is-invalid");
-    validmsg.classList.remove("invalid-feedback");
-    taskTitle.classList.add("is-valid");
-    validmsg.classList.add("valid-feedback");
-    console.log("going to else");
-    msg.innerHTML = "All good!";
+  else if(taskNameValue.length < 6 || taskNameValue.length >10){
+    setErrorFor(taskName , 'Task Name length must be less than 6 and not greater than 10');
+     $('#submit').attr('disabled',true);
+  }
+  else{
+    setSuccessFor(taskName);
     
+  }
+  /*Validates Task Description*/
+  if (taskDescValue === ''){
+    setErrorFor(taskDesc , 'Task Description cannot be blank');
+     $('#submit').attr('disabled',true);
+  }
+  else if(taskDescValue.length < 6 || taskDescValue.length >10){
+    setErrorFor(taskDesc , 'Task Descrition must not exceed 15 char');
+     $('#submit').attr('disabled',true);
+  }
+ 
+  else {
+    setSuccessFor(taskDesc);
+  }
+  /*validates Task assignee*/
+  console.log(taskAssigneeValue);
+  if (taskAssigneeValue === '' ){
+    setErrorFor(taskAssignee , 'Task Must be assigned to someone');
+    $('#submit').attr('disabled',true);
+ }
 
-   }
+ else if(taskAssigneeValue.length < 3 || taskAssigneeValue.length > 8 ){
+   setErrorFor(taskAssignee, 'Task Assignee length must be less than 6 and not greater than 10');
+    $('#submit').attr('disabled',true);
+ }
+ else{
+   setSuccessFor(taskAssignee);
+   
+ }
+ /*Validate Due Date*/
+  var todayDate = new Date().toISOString().slice(0,10);
+  
+  console.log(taskDateValue);
+  if (taskDateValue == null || taskDateValue == ''){
+    setErrorFor(taskDate , 'Task must have a due date');
+    $('#submit').attr('disabled',true);
+ }
+ else if(taskDateValue < todayDate){
+  setErrorFor(taskDate , 'Task cannot be created in past date');
+   $('#submit').attr('disabled',true);
+}
+ 
+else{
+  setSuccessFor(taskDate);
+  
+}
 }
 
-function titleValidation () {
-  let taskTitleval = document.querySelector("#TitleField").value;
-  let msg = document.querySelector("#msg");
-  console.log(msg);
-  console.log(taskTitleval);
-   if( taskTitleval==""){
-       taskTitle.classList.add("is-invalid");
-       validmsg.classList.add("invalid-feedback");
-       console.log(taskTitleval);
-       msg.innerHTML = "Invalid-input it can't be blank";
+function setErrorFor(input, message){
+  const formgroup = input.parentElement;
+  const small = formgroup.querySelector('small');
+  small.innerText = message;
+  small.style.color = "red";
+  formgroup.className = 'form-group error';
 
-   }
-   else if( taskTitleval.length < 4 ) {
-    taskTitle.classList.add("is-invalid");
-    validmsg.classList.add("invalid-feedback");
-    console.log("going to else if");
-    msg.innerHTML = "Invalid-input it can't be short";
-   }
-   else if(taskTitleval.length > 4){
-    taskTitle.classList.remove("is-invalid");
-    validmsg.classList.remove("invalid-feedback");
-    taskTitle.classList.add("is-valid");
-    validmsg.classList.add("valid-feedback");
-    console.log("going to else");
-    msg.innerHTML = "All good!";
-    
-
-   }
 }
 
-
-
-
-
-
-
-
+function setSuccessFor(input){
+  const formgroup = input.parentElement;
+  const small = formgroup.querySelector('small');
+  small.innerText = 'Looks good!';
+  small.style.color = "green";
+  formgroup.className = 'form-group success';
+}
+//Validation code ends here//

@@ -241,26 +241,26 @@
               </button>
             </div>
             <div class="modal-body">
-              <form id="frm1" novalidate>
-                <div class="form-group" id="title">
+              <form id="form" class="form">
+                <div class="form-group " id="title">
                   <label for="Title">Title :</label>
                   <input
                     type="text"
                     class="form-control "
                     placeholder="The subject of task goes here"
                     id="TitleField" 
-                  /><div class=" d-block" id ="errorMsg">
-                      <p id="msg"></p>
-                  </div>
+                  /><small> </small>
                 </div>
                 
-                <div class="form-group">
+                <div class="form-group ">
                   <label for="Description">Task Description :</label>
                   <textarea
+                    type="text"
                     class="form-control"
                     id="DescriptionField"
                     placeholder="Give us detailed description of the task"
-                  ></textarea><div ></div>
+                  ></textarea>
+                  <small> </small>
                 </div>
                 <div class="form-group">
                   <label for="Assignee">Assigned to :</label>
@@ -269,7 +269,7 @@
                     class="form-control"
                     placeholder="name of assignee "
                     id="AssigneeField" 
-                  /><div ></div>
+                  /><small> </small>
                 </div>
                 <div class="form-group">
                   <label for="Status">Status :</label>
@@ -287,10 +287,10 @@
                     
                     value="dd/mm/yyyy"
                     id="date"
-                  ></input>
+                  ></input><small> </small>
                 </div>
                 <div class="form-group">
-                  <label for="Time :">Date :</label>
+                  <label for="Time :">Time :</label>
                   <input class="form-control"
                     type="time"
                     

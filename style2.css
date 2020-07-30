@@ -269,3 +269,14 @@ ul li:hover .linktitle {
   opacity: 1;
   transition: 0s;
 }
+
+.form-group small {
+}
+
+.form-group.success input {
+  border: 2px solid lightgreen;
+}
+
+.form-group.error input {
+  border: 2px solid red;
+}
