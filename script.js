@@ -135,7 +135,7 @@ function validateName() {
     }
 
  else if(taskNameValue.length >10){
-   setErrorFor(taskName , 'Task Name length must be less than 6 and not greater than 10');
+   setErrorFor(taskName , 'Task Name length must be less than 10 chars');
     }
  else{
    setSuccessFor(taskName);
@@ -149,7 +149,7 @@ function validateDescription(){
   if (taskDescValue === ''){
     setErrorFor(taskDesc , 'Task Description cannot be blank');
      }
-  else if(taskDescValue.length < 6 || taskDescValue.length >10){
+  else if(taskDescValue.length >10){
     setErrorFor(taskDesc , 'Task Descrition must not exceed 15 char');
     }
   else {
@@ -165,8 +165,8 @@ function validateAssignee(){
   if (taskAssigneeValue === '' ){
     setErrorFor(taskAssignee , 'Task Must be assigned to someone');
   }
-  else if(taskAssigneeValue.length < 3 || taskAssigneeValue.length > 8 ){
-   setErrorFor(taskAssignee, 'Task Assignee length must be less than 6 and not greater than 10');
+  else if(taskAssigneeValue.length > 8 ){
+   setErrorFor(taskAssignee, 'Task Assignee length must not be greater than 10');
    }
  else{
    setSuccessFor(taskAssignee);
