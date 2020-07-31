@@ -78,8 +78,8 @@ function addtask(name, description, assignee, date, status) {
       </div>
     </div>
   </div>`;
-  // <script>
-  {
+  // <sript>
+  
     /* delBtn${count}.addEventListener('click',)
 const taskCard = document.querySelector("#${count}");
 console.log(taskCard);
@@ -90,7 +90,7 @@ function deleteCard() {
   console.log("del clicked");
 }
 deleteBtn.addEventListener("click", deleteCard); */
-  }
+  
   // </script>;
   const myFragment = document.createRange().createContextualFragment(myHTML);
 
@@ -102,88 +102,113 @@ deleteBtn.addEventListener("click", deleteCard); */
 }
 
 // below code deals with the validation of the form//
-const form = document.querySelector("#form");
-const taskName = document.querySelector("#TitleField");
-const taskDesc = document.querySelector("#DescriptionField");
-const taskAssignee = document.querySelector("#AssigneeField");
-const taskStatus = document.querySelector("#status");
-const taskDate = document.querySelector("#date");
+const form = document.querySelector('#form');
+const taskName = document.querySelector('#TitleField');
+const taskDesc = document.querySelector('#DescriptionField');
+const taskAssignee = document.querySelector('#AssigneeField');
+const taskStatus = document.querySelector('#status');
+const taskDate = document.querySelector('#date');
 
-function validateInputs() {
+var form1 = document.querySelector("#form");
+window.addEventListener("load" , disableSubmit);
+taskName.addEventListener("blur" ,validateName);
+taskDesc.addEventListener("blur" ,validateDescription);
+taskAssignee.addEventListener("blur" ,validateAssignee);
+taskDate.addEventListener("blur" ,validateDueDate);
+ 
+function disableSubmit(){
+  
+  document.getElementById("submit").disabled = true;
+}
+function validateName() {
+  
   const taskNameValue = taskName.value.trim();
-  const taskDescValue = taskDesc.value.trim();
-  const taskAssigneeValue = taskAssignee.value.trim();
-  const taskStatusValue = taskStatus.value.trim();
-  const taskDateValue = taskDate.value;
-  console.log(taskName);
-  console.log(taskDesc);
+  if (taskNameValue == null ||
+    taskNameValue == "" ||
+    taskNameValue.length == undefined ||
+    taskNameValue.length == null ||
+    taskNameValue.length == 0 ||
+    taskNameValue.length == null ||
+    taskNameValue.length == 0)
+    {
+    setErrorFor(taskName , 'Task Name cannot be blank');
+    }
 
-  /*validates for the taskName*/
-  if (taskNameValue === "") {
-    setErrorFor(taskName, "Task Name cannot be blank");
-    $("#submit").attr("disabled", true);
-  } else if (taskNameValue.length < 6 || taskNameValue.length > 10) {
-    setErrorFor(
-      taskName,
-      "Task Name length must be less than 6 and not greater than 10"
-    );
-    $("#submit").attr("disabled", true);
-  } else {
-    setSuccessFor(taskName);
-  }
-  /*Validates Task Description*/
-  if (taskDescValue === "") {
-    setErrorFor(taskDesc, "Task Description cannot be blank");
-    $("#submit").attr("disabled", true);
-  } else if (taskDescValue.length < 6 || taskDescValue.length > 10) {
-    setErrorFor(taskDesc, "Task Descrition must not exceed 15 char");
-    $("#submit").attr("disabled", true);
-  } else {
-    setSuccessFor(taskDesc);
-  }
-  /*validates Task assignee*/
-  console.log(taskAssigneeValue);
-  if (taskAssigneeValue === "") {
-    setErrorFor(taskAssignee, "Task Must be assigned to someone");
-    $("#submit").attr("disabled", true);
-  } else if (taskAssigneeValue.length < 3 || taskAssigneeValue.length > 8) {
-    setErrorFor(
-      taskAssignee,
-      "Task Assignee length must be less than 6 and not greater than 10"
-    );
-    $("#submit").attr("disabled", true);
-  } else {
-    setSuccessFor(taskAssignee);
-  }
-  /*Validate Due Date*/
-  var todayDate = new Date().toISOString().slice(0, 10);
-
-  console.log(taskDateValue);
-  if (taskDateValue == null || taskDateValue == "") {
-    setErrorFor(taskDate, "Task must have a due date");
-    $("#submit").attr("disabled", true);
-  } else if (taskDateValue < todayDate) {
-    setErrorFor(taskDate, "Task cannot be created in past date");
-    $("#submit").attr("disabled", true);
-  } else {
-    setSuccessFor(taskDate);
-  }
+ else if(taskNameValue.length >10){
+   setErrorFor(taskName , 'Task Name length must be less than 6 and not greater than 10');
+    }
+ else{
+   setSuccessFor(taskName);
+ }
 }
 
-function setErrorFor(input, message) {
+
+function validateDescription(){
+  const taskDescValue = taskDesc.value.trim();
+  
+  if (taskDescValue === ''){
+    setErrorFor(taskDesc , 'Task Description cannot be blank');
+     }
+  else if(taskDescValue.length < 6 || taskDescValue.length >10){
+    setErrorFor(taskDesc , 'Task Descrition must not exceed 15 char');
+    }
+  else {
+    setSuccessFor(taskDesc);
+    }
+}
+
+function validateAssignee(){
+  
+  const taskAssigneeValue = taskAssignee.value.trim();
+  
+  console.log(taskAssigneeValue);
+  if (taskAssigneeValue === '' ){
+    setErrorFor(taskAssignee , 'Task Must be assigned to someone');
+  }
+  else if(taskAssigneeValue.length < 3 || taskAssigneeValue.length > 8 ){
+   setErrorFor(taskAssignee, 'Task Assignee length must be less than 6 and not greater than 10');
+   }
+ else{
+   setSuccessFor(taskAssignee);
+   }
+}
+
+function validateDueDate(){
+ 
+  const taskDateValue = taskDate.value;
+  var todayDate = new Date().toISOString().slice(0,10);
+  
+  console.log(taskDateValue);
+  if (taskDateValue == null || taskDateValue == ''){
+    setErrorFor(taskDate , 'Task must have a due date');
+    }
+ else if(taskDateValue < todayDate){
+  setErrorFor(taskDate , 'Task cannot be created in past date');
+  }
+ 
+else{
+  setSuccessFor(taskDate);
+  }
+}
+ 
+function setErrorFor(input, message){
   const formgroup = input.parentElement;
-  const small = formgroup.querySelector("small");
+  const small = formgroup.querySelector('small');
   small.innerText = message;
   small.style.color = "red";
-  formgroup.className = "form-group error";
+  formgroup.className = 'form-group error';
+  document.getElementById("submit").disabled = true;
+  
+
 }
 
-function setSuccessFor(input) {
+function setSuccessFor(input){
   const formgroup = input.parentElement;
-  const small = formgroup.querySelector("small");
-  small.innerText = "Looks good!";
+  const small = formgroup.querySelector('small');
+  small.innerText = 'Looks good!';
   small.style.color = "green";
-  formgroup.className = "form-group success";
+  formgroup.className = 'form-group success';
+  document.getElementById("submit").disabled = false;
 }
 //Validation code ends here//
 // delete button code
