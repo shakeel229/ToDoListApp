@@ -142,7 +142,6 @@ ul li:hover .linktitle {
 
   ul li {
     overflow: hidden;
-    padding: 0px 10px;
   }
 
   .linktitle {
@@ -160,7 +159,7 @@ ul li:hover .linktitle {
     z-index: 1;
   }
   .icons {
-    padding: 10px 10px;
+    padding: 10px 0px 10px 0px;
   }
   .titleHeader {
     font-size: 40px;
