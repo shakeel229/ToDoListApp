@@ -36,7 +36,7 @@ function submitButtonClicked() {
   const status = document.getElementById("status").value;
   const date = document.getElementById("date").value;
 
-  validateInputs();
+  // validateInputs();
 
   console.log({ name, description, assignee, status, date });
   addtask(name, description, assignee, date, status);
@@ -74,27 +74,27 @@ function addtask(name, description, assignee, date, status) {
           <button class="btn btn-danger"  id="delBtn${count}">Delete</button></li>
       
         </ul>
-        
+        <script>
+        {
+          delBtn${count}.addEventListener('click',delCard);
+      const taskCardN = document.querySelector("#${count}");
+      console.log(taskCardN);
+      const deleteBtn = document.querySelector("#delBtn${count}");
+      function delCard() {
+        console.log(taskCard.innerHTML);
+        taskCard.outerHTML = "";
+        console.log("del clicked");
+      }
+      deleteBtn.addEventListener("click", deleteCard); */
+        }
+        </script>
       </div>
     </div>
   </div>`;
-  // <sript>
-  
-    /* delBtn${count}.addEventListener('click',)
-const taskCard = document.querySelector("#${count}");
-console.log(taskCard);
-const deleteBtn = document.querySelector("#delBtn");
-function deleteCard() {
-  console.log(taskCard.innerHTML);
-  taskCard.outerHTML = "";
-  console.log("del clicked");
-}
-deleteBtn.addEventListener("click", deleteCard); */
-  
-  // </script>;
+
   const myFragment = document.createRange().createContextualFragment(myHTML);
 
-  taskcontainer.append(myFragment);
+  taskcontainer.appendChild(myFragment);
 
   count++;
 
@@ -102,112 +102,99 @@ deleteBtn.addEventListener("click", deleteCard); */
 }
 
 // below code deals with the validation of the form//
-const form = document.querySelector('#form');
-const taskName = document.querySelector('#TitleField');
-const taskDesc = document.querySelector('#DescriptionField');
-const taskAssignee = document.querySelector('#AssigneeField');
-const taskStatus = document.querySelector('#status');
-const taskDate = document.querySelector('#date');
+const form = document.querySelector("#form");
+const taskName = document.querySelector("#TitleField");
+const taskDesc = document.querySelector("#DescriptionField");
+const taskAssignee = document.querySelector("#AssigneeField");
+const taskStatus = document.querySelector("#status");
+const taskDate = document.querySelector("#date");
 
 var form1 = document.querySelector("#form");
-window.addEventListener("load" , disableSubmit);
-taskName.addEventListener("blur" ,validateName);
-taskDesc.addEventListener("blur" ,validateDescription);
-taskAssignee.addEventListener("blur" ,validateAssignee);
-taskDate.addEventListener("blur" ,validateDueDate);
- 
-function disableSubmit(){
-  
+window.addEventListener("load", disableSubmit);
+taskName.addEventListener("blur", validateName);
+taskDesc.addEventListener("blur", validateDescription);
+taskAssignee.addEventListener("blur", validateAssignee);
+taskDate.addEventListener("blur", validateDueDate);
+
+function disableSubmit() {
   document.getElementById("submit").disabled = true;
 }
 function validateName() {
-  
   const taskNameValue = taskName.value.trim();
-  if (taskNameValue == null ||
+  if (
+    taskNameValue == null ||
     taskNameValue == "" ||
     taskNameValue.length == undefined ||
     taskNameValue.length == null ||
     taskNameValue.length == 0 ||
     taskNameValue.length == null ||
-    taskNameValue.length == 0)
-    {
-    setErrorFor(taskName , 'Task Name cannot be blank');
-    }
-
- else if(taskNameValue.length >10){
-   setErrorFor(taskName , 'Task Name length must be less than 10 chars');
-    }
- else{
-   setSuccessFor(taskName);
- }
+    taskNameValue.length == 0
+  ) {
+    setErrorFor(taskName, "Task Name cannot be blank");
+  } else if (taskNameValue.length > 10) {
+    setErrorFor(taskName, "Task Name length must be less than 10 chars");
+  } else {
+    setSuccessFor(taskName);
+  }
 }
 
-
-function validateDescription(){
+function validateDescription() {
   const taskDescValue = taskDesc.value.trim();
-  
-  if (taskDescValue === ''){
-    setErrorFor(taskDesc , 'Task Description cannot be blank');
-     }
-  else if(taskDescValue.length >10){
-    setErrorFor(taskDesc , 'Task Descrition must not exceed 15 char');
-    }
-  else {
+
+  if (taskDescValue === "") {
+    setErrorFor(taskDesc, "Task Description cannot be blank");
+  } else if (taskDescValue.length > 10) {
+    setErrorFor(taskDesc, "Task Descrition must not exceed 15 char");
+  } else {
     setSuccessFor(taskDesc);
-    }
+  }
 }
 
-function validateAssignee(){
-  
+function validateAssignee() {
   const taskAssigneeValue = taskAssignee.value.trim();
-  
+
   console.log(taskAssigneeValue);
-  if (taskAssigneeValue === '' ){
-    setErrorFor(taskAssignee , 'Task Must be assigned to someone');
+  if (taskAssigneeValue === "") {
+    setErrorFor(taskAssignee, "Task Must be assigned to someone");
+  } else if (taskAssigneeValue.length > 8) {
+    setErrorFor(
+      taskAssignee,
+      "Task Assignee length must not be greater than 10"
+    );
+  } else {
+    setSuccessFor(taskAssignee);
   }
-  else if(taskAssigneeValue.length > 8 ){
-   setErrorFor(taskAssignee, 'Task Assignee length must not be greater than 10');
-   }
- else{
-   setSuccessFor(taskAssignee);
-   }
 }
 
-function validateDueDate(){
- 
+function validateDueDate() {
   const taskDateValue = taskDate.value;
-  var todayDate = new Date().toISOString().slice(0,10);
-  
+  var todayDate = new Date().toISOString().slice(0, 10);
+
   console.log(taskDateValue);
-  if (taskDateValue == null || taskDateValue == ''){
-    setErrorFor(taskDate , 'Task must have a due date');
-    }
- else if(taskDateValue < todayDate){
-  setErrorFor(taskDate , 'Task cannot be created in past date');
-  }
- 
-else{
-  setSuccessFor(taskDate);
+  if (taskDateValue == null || taskDateValue == "") {
+    setErrorFor(taskDate, "Task must have a due date");
+  } else if (taskDateValue < todayDate) {
+    setErrorFor(taskDate, "Task cannot be created in past date");
+  } else {
+    setSuccessFor(taskDate);
   }
 }
- 
-function setErrorFor(input, message){
+
+function setErrorFor(input, message) {
   const formgroup = input.parentElement;
-  const small = formgroup.querySelector('small');
+  const small = formgroup.querySelector("small");
   small.innerText = message;
   small.style.color = "red";
-  formgroup.className = 'form-group error';
+  formgroup.className = "form-group error";
   document.getElementById("submit").disabled = true;
-  
-
 }
 
-function setSuccessFor(input){
+function setSuccessFor(input) {
   const formgroup = input.parentElement;
-  const small = formgroup.querySelector('small');
-  small.innerText = 'Looks good!';
+  const small = formgroup.querySelector("small");
+  small.innerText = "Looks good!";
   small.style.color = "green";
-  formgroup.className = 'form-group success';
+  formgroup.className = "form-group success";
   document.getElementById("submit").disabled = false;
 }
 //Validation code ends here//
