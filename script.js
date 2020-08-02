@@ -15,6 +15,19 @@ let crdtitle1 = document.querySelector("#crdtitle1");
 
 let adnewbtn = document.querySelector(".AddNewBtn");
 
+//function to create task object
+function createTaskObject(title, taskdesc, assigned, status, date, time) {
+  const TaskContent = {
+    title: title,
+    taskDescription: taskdesc,
+    assignedTo: assigned,
+    status: status,
+    date: date,
+    time: time,
+  };
+  return TaskContent;
+}
+let tasksList = [];
 console.log(modelt);
 console.log(title);
 edibtn1.onclick = function () {
@@ -35,62 +48,52 @@ function submitButtonClicked() {
   const assignee = document.getElementById("AssigneeField").value;
   const status = document.getElementById("status").value;
   const date = document.getElementById("date").value;
-
+  const timee = document.getElementById("time").value;
   // validateInputs();
-
-  console.log({ name, description, assignee, status, date });
-  addtask(name, description, assignee, date, status);
+  const d = createTaskObject(name, description, assignee, status, date, timee);
+  tasksList.push(d);
+  console.log(tasksList + typeof tasksList);
+  //console.log({ name, description, assignee, status, date });
+  addtask(
+    tasksList[0].title,
+    tasksList[0].taskDescription,
+    tasksList[0].assignedTo,
+    tasksList[0].status,
+    tasksList[0].date,
+    tasksList[0].time
+  );
 }
 
-function addtask(name, description, assignee, date, status) {
-  const myHTML = `<div class="card" id=${count}>
-    <div class="card-header" id="head${count}">
-      <h2 class="mb-0 text-left" style="text-decoration: none;">
-        <button id="b1" class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapse${count}" aria-expanded="false" aria-controls="collapse${count}">
-          <strong><h5 id ="crdtitle1" class="text-center" style="text-decoration: none;">${name}</h5></strong> 
-        </button>
-      </h2>
-    </div>
-    <div id="collapse${count}" class="collapse show" aria-labelledby="head${count}" >
-      <div class="card-body" style="width: rem;" >
-        <h5 class="card-title">${description}</h5>
-        <ul class="list-group ">
-          <li class="list-group-item" id ="assignedto1">Assigned to: ${assignee}</li>
-          <li class="list-group-item" id="time1">Time : ${date} AM</li>
-          <li class="list-group-item">
-            <div class="dropdown">
-              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                ${status}
-              </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#" style="z-index: 1 !important;">TO DO</a>
-                <a class="dropdown-item" href="#" style="z-index: 1 !important;">In progress</a>
-                <a class="dropdown-item" href="#"style="z-index: 1 !important;">REVIEW</a>
-                <a class="dropdown-item" href="#"style="z-index: 1 !important;">DONE</a>
-              </div>
-            </div>
-          </li>
-          <li class="list-group-item"><button class="btn btn-primary" data-toggle="modal" data-target = "#NewTask" id="Ebtn1">Edit</button>
-          <button class="btn btn-danger"  id="delBtn${count}">Delete</button></li>
+function addtask(name, description, assignee, status, date, time) {
+  const myHTML = `<div class="card">
+  <div class="card-header" id="head">
+    <h2 class="mb-0 text-left" style="text-decoration: none;">
+      <button id="b1" class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
+        <strong><h5 id ="crdtitle1" class="text-center" style="text-decoration: none;">${name}</h5></strong> 
+      </button>
+    </h2>
+  </div>
+  <div id="collapse1" class="collapse show" aria-labelledby="head1" >
+    <div class="card-body" style="width: rem;" >
       
-        </ul>
-        <script>
-        {
-          delBtn${count}.addEventListener('click',delCard);
-      const taskCardN = document.querySelector("#${count}");
-      console.log(taskCardN);
-      const deleteBtn = document.querySelector("#delBtn${count}");
-      function delCard() {
-        console.log(taskCard.innerHTML);
-        taskCard.outerHTML = "";
-        console.log("del clicked");
-      }
-      deleteBtn.addEventListener("click", deleteCard); */
-        }
-        </script>
-      </div>
+      <ul class="list-group ">
+      <li class="list-group-item" id ="assignedto1"><strong>Task Description : </strong>${description}</li>
+
+        <li class="list-group-item" id ="assignedto1"><strong>Assigned to : </strong>${assignee}</li>
+        <li class="list-group-item" id="date"><strong>Date : </strong>${date}</li>
+        <li class="list-group-item" id="time1"><strong>Time : </strong>${time}</li>
+        <li class="list-group-item">
+        <strong> Status : ${status}</strong>
+        </li>
+        <li class="list-group-item"><button class="btn btn-primary" data-toggle="modal" data-target = "#NewTask" id="Ebtn1">Edit</button>
+          <button class="btn btn-danger"  id="delBtn">Delete</button></li>
+       
+        
+      </ul>
+      
     </div>
-  </div>`;
+  </div>
+</div>`;
 
   const myFragment = document.createRange().createContextualFragment(myHTML);
 
