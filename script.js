@@ -1,5 +1,5 @@
 const taskcontainer = document.querySelector("#task");
-
+let tasksList = [];
 let edibtn1 = document.querySelector("#Ebtn1");
 let modelt = document.querySelector(".modal-title");
 
@@ -27,7 +27,7 @@ function createTaskObject(title, taskdesc, assigned, status, date, time) {
   };
   return TaskContent;
 }
-let tasksList = [];
+
 console.log(modelt);
 console.log(title);
 edibtn1.onclick = function () {
@@ -38,7 +38,7 @@ edibtn1.onclick = function () {
 const submit = document.getElementById("submit");
 console.log(submit);
 
-//Anindha class//
+//A//
 
 submit.addEventListener("click", submitButtonClicked);
 
@@ -52,16 +52,27 @@ function submitButtonClicked() {
   // validateInputs();
   const d = createTaskObject(name, description, assignee, status, date, timee);
   tasksList.push(d);
+  tasksList.push(d);
   console.log(tasksList + typeof tasksList);
   //console.log({ name, description, assignee, status, date });
-  addtask(
-    tasksList[0].title,
-    tasksList[0].taskDescription,
-    tasksList[0].assignedTo,
-    tasksList[0].status,
-    tasksList[0].date,
-    tasksList[0].time
-  );
+  for (i = 0; i < tasksList.length; i++) {
+    addtask(
+      tasksList[i].title,
+      tasksList[i].taskDescription,
+      tasksList[i].assignedTo,
+      tasksList[i].status,
+      tasksList[i].date,
+      tasksList[i].time
+    );
+  }
+  // addtask(
+  //   tasksList[0].title,
+  //   tasksList[0].taskDescription,
+  //   tasksList[0].assignedTo,
+  //   tasksList[0].status,
+  //   tasksList[0].date,
+  //   tasksList[0].time
+  // );
 }
 
 function addtask(name, description, assignee, status, date, time) {
@@ -86,7 +97,7 @@ function addtask(name, description, assignee, status, date, time) {
         <strong> Status : ${status}</strong>
         </li>
         <li class="list-group-item"><button class="btn btn-primary" data-toggle="modal" data-target = "#NewTask" id="Ebtn1">Edit</button>
-          <button class="btn btn-danger"  id="delBtn">Delete</button></li>
+          <button class="btn btn-danger delete"  id="delBtn">Delete</button></li>
        
         
       </ul>
@@ -101,6 +112,12 @@ function addtask(name, description, assignee, status, date, time) {
 
   count++;
 
+  const delbuttons = document.querySelectorAll(".delete");
+  console.log(delbuttons);
+  delbuttons.forEach((buttn) => addEventListener("click", deleteCard));
+  function deleteCard(event) {
+    console.log(event.currentTarget);
+  }
   //console.log({name, description, assignee, status, date});
 }
 
@@ -201,13 +218,22 @@ function setSuccessFor(input) {
   document.getElementById("submit").disabled = false;
 }
 //Validation code ends here//
+//delete button code
+
+// function deleteCard(event) {
+//   console.log("dely clicked");
+//   const deleteButtonClicked = event.currentTarget;
+//   console.log(deleteButtonClicked);
+//   deleteButtonClicked.closest(".card").remove();
+//   // deleteButtonClicked.closest(".card").remove();
+// }
 // delete button code
-const taskCard = document.querySelector("#cardA");
-console.log(taskCard);
-const deleteBtn = document.querySelector("#delBtn");
-function deleteCard() {
-  console.log(taskCard.innerHTML);
-  taskCard.outerHTML = "";
-  console.log("del clicked");
-}
-deleteBtn.addEventListener("click", deleteCard);
+// const taskCard = document.querySelector("#cardA");
+// console.log(taskCard);
+// const deleteBtn = document.querySelector("#delBtn");
+// function deleteCard() {
+//   console.log(taskCard.innerHTML);
+//   taskCard.outerHTML = "";
+//   console.log("del clicked");
+// }
+// deleteBtn.addEventListener("click", deleteCard);
