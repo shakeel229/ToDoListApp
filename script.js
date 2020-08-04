@@ -15,10 +15,6 @@ let crdtitle1 = document.querySelector("#crdtitle1");
 
 let adnewbtn = document.querySelector(".AddNewBtn");
 
-
-
-
-
 /*
 
 let tasksarray=[];
@@ -97,8 +93,8 @@ function deleteCard() {
   console.log("del clicked");
 }
 deleteBtn.addEventListener("click", deleteCard); */
-  
- /*
+
+/*
  const myFragment = document.createRange().createContextualFragment(myHTML);
   console.log("Check" +myFragment);
   taskcontainer.append(myFragment);
@@ -106,8 +102,7 @@ deleteBtn.addEventListener("click", deleteCard); */
 
 
 */
-  //console.log({name, description, assignee, status, date});
-
+//console.log({name, description, assignee, status, date});
 
 // below code deals with the validation of the form//
 /*const form = document.querySelector('#form');
@@ -235,27 +230,32 @@ deleteBtn.addEventListener("click", deleteCard);
 
 /* Task Manager class for the add task , delete task , update task */
 
-
 class taskManager {
-  constructor(parent){
+  constructor(parent) {
     this.taskarray = [];
     this.index = 1;
     this.parent = parent;
-    
   }
-  
-  addTask(name, description, assignee, status, date, time) {
 
-    const task = new Task(`task${this.index++}` , name, description, assignee, status, date, time);
+  addTask(name, description, assignee, status, date, time) {
+    const task = new Task(
+      `task${this.index++}`,
+      name,
+      description,
+      assignee,
+      status,
+      date,
+      time
+    );
     console.log(this.time);
     this.taskarray.push(task);
     console.log(this.taskarray);
     this.refreshPage(this.taskarray);
   }
 
-  updateTask(id,name, description, assignee, status, date, time){
-    for(let i=0 ; i<this.taskarray.length; i++){
-      if(this.taskarray[i].id === id){
+  updateTask(id, name, description, assignee, status, date, time) {
+    for (let i = 0; i < this.taskarray.length; i++) {
+      if (this.taskarray[i].id === id) {
         this.taskarray[i].name = name;
         this.taskarray[i].description = description;
         this.taskarray[i].assignee = assignee;
@@ -263,123 +263,130 @@ class taskManager {
         this.taskarray[i].date = date;
         this.taskarray[i].time = time;
         break;
-        
       }
     }
   }
-  refreshPage(tasks){
-    
+  refreshPage(tasks) {
     this.parent.innerHTML = "";
     this.taskarray.forEach((task) => {
       const element = task.templateToDom();
-       this.parent.append(element);
+      this.parent.append(element);
     });
+    task.attachDeleteListeners();
   }
-
-  
 }
-
-
 
 // Task class that has the metadata of the card //
 class Task {
-  constructor( id, name, description, assignee, status, date, time){
-    this.id = id ;
+  constructor(id, name, description, assignee, status, date, time) {
+    this.id = id;
     this.name = name;
     this.description = description;
     this.assignee = assignee;
     this.status = status;
     this.date = date;
     this.time = time;
-   }
-   
-   setErrorFor(input, message){
+  }
+
+  setErrorFor(input, message) {
     const formgroup = input.parentElement;
-    const small = formgroup.querySelector('small');
+    const small = formgroup.querySelector("small");
     small.innerText = message;
     small.style.color = "red";
-    formgroup.className = 'form-group error';
+    formgroup.className = "form-group error";
     document.getElementById("submit").disabled = true;
   }
 
-  
-  
-  setSuccessFor(input){
+  setSuccessFor(input) {
     const formgroup = input.parentElement;
-    const small = formgroup.querySelector('small');
-    small.innerText = 'Looks good!';
+    const small = formgroup.querySelector("small");
+    small.innerText = "Looks good!";
     small.style.color = "green";
-    formgroup.className = 'form-group success';
+    formgroup.className = "form-group success";
     document.getElementById("submit").disabled = false;
   }
 
-  inputValidation(name, description, assignee, date){
-    
-     const nameVal= name.value;
-     
-      if (nameVal == null ||
-        nameVal == "" ||
-        nameVal.length == undefined ||
-        nameVal.length == null ||
-        nameVal.length == 0 ||
-        nameVal.length == null ||
-        nameVal.length == 0)
-        {
-        task.setErrorFor(name, 'Task Name cannot be blank');
-        }
-    
-        else if(nameVal.length >10){
-       task.setErrorFor(name, 'Task Name length must be less than 10 chars');
-        }
-        else{
-       task.setSuccessFor(name);
-       }
-       const taskDescValue = description.value.trim();
-  
-       if (taskDescValue === ''){
-       task.setErrorFor(description , 'Task Description cannot be blank');
-       }
-       else if(taskDescValue.length >10){
-       task.setErrorFor(description , 'Task Descrition must not exceed 15 char');
-       }
-       else {
-        task.setSuccessFor(description);
-       }
-       const taskAssigneeValue = assignee.value.trim();
-       if (taskAssigneeValue === '' ){
-       task.setErrorFor(assignee , 'Task Must be assigned to someone');
-       }
-      else if(taskAssigneeValue.length > 8 ){
-      task.setErrorFor(assignee, 'Task Assignee length must not be greater than 10');
-      }
-     else{
-      task.setSuccessFor(assignee);
-     }
-     const taskDateValue = date.value;
-     var todayDate = new Date().toISOString().slice(0,10);
-     if (taskDateValue == null || taskDateValue == ''){
-      task.setErrorFor(date , 'Task must have a due date');
-      }
-     else if(taskDateValue < todayDate){
-      task.setErrorFor(date , 'Task cannot be created in past date');
-      }
-     else{
-      task.setSuccessFor(date);
-      }
+  inputValidation(name, description, assignee, date) {
+    const nameVal = name.value;
+
+    if (
+      nameVal == null ||
+      nameVal == "" ||
+      nameVal.length == undefined ||
+      nameVal.length == null ||
+      nameVal.length == 0 ||
+      nameVal.length == null ||
+      nameVal.length == 0
+    ) {
+      task.setErrorFor(name, "Task Name cannot be blank");
+    } else if (nameVal.length > 10) {
+      task.setErrorFor(name, "Task Name length must be less than 10 chars");
+    } else {
+      task.setSuccessFor(name);
     }
-  
-  
-  templateToDom(){
-  const myHTML = this.htmlTemplate();
-  const myFragment = document.createRange().createContextualFragment(myHTML);
-  console.log("Check" +myFragment);
-  
-  return myFragment;
-    
+    const taskDescValue = description.value.trim();
+
+    if (taskDescValue === "") {
+      task.setErrorFor(description, "Task Description cannot be blank");
+    } else if (taskDescValue.length > 10) {
+      task.setErrorFor(description, "Task Descrition must not exceed 15 char");
+    } else {
+      task.setSuccessFor(description);
+    }
+    const taskAssigneeValue = assignee.value.trim();
+    if (taskAssigneeValue === "") {
+      task.setErrorFor(assignee, "Task Must be assigned to someone");
+    } else if (taskAssigneeValue.length > 8) {
+      task.setErrorFor(
+        assignee,
+        "Task Assignee length must not be greater than 10"
+      );
+    } else {
+      task.setSuccessFor(assignee);
+    }
+    const taskDateValue = date.value;
+    var todayDate = new Date().toISOString().slice(0, 10);
+    if (taskDateValue == null || taskDateValue == "") {
+      task.setErrorFor(date, "Task must have a due date");
+    } else if (taskDateValue < todayDate) {
+      task.setErrorFor(date, "Task cannot be created in past date");
+    } else {
+      task.setSuccessFor(date);
+    }
   }
 
+  templateToDom() {
+    const myHTML = this.htmlTemplate();
+    const myFragment = document.createRange().createContextualFragment(myHTML);
+    console.log("Check" + myFragment);
 
-  htmlTemplate(){
+    return myFragment;
+  }
+  attachDeleteListeners() {
+    const deleteButtons = document.querySelectorAll("button.removeBtn");
+    console.log(deleteButtons);
+    deleteButtons.forEach(function attacher(butn) {
+      butn.addEventListener("click", handleClick);
+    });
+    function handleClick() {
+      console.log(event.target);
+      const targetId = event.target.id;
+      console.log(taskMgr.taskarray);
+      taskMgr.taskarray = taskMgr.taskarray.filter(
+        (taskElement) => taskElement.id != targetId
+      );
+      // taskMgr.taskarray = taskMgr.taskarray.filter(function (arrayElement) {
+      //   if (arrayElement.id == targetId {
+
+      //   }
+      // });
+      // taskMgr.taskarray = s;
+      console.log(taskMgr.taskarray);
+      taskMgr.refreshPage(taskMgr.taskarray);
+    }
+  }
+
+  htmlTemplate() {
     const myHTML = `<div class="card" id=${this.id}>
     <div class="card-header" id="head${this.id}">
       <h2 class="mb-0 text-left" style="text-decoration: none;">
@@ -400,44 +407,39 @@ class Task {
           <strong> Status : ${this.status}</strong>
           </li>
           <li class="list-group-item"><button class="btn btn-primary" data-toggle="modal" data-target = "#NewTask" id="Ebtn${this.id}">Edit</button>
-          <button class="btn btn-danger"  id="delBtn${this.id}">Delete</button></li>
+          <button class="btn btn-danger removeBtn"  id="${this.id}">Delete</button></li>
       
         </ul>
         
       </div>
     </div>
   </div>`;
-  return myHTML;
+    return myHTML;
   }
 }
 
-
-
-
-
 const taskMgr = new taskManager(taskcontainer);
-const task = new Task;
+const task = new Task();
 const submit = document.getElementById("submit");
 const name1 = document.querySelector("#TitleField");
 submit.addEventListener("click", submitButtonClicked);
-name1.addEventListener("input" ,Validation);
+name1.addEventListener("input", Validation);
 const description1 = document.querySelector("#DescriptionField");
 const assignee1 = document.getElementById("AssigneeField");
-description1.addEventListener("input" ,Validation);
-assignee1.addEventListener("input" ,Validation);
+description1.addEventListener("input", Validation);
+assignee1.addEventListener("input", Validation);
 const date1 = document.getElementById("date");
-date1.addEventListener("input" ,Validation);
+date1.addEventListener("input", Validation);
 
-function Validation(){
-  const name1= document.querySelector("#TitleField");
+function Validation() {
+  const name1 = document.querySelector("#TitleField");
   const description1 = document.querySelector("#DescriptionField");
   const assignee1 = document.getElementById("AssigneeField");
   const status1 = document.getElementById("status");
   const date1 = document.getElementById("date");
   const time1 = document.getElementById("time");
-  task.inputValidation(name1, description1, assignee1, date1 );
+  task.inputValidation(name1, description1, assignee1, date1);
 }
-
 
 function submitButtonClicked() {
   const name = document.querySelector("#TitleField").value;
@@ -447,19 +449,4 @@ function submitButtonClicked() {
   const date = document.getElementById("date").value;
   const time = document.getElementById("time").value;
   taskMgr.addTask(name, description, assignee, status, date, time);
-  }
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
+}
