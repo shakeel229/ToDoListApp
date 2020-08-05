@@ -2,7 +2,8 @@ const taskcontainer = document.querySelector("#task");
 
 let edibtn1 = document.querySelector("#Ebtn1");
 let modelt = document.querySelector(".modal-title");
-
+let editedTask = false;
+let s = null;
 let count = 4;
 //Accessing Modal Fields //
 
@@ -238,25 +239,30 @@ class taskManager {
   }
 
   addTask(name, description, assignee, status, date, time) {
-    if(name.length === 0 || description.length === 0 ||  assignee.length === 0 || status.length === 0 || date.length === 0 || time.length === 0){
+    if (
+      name.length === 0 ||
+      description.length === 0 ||
+      assignee.length === 0 ||
+      status.length === 0 ||
+      date.length === 0 ||
+      time.length === 0
+    ) {
       alert("Please fill in the value of input fields in the form");
-      
-        
+    } else {
+      const task = new Task(
+        `task${this.index++}`,
+        name,
+        description,
+        assignee,
+        status,
+        date,
+        time
+      );
+      console.log(this.time);
+      this.taskarray.push(task);
+      console.log(this.taskarray);
+      this.refreshPage(this.taskarray);
     }
-    else{const task = new Task(
-      `task${this.index++}`,
-      name,
-      description,
-      assignee,
-      status,
-      date,
-      time
-    );
-    console.log(this.time);
-    this.taskarray.push(task);
-    console.log(this.taskarray);
-    this.refreshPage(this.taskarray);}
-    
   }
 
   updateTask(id, name, description, assignee, status, date, time) {
@@ -273,13 +279,13 @@ class taskManager {
     }
   }
   refreshPage(tasks) {
-    
     this.parent.innerHTML = "";
     this.taskarray.forEach((task) => {
       const element = task.templateToDom();
       this.parent.append(element);
     });
     task.attachDeleteListeners();
+    task.attachEditListeners();
   }
 }
 
@@ -335,7 +341,7 @@ class Task {
     }
   }
 
-   descrValidation(description){
+  descrValidation(description) {
     const taskDescValue = description.value.trim();
 
     if (taskDescValue === "") {
@@ -348,42 +354,39 @@ class Task {
       task.setSuccessFor(description);
       document.getElementById("submit").disabled = false;
     }
+  }
 
-     }
-
-    assigneeValidation(assignee){
-      const taskAssigneeValue = assignee.value.trim();
-      if (taskAssigneeValue === "") {
-        task.setErrorFor(assignee, "Task Must be assigned to someone");
-        document.getElementById("submit").disabled = true;
-      } else if (taskAssigneeValue.length > 8) {
-        task.setErrorFor(
-          assignee,
-          "Task Assignee length must not be greater than 10"
-        );
-        document.getElementById("submit").disabled = true;
-      } else {
-        task.setSuccessFor(assignee);
-        document.getElementById("submit").disabled = false;
-      }
+  assigneeValidation(assignee) {
+    const taskAssigneeValue = assignee.value.trim();
+    if (taskAssigneeValue === "") {
+      task.setErrorFor(assignee, "Task Must be assigned to someone");
+      document.getElementById("submit").disabled = true;
+    } else if (taskAssigneeValue.length > 8) {
+      task.setErrorFor(
+        assignee,
+        "Task Assignee length must not be greater than 10"
+      );
+      document.getElementById("submit").disabled = true;
+    } else {
+      task.setSuccessFor(assignee);
+      document.getElementById("submit").disabled = false;
     }
-   
+  }
 
-    dateValidation(date){
-      const taskDateValue = date.value;
-      var todayDate = new Date().toISOString().slice(0, 10);
-      if (taskDateValue == null || taskDateValue == "") {
-        task.setErrorFor(date, "Task must have a due date");
-        document.getElementById("submit").disabled = true;
-      } else if (taskDateValue < todayDate) {
-        task.setErrorFor(date, "Task cannot be created in past date");
-        document.getElementById("submit").disabled = true;
-      } else {
-        task.setSuccessFor(date);
-        document.getElementById("submit").disabled = false;
-      }
-
+  dateValidation(date) {
+    const taskDateValue = date.value;
+    var todayDate = new Date().toISOString().slice(0, 10);
+    if (taskDateValue == null || taskDateValue == "") {
+      task.setErrorFor(date, "Task must have a due date");
+      document.getElementById("submit").disabled = true;
+    } else if (taskDateValue < todayDate) {
+      task.setErrorFor(date, "Task cannot be created in past date");
+      document.getElementById("submit").disabled = true;
+    } else {
+      task.setSuccessFor(date);
+      document.getElementById("submit").disabled = false;
     }
+  }
 
   templateToDom() {
     const myHTML = this.htmlTemplate();
@@ -415,6 +418,40 @@ class Task {
       taskMgr.refreshPage(taskMgr.taskarray);
     }
   }
+  attachEditListeners() {
+    const editButtons = document.querySelectorAll("button.editBtn");
+    console.log(editButtons);
+    editButtons.forEach(function attachEditLister(editButton) {
+      editButton.addEventListener("click", handleEdit);
+    });
+    function handleEdit() {
+      const targetId = event.target.id;
+      console.log(targetId);
+      let editTask = taskMgr.taskarray.filter(
+        (taskElement) => taskElement.id == targetId
+      );
+
+      s = taskMgr.taskarray.findIndex((x) => x.id == targetId);
+      console.log(s);
+      console.log(taskMgr.taskarray[s].name);
+      document.querySelector("#TitleField").value = taskMgr.taskarray[s].name;
+      console.log(document.querySelector("#TitleField").value);
+      document.querySelector("#DescriptionField").value =
+        taskMgr.taskarray[s].description;
+      document.getElementById("AssigneeField").value =
+        taskMgr.taskarray[s].assignee;
+      document.getElementById("time").value = taskMgr.taskarray[s].time;
+      document.getElementById("date").value = taskMgr.taskarray[s].date;
+      console.log(document.querySelector("#status").value);
+      document.querySelector("#status").value = taskMgr.taskarray[s].status;
+      console.log(document.querySelector("#status").value);
+
+      let p = (document.querySelector("h4.modal-title").innerText =
+        "Edit Task ");
+      let d = (document.getElementById("submit").innerText = "Update");
+      editedTask = true;
+    }
+  }
 
   htmlTemplate() {
     const myHTML = `<div class="card" id=${this.id}>
@@ -431,12 +468,15 @@ class Task {
         <ul class="list-group " style = "background: lightyellow;">
           <li class="list-group-item" style = "background: lightyellow;" id ="assignedto1"><strong>Description :</strong> ${this.description}</li>
           <li class="list-group-item" style = "background: lightyellow;" id ="assignedto1"><strong>Assigned to: </strong>${this.assignee}</li>
-          <li class="list-group-item" style = "background: lightyellow;" id="date"><strong>Date : </strong>${this.date}</li>
+          <li class="list-group-item" style = "background: lightyellow;" id="dateInCard"><strong>Date : </strong>${this.date}</li>
           <li class="list-group-item" style = "background: lightyellow;" id="time1"><strong>Time :</strong> ${this.time} </li>
           <li class="list-group-item"style = "background: lightyellow;">
           <strong> Status : ${this.status}</strong>
           </li>
-          <li class="list-group-item" style = "background: lightyellow;"><button class="btn btn-primary" data-toggle="modal" data-target = "#NewTask" id="Ebtn${this.id}">Edit</button>
+          <li class="list-group-item" style = "background: lightyellow;">
+          <li class="list-group-item" style = "background: lightyellow;">
+          <button class="btn btn-primary editBtn" data-toggle="modal" data-target = "#NewTask" id="${this.id}">Edit</button>
+
           <button class="btn btn-danger removeBtn"  id="${this.id}">Delete</button></li>
       
         </ul>
@@ -458,13 +498,18 @@ const name1 = document.querySelector("#TitleField");
 const description1 = document.querySelector("#DescriptionField");
 const assignee1 = document.getElementById("AssigneeField");
 const date1 = document.getElementById("date");
-name1.addEventListener("input", function(){task.nameValidation(name1)});
-description1.addEventListener("input", function(){task.descrValidation(description1)});
-assignee1.addEventListener("input", function(){task.assigneeValidation(assignee1)});
-date1.addEventListener("input", function(){task.dateValidation(date1)});
-
-
-
+name1.addEventListener("input", function () {
+  task.nameValidation(name1);
+});
+description1.addEventListener("input", function () {
+  task.descrValidation(description1);
+});
+assignee1.addEventListener("input", function () {
+  task.assigneeValidation(assignee1);
+});
+date1.addEventListener("input", function () {
+  task.dateValidation(date1);
+});
 
 function submitButtonClicked() {
   const form = document.querySelector("#form");
@@ -474,6 +519,17 @@ function submitButtonClicked() {
   const status = document.getElementById("status").value;
   const date = document.getElementById("date").value;
   const time = document.getElementById("time").value;
-  taskMgr.addTask(name, description, assignee, status, date, time);
-  form.reset();
+  if (editedTask) {
+    editedTask = false;
+    taskMgr.taskarray[s].name = name;
+    taskMgr.taskarray[s].description = description;
+    taskMgr.taskarray[s].assignee = assignee;
+    taskMgr.taskarray[s].status = status;
+    taskMgr.taskarray[s].date = date;
+    taskMgr.taskarray[s].time = time;
+    taskMgr.refreshPage(taskMgr.taskarray);
+    document.getElementById("submit").innerText = "Submit ";
+  } else {
+    taskMgr.addTask(name, description, assignee, status, date, time);
+  }
 }
