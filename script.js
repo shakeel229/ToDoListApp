@@ -288,7 +288,7 @@ class taskManager {
     });
     task.attachDeleteListeners();
     task.attachEditListeners();
-    task.resetValidation();
+    this.resetValidation();
   }
   //validation code starts here 
 
