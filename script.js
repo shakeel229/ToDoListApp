@@ -251,6 +251,8 @@ class taskManager {
     this.taskarray = [];
     this.index = 1;
     this.parent = parent;
+    this.minLength = 1;
+    this.maxLength = 20;
   }
 
   addTask(name, description, assignee, status, date, time) {
@@ -288,6 +290,83 @@ class taskManager {
     task.attachEditListeners();
     task.resetValidation();
   }
+  //validation code starts here 
+
+  validation(input){
+    const field = input;
+    console.log(field);
+    if(field.value.length < this.minLength || field.value.length === "undefined"){
+      this.setErrorFor(field , `${field.name} cannot be blank` );
+      document.getElementById("submit").disabled = true;
+    }
+    else if (field.value.length > this.maxLength ){
+      this.setErrorFor(field ,  `${field.name} is longer than 20 char!`);
+      document.getElementById("submit").disabled = true;
+    }
+    else {
+      this.setSuccessFor(field);
+      document.getElementById("submit").disabled = false;
+    }
+    }
+
+
+    dateValidation(date) {
+      const taskDateValue = date.value;
+      var todayDate = new Date().toISOString().slice(0, 10);
+      if (taskDateValue == null || taskDateValue == "") {
+        this.setErrorFor(date, "Task must have a due date");
+        document.getElementById("submit").disabled = true;
+      } else if (taskDateValue < todayDate) {
+        this.setErrorFor(date, "Task cannot be created in past date");
+        document.getElementById("submit").disabled = true;
+      } else {
+        this.setSuccessFor(date);
+        document.getElementById("submit").disabled = false;
+      }
+    }
+
+    setErrorFor(input, message) {
+      const formgroup = input.parentElement;
+      const small = formgroup.querySelector("small");
+      small.innerText = message;
+      small.style.color = "red";
+      formgroup.className = "form-group error";
+      document.getElementById("submit").disabled = true;
+    }
+  
+    setSuccessFor(input) {
+      const formgroup = input.parentElement;
+      const small = formgroup.querySelector("small");
+      small.innerText = "Looks good!";
+      small.style.color = "green";
+      formgroup.className = "form-group success";
+      document.getElementById("submit").disabled = false;
+    }
+  
+
+//validation code ends here//
+    
+// this code deals with clearing the validation classesand message when a form is launched again - for repo//
+
+  resetValidation(){
+    form.reset();
+    const validationClass = document.getElementsByClassName("form-group success");
+    const validationEClass = document.getElementsByClassName("form-group error");
+    while (validationClass.length ) {
+      validationClass[0].classList.remove('success');
+      }
+    while (validationEClass.length ) {
+      validationEClass[0].classList.remove('error');
+        }
+
+    
+    const validationMsg = document.getElementsByClassName("msg");
+    console.log(validationMsg.length)
+    for(var i = 0; i < validationMsg.length; i++){
+    validationMsg[i].innerText = "";
+   }
+   }
+// reset validation ends here//
 }
 
 // Task class that has the metadata of the card //
@@ -301,111 +380,6 @@ class Task {
     this.date = date;
     this.time = time;
   }
-
-  setErrorFor(input, message) {
-    const formgroup = input.parentElement;
-    const small = formgroup.querySelector("small");
-    small.innerText = message;
-    small.style.color = "red";
-    formgroup.className = "form-group error";
-    document.getElementById("submit").disabled = true;
-  }
-
-  setSuccessFor(input) {
-    const formgroup = input.parentElement;
-    const small = formgroup.querySelector("small");
-    small.innerText = "Looks good!";
-    small.style.color = "green";
-    formgroup.className = "form-group success";
-    document.getElementById("submit").disabled = false;
-  }
-
-  nameValidation(name) {
-    const nameVal = name.value;
-    if (
-      nameVal == null ||
-      nameVal == "" ||
-      nameVal.length == undefined ||
-      nameVal.length == null ||
-      nameVal.length == 0 ||
-      nameVal.length == null ||
-      nameVal.length == 0
-    ) {
-      task.setErrorFor(name, "Task Name cannot be blank");
-      document.getElementById("submit").disabled = true;
-    } else if (nameVal.length > 10) {
-      task.setErrorFor(name, "Task Name length must be less than 10 chars");
-      document.getElementById("submit").disabled = true;
-    } else {
-      task.setSuccessFor(name);
-      document.getElementById("submit").disabled = false;
-    }
-  }
-
-  descrValidation(description) {
-    const taskDescValue = description.value.trim();
-
-    if (taskDescValue === "") {
-      task.setErrorFor(description, "Task Description cannot be blank");
-      document.getElementById("submit").disabled = true;
-    } else if (taskDescValue.length > 20) {
-      task.setErrorFor(description, "Task Descrition must not exceed 15 char");
-      document.getElementById("submit").disabled = true;
-    } else {
-      task.setSuccessFor(description);
-      document.getElementById("submit").disabled = false;
-    }
-  }
-
-  assigneeValidation(assignee) {
-    const taskAssigneeValue = assignee.value.trim();
-    if (taskAssigneeValue === "") {
-      task.setErrorFor(assignee, "Task Must be assigned to someone");
-      document.getElementById("submit").disabled = true;
-    } else if (taskAssigneeValue.length > 8) {
-      task.setErrorFor(
-        assignee,
-        "Task Assignee length must not be greater than 10"
-      );
-      document.getElementById("submit").disabled = true;
-    } else {
-      task.setSuccessFor(assignee);
-      document.getElementById("submit").disabled = false;
-    }
-  }
-
-  dateValidation(date) {
-    const taskDateValue = date.value;
-    var todayDate = new Date().toISOString().slice(0, 10);
-    if (taskDateValue == null || taskDateValue == "") {
-      task.setErrorFor(date, "Task must have a due date");
-      document.getElementById("submit").disabled = true;
-    } else if (taskDateValue < todayDate) {
-      task.setErrorFor(date, "Task cannot be created in past date");
-      document.getElementById("submit").disabled = true;
-    } else {
-      task.setSuccessFor(date);
-      document.getElementById("submit").disabled = false;
-    }
-  }
-
-  // this code deals with clearing the validation classesand message when a form is launched again - for repo//
-
-  resetValidation() {
-    form.reset();
-    const validationClass = document.getElementsByClassName(
-      "form-group success"
-    );
-    while (validationClass.length) {
-      validationClass[0].classList.remove("success");
-    }
-    const validationMsg = document.getElementsByClassName("msg");
-    console.log(validationMsg.length);
-    for (var i = 0; i < validationMsg.length; i++) {
-      validationMsg[i].innerText = "";
-    }
-  }
-  // reset validation ends here//
 
   templateToDom() {
     const myHTML = this.htmlTemplate();
@@ -502,7 +476,6 @@ class Task {
           <strong> Status : ${this.status}</strong>
           </li>
           <li class="list-group-item" style = "background: lightyellow;">
-          <li class="list-group-item" style = "background: lightyellow;">
           <button class="btn btn-primary editBtn" data-toggle="modal" data-target = "#NewTask" id="${this.id}">Edit</button>
 
           <button class="btn btn-danger removeBtn"  id="${this.id}">Delete</button></li>
@@ -523,21 +496,22 @@ const submit = document.getElementById("submit");
 
 submit.addEventListener("click", submitButtonClicked);
 //validation call for form //
+//validation call for form //
 const name1 = document.querySelector("#TitleField");
 const description1 = document.querySelector("#DescriptionField");
 const assignee1 = document.getElementById("AssigneeField");
 const date1 = document.getElementById("date");
 name1.addEventListener("input", function () {
-  task.nameValidation(name1);
+  taskMgr.validation(name1);
 });
 description1.addEventListener("input", function () {
-  task.descrValidation(description1);
+  taskMgr.validation(description1);
 });
 assignee1.addEventListener("input", function () {
-  task.assigneeValidation(assignee1);
+  taskMgr.validation(assignee1);
 });
 date1.addEventListener("input", function () {
-  task.dateValidation(date1);
+  taskMgr.dateValidation(date1);
 });
 
 function submitButtonClicked() {
@@ -565,5 +539,16 @@ function submitButtonClicked() {
 
 const reset = document.getElementById("reset");
 reset.addEventListener("click", function () {
-  task.resetValidation();
+  taskMgr.resetValidation();
+});
+
+
+const cancel = document.getElementById("cancel");
+cancel.addEventListener("click", function () {
+  taskMgr.resetValidation();
+});
+
+const closeForm = document.getElementById("close");
+closeForm.addEventListener("click", function () {
+  taskMgr.resetValidation();
 });

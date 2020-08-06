@@ -215,15 +215,16 @@
           <div class="modal-content">
             <div class="modal-header">
               <h4 class="modal-title">New Task</h4>
-              <button type="button" class="close" data-dismiss="modal">
+              <button type="button" class="close" data-dismiss="modal" id="close">
                 <span>&times;</span>
               </button>
             </div>
             <div class="modal-body">
               <form id="form" class="form">
                 <div class="form-group " id="title">
-                  <label for="Title">Title :</label>
+                  <label for="Title">Subject :</label>
                   <input
+                    name = "Task Subject"
                     type="text"
                     class="form-control "
                     placeholder="The subject of task goes here"
@@ -235,6 +236,7 @@
                 <div class="form-group ">
                   <label for="Description">Task Description :</label>
                   <textarea
+                    name = "Task Description"
                     type="text"
                     class="form-control"
                     id="DescriptionField"
@@ -247,6 +249,7 @@
                 <div class="form-group">
                   <label for="Assignee">Assigned to :</label>
                   <input
+                    name = "Task Assignee"
                     type="text"
                     class="form-control"
                     placeholder="name of assignee "
@@ -267,6 +270,7 @@
                 <div class="form-group">
                   <label for="Date :">Date :</label>
                   <input class="form-control"
+                    name = "Task Due Date"
                     type="date"
                     name="date"
                     value=""
@@ -288,7 +292,7 @@
              
               
                   <button   type ="reset" class="btn btn-warning"  id="reset">Reset</button>
-                  <button  type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                  <button  type="button" class="btn btn-danger" data-dismiss="modal" id ="cancel" >Cancel</button>
                   <button  type="button" class="btn btn-primary" data-dismiss="modal" id ="submit">Submit</button>
               
             </div>
