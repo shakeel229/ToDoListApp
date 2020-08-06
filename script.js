@@ -286,7 +286,6 @@ class taskManager {
     });
     task.attachDeleteListeners();
     task.attachEditListeners();
-    task.displayTasksByCategory();
     task.resetValidation();
   }
 }
@@ -517,6 +516,7 @@ class Task {
 
 const taskMgr = new taskManager(taskcontainer);
 const task = new Task();
+task.displayTasksByCategory();
 const submit = document.getElementById("submit");
 
 submit.addEventListener("click", submitButtonClicked);
