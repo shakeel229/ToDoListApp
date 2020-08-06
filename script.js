@@ -468,7 +468,7 @@ class Task {
     function filterTasks() {
       console.log(event.target.value);
       const category = event.target.value;
-      if (category != "All") {
+      if (category != "All Tasks") {
         console.log("inside if of category chosing");
         const filterCondition = event.target.value;
         const filteredTasks = taskMgr.taskarray.filter(
@@ -476,6 +476,8 @@ class Task {
         );
         console.log(filteredTasks);
         taskMgr.refreshPage(filteredTasks);
+      } else {
+        taskMgr.refreshPage(taskMgr.taskarray);
       }
     }
   }
@@ -539,6 +541,7 @@ date1.addEventListener("input", function () {
 });
 
 function submitButtonClicked() {
+  document.getElementById("tasksFilter").value = "All Tasks";
   const form = document.querySelector("#form");
   const name = document.querySelector("#TitleField").value;
   const description = document.querySelector("#DescriptionField").value;
@@ -559,7 +562,6 @@ function submitButtonClicked() {
     taskMgr.addTask(name, description, assignee, status, date, time);
   }
 }
-
 
 const reset = document.getElementById("reset");
 reset.addEventListener("click", function () {
