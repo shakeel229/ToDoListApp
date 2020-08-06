@@ -559,3 +559,9 @@ function submitButtonClicked() {
     taskMgr.addTask(name, description, assignee, status, date, time);
   }
 }
+
+
+const reset = document.getElementById("reset");
+reset.addEventListener("click", function () {
+  task.resetValidation();
+});
