@@ -42,22 +42,28 @@
       <section class="mainSection" >
         <div class="row">
           <!-- first row start -->
-          <div class="col-md-6">
-            <button  class="AddNewBtn with-shadow colorStyle" data-toggle="modal" data-target="#NewTask" ><strong>Add New Task</strong></button>
-            <button class="button-three" data-toggle="modal" data-target="#NewTask">Add New Task</button>
-            <h2 class="Padding20">Today's Tasks</h2>
+          <div class="col-md-7">
+            <button  class="AddNewBtn with-shadow colorStyle" data-toggle="modal" data-target="#NewTask" id="addTaskBtn" ><strong>Add New Task</strong></button>
+            <button class="button-three" data-toggle="modal" name= data-target="#NewTask">Add New Task</button>
+            
           </div>
+         
           <div class="col-md-6">
  
-
+            <h2 class="Padding20">Today's Tasks</h2>
           </div>
-          
-
-          
-          
-         
-          
-          <div class="col-md-6 col-sm-12 ml-2" id= "task">
+          <div class="col-md-4 offset-md-0 " style="padding-left: 42px;">
+            <div class="form-group">
+              <label for="Status"><h6>Display Tasks By Status</h6></label>
+              <select name="status" style="background-color: #96d3ec" class="form-control" id="tasksFilter">
+                <option value="TO-DO" >TODO</option>
+                <option value="In-Progress">In Progress</option>
+                <option value="Review">Review</option>
+                <option value="Done">Done</option>
+              </select>
+            </div>
+          </div>
+                   <div class="col-md-6 col-sm-12 ml-2" id= "task">
             
 
             <!-- first card of task visit doctor -->

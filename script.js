@@ -1,3 +1,8 @@
+document.getElementById("addTaskBtn").addEventListener("click", resetTaskForm);
+function resetTaskForm() {
+  document.querySelector("h4.modal-title").innerText = "New Task ";
+  document.getElementById("submit").innerText = "Submit ";
+}
 const taskcontainer = document.querySelector("#task");
 
 let edibtn1 = document.querySelector("#Ebtn1");
@@ -240,12 +245,12 @@ class taskManager {
 
   addTask(name, description, assignee, status, date, time) {
     if (
-      name.length === 0 ||
-      description.length === 0 ||
-      assignee.length === 0 ||
-      status.length === 0 ||
-      date.length === 0 ||
-      time.length === 0
+      !name.length ||
+      !description.length ||
+      !assignee.length ||
+      !status.length ||
+      !date.length ||
+      !time.length
     ) {
       alert("Please fill in the value of input fields in the form");
     } else {
@@ -258,24 +263,8 @@ class taskManager {
         date,
         time
       );
-      console.log(this.time);
       this.taskarray.push(task);
-      console.log(this.taskarray);
       this.refreshPage(this.taskarray);
-    }
-  }
-
-  updateTask(id, name, description, assignee, status, date, time) {
-    for (let i = 0; i < this.taskarray.length; i++) {
-      if (this.taskarray[i].id === id) {
-        this.taskarray[i].name = name;
-        this.taskarray[i].description = description;
-        this.taskarray[i].assignee = assignee;
-        this.taskarray[i].status = status;
-        this.taskarray[i].date = date;
-        this.taskarray[i].time = time;
-        break;
-      }
     }
   }
   refreshPage(tasks) {
@@ -399,60 +388,49 @@ class Task {
     const deleteButtons = document.querySelectorAll("button.removeBtn");
     console.log(deleteButtons);
     deleteButtons.forEach(function attacher(butn) {
-      butn.addEventListener("click", handleClick);
+      butn.addEventListener("click", task.deleteTask);
     });
-    function handleClick() {
-      console.log(event.target);
-      const targetId = event.target.id;
-      console.log(taskMgr.taskarray);
-      taskMgr.taskarray = taskMgr.taskarray.filter(
-        (taskElement) => taskElement.id != targetId
-      );
-      // taskMgr.taskarray = taskMgr.taskarray.filter(function (arrayElement) {
-      //   if (arrayElement.id == targetId {
-
-      //   }
-      // });
-      // taskMgr.taskarray = s;
-      console.log(taskMgr.taskarray);
-      taskMgr.refreshPage(taskMgr.taskarray);
-    }
+  }
+  deleteTask() {
+    const targetId = event.target.id;
+    taskMgr.taskarray = taskMgr.taskarray.filter(
+      (taskElement) => taskElement.id != targetId
+    );
+    taskMgr.refreshPage(taskMgr.taskarray);
   }
   attachEditListeners() {
     const editButtons = document.querySelectorAll("button.editBtn");
     console.log(editButtons);
     editButtons.forEach(function attachEditLister(editButton) {
-      editButton.addEventListener("click", handleEdit);
+      editButton.addEventListener("click", task.editTask);
     });
-    function handleEdit() {
-      const targetId = event.target.id;
-      console.log(targetId);
-      let editTask = taskMgr.taskarray.filter(
-        (taskElement) => taskElement.id == targetId
-      );
-
-      s = taskMgr.taskarray.findIndex((x) => x.id == targetId);
-      console.log(s);
-      console.log(taskMgr.taskarray[s].name);
-      document.querySelector("#TitleField").value = taskMgr.taskarray[s].name;
-      console.log(document.querySelector("#TitleField").value);
-      document.querySelector("#DescriptionField").value =
-        taskMgr.taskarray[s].description;
-      document.getElementById("AssigneeField").value =
-        taskMgr.taskarray[s].assignee;
-      document.getElementById("time").value = taskMgr.taskarray[s].time;
-      document.getElementById("date").value = taskMgr.taskarray[s].date;
-      console.log(document.querySelector("#status").value);
-      document.querySelector("#status").value = taskMgr.taskarray[s].status;
-      console.log(document.querySelector("#status").value);
-
-      let p = (document.querySelector("h4.modal-title").innerText =
-        "Edit Task ");
-      let d = (document.getElementById("submit").innerText = "Update");
-      editedTask = true;
-    }
   }
+  editTask() {
+    const targetId = event.target.id;
+    console.log(targetId);
+    let editTask = taskMgr.taskarray.filter(
+      (taskElement) => taskElement.id == targetId
+    );
 
+    s = taskMgr.taskarray.findIndex((x) => x.id == targetId);
+    console.log(s);
+    console.log(taskMgr.taskarray[s].name);
+    document.querySelector("#TitleField").value = taskMgr.taskarray[s].name;
+    console.log(document.querySelector("#TitleField").value);
+    document.querySelector("#DescriptionField").value =
+      taskMgr.taskarray[s].description;
+    document.getElementById("AssigneeField").value =
+      taskMgr.taskarray[s].assignee;
+    document.getElementById("time").value = taskMgr.taskarray[s].time;
+    document.getElementById("date").value = taskMgr.taskarray[s].date;
+    console.log(document.querySelector("#status").value);
+    document.querySelector("#status").value = taskMgr.taskarray[s].status;
+    console.log(document.querySelector("#status").value);
+
+    let p = (document.querySelector("h4.modal-title").innerText = "Edit Task");
+    let d = (document.getElementById("submit").innerText = "Update");
+    editedTask = true;
+  }
   htmlTemplate() {
     const myHTML = `<div class="card" id=${this.id}>
     <div class="card-header" style=" background : lightcoral;" id="head${this.id}">
@@ -528,7 +506,6 @@ function submitButtonClicked() {
     taskMgr.taskarray[s].date = date;
     taskMgr.taskarray[s].time = time;
     taskMgr.refreshPage(taskMgr.taskarray);
-    document.getElementById("submit").innerText = "Submit ";
   } else {
     taskMgr.addTask(name, description, assignee, status, date, time);
   }
