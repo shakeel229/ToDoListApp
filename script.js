@@ -286,6 +286,7 @@ class taskManager {
     });
     task.attachDeleteListeners();
     task.attachEditListeners();
+    task.resetValidation();
   }
 }
 
@@ -387,6 +388,22 @@ class Task {
       document.getElementById("submit").disabled = false;
     }
   }
+
+  // this code deals with clearing the validation classesand message when a form is launched again - for repo//
+
+  resetValidation(){
+    form.reset();
+    const validationClass = document.getElementsByClassName("form-group success");
+    while (validationClass.length) {
+      validationClass[0].classList.remove('success');
+      }
+    const validationMsg = document.getElementsByClassName("msg");
+    console.log(validationMsg.length)
+    for(var i = 0; i < validationMsg.length; i++){
+    validationMsg[i].innerText = "";
+   }
+   }
+// reset validation ends here//
 
   templateToDom() {
     const myHTML = this.htmlTemplate();
