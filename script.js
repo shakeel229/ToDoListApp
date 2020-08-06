@@ -11,16 +11,16 @@ let editedTask = false;
 let s = null;
 let count = 4;
 //Accessing Modal Fields //
-document.getElementById("tasksFilter").addEventListener("change", filterTasks);
-function filterTasks() {
-  console.log(event.target.value);
-  const filterCondition = event.target.value;
-  const filteredTasks = taskMgr.taskarray.filter(
-    (x) => x.status == filterCondition
-  );
-  console.log(filteredTasks);
-  taskMgr.refreshPage(filteredTasks);
-}
+// document.getElementById("tasksFilter").addEventListener("change", filterTasks);
+// function filterTasks() {
+//   console.log(event.target.value);
+//   const filterCondition = event.target.value;
+//   const filteredTasks = taskMgr.taskarray.filter(
+//     (x) => x.status == filterCondition
+//   );
+//   console.log(filteredTasks);
+//   taskMgr.refreshPage(filteredTasks);
+// }
 
 let title = document.getElementById("TitleField").form.value;
 let desc = document.getElementById("DescriptionField").form.value;
@@ -286,6 +286,7 @@ class taskManager {
     });
     task.attachDeleteListeners();
     task.attachEditListeners();
+    task.displayTasksByCategory();
     task.resetValidation();
   }
 }
@@ -391,19 +392,21 @@ class Task {
 
   // this code deals with clearing the validation classesand message when a form is launched again - for repo//
 
-  resetValidation(){
+  resetValidation() {
     form.reset();
-    const validationClass = document.getElementsByClassName("form-group success");
+    const validationClass = document.getElementsByClassName(
+      "form-group success"
+    );
     while (validationClass.length) {
-      validationClass[0].classList.remove('success');
-      }
+      validationClass[0].classList.remove("success");
+    }
     const validationMsg = document.getElementsByClassName("msg");
-    console.log(validationMsg.length)
-    for(var i = 0; i < validationMsg.length; i++){
-    validationMsg[i].innerText = "";
-   }
-   }
-// reset validation ends here//
+    console.log(validationMsg.length);
+    for (var i = 0; i < validationMsg.length; i++) {
+      validationMsg[i].innerText = "";
+    }
+  }
+  // reset validation ends here//
 
   templateToDom() {
     const myHTML = this.htmlTemplate();
@@ -458,6 +461,24 @@ class Task {
     let p = (document.querySelector("h4.modal-title").innerText = "Edit Task");
     let d = (document.getElementById("submit").innerText = "Update");
     editedTask = true;
+  }
+  displayTasksByCategory() {
+    document
+      .getElementById("tasksFilter")
+      .addEventListener("change", filterTasks);
+    function filterTasks() {
+      console.log(event.target.value);
+      const category = event.target.value;
+      if (category != "All") {
+        console.log("inside if of category chosing");
+        const filterCondition = event.target.value;
+        const filteredTasks = taskMgr.taskarray.filter(
+          (x) => x.status == filterCondition
+        );
+        console.log(filteredTasks);
+        taskMgr.refreshPage(filteredTasks);
+      }
+    }
   }
   htmlTemplate() {
     const myHTML = `<div class="card" id=${this.id}>
