@@ -11,6 +11,16 @@ let editedTask = false;
 let s = null;
 let count = 4;
 //Accessing Modal Fields //
+document.getElementById("tasksFilter").addEventListener("change", filterTasks);
+function filterTasks() {
+  console.log(event.target.value);
+  const filterCondition = event.target.value;
+  const filteredTasks = taskMgr.taskarray.filter(
+    (x) => x.status == filterCondition
+  );
+  console.log(filteredTasks);
+  taskMgr.refreshPage(filteredTasks);
+}
 
 let title = document.getElementById("TitleField").form.value;
 let desc = document.getElementById("DescriptionField").form.value;
@@ -267,9 +277,10 @@ class taskManager {
       this.refreshPage(this.taskarray);
     }
   }
-  refreshPage(tasks) {
+  refreshPage(tasksArray) {
     this.parent.innerHTML = "";
-    this.taskarray.forEach((task) => {
+    // this.taskarray.forEach((task)
+    tasksArray.forEach((task) => {
       const element = task.templateToDom();
       this.parent.append(element);
     });
