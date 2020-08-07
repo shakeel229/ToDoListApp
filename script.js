@@ -2,16 +2,15 @@
 const taskForm= document.querySelector('[name="taskForm"]');
 const formFooter= document.querySelector('[name="formFooter"]');
 const formTitle= document.querySelector('[name="formTitle"]');
-const submitBtn =document.getElementById("submit")
+const submitBtn =document.getElementById("submit");
+const taskcontainer = document.querySelector("#task");
+let editedTask = false;
+let s = null;
 document.getElementById("addTaskBtn").addEventListener("click", resetTaskForm);
 function resetTaskForm() {
   formTitle.innerText = "New Task ";
   submitBtn.innerText = "Submit ";
 }
-const taskcontainer = document.querySelector("#task");
-let editedTask = false;
-let s = null;
-
 
 /* Task Manager class for the add task , delete task , update task */
 class taskManager {
@@ -25,7 +24,7 @@ class taskManager {
 
   alertOnSubmit(){
       alert("Please fill in all the fields , Task can't be blank");
-      document.getElementById("submit").disabled = true;
+      submitBtn.disabled = true;
 }
 
   addTask(name, description, assignee, status, date, time) {
@@ -69,13 +68,13 @@ class taskManager {
   //attach delete listeners
   attachDeleteListeners() {
     const deleteButtons = document.querySelectorAll("button.removeBtn");
-    console.log(deleteButtons);
+   
     deleteButtons.forEach(function attacher(butn) {
       butn.addEventListener("click", taskMgr.deleteTask);
     });
   }
   deleteTask() {
-    const targetId = event.target.id;
+    targetId=event.target.id;
     taskMgr.tasksList = taskMgr.tasksList.filter(
       (taskElement) => taskElement.id != targetId
     );
@@ -84,21 +83,19 @@ class taskManager {
   //validation code starts here 
   attachEditListeners() {
     const editButtons = document.querySelectorAll("button.editBtn");
-    console.log(editButtons);
+   
     editButtons.forEach(function attachEditLister(editButton) {
       editButton.addEventListener("click", taskMgr.editTask);
     });
   }
   editTask() {
     const targetId = event.target.id;
-    console.log(targetId);
+    
     let editTask = taskMgr.tasksList.filter(
       (taskElement) => taskElement.id == targetId
     );
 
     s = taskMgr.tasksList.findIndex((x) => x.id == targetId);
-    console.log(s);
-    console.log(taskMgr.tasksList[s].name);
     taskForm.taskSubject.value= taskMgr.tasksList[s].name;
     taskForm.taskDescription.value= taskMgr.tasksList[s].description;
     taskForm.taskAssignee.value = taskMgr.tasksList[s].assignee;
@@ -108,6 +105,26 @@ class taskManager {
     submitBtn.innerText='Update ';  
     formTitle.innerText = "Edit Task";
     editedTask = true;
+  }
+  displayTasksByCategory() {
+    document
+      .getElementById("tasksFilter")
+      .addEventListener("change", filterTasks);
+    function filterTasks() {
+      console.log(event.target.value);
+      const category = event.target.value;
+      if (category != "All Tasks") {
+        console.log("inside if of category chosing");
+        const filterCondition = event.target.value;
+        const filteredTasks = taskMgr.tasksList.filter(
+          (x) => x.status == filterCondition
+        );
+        console.log(filteredTasks);
+        taskMgr.refreshPage(filteredTasks);
+      } else {
+        taskMgr.refreshPage(taskMgr.tasksList);
+      }
+    }
   }
   validation(input){
     const field = input;
@@ -178,7 +195,7 @@ class taskManager {
 
     
     const validationMsg = document.getElementsByClassName("msg");
-    console.log(validationMsg.length)
+    
     for(var i = 0; i < validationMsg.length; i++){
     validationMsg[i].innerText = "";
    }
@@ -207,26 +224,7 @@ class Task {
   }
   
   
-  displayTasksByCategory() {
-    document
-      .getElementById("tasksFilter")
-      .addEventListener("change", filterTasks);
-    function filterTasks() {
-      console.log(event.target.value);
-      const category = event.target.value;
-      if (category != "All Tasks") {
-        console.log("inside if of category chosing");
-        const filterCondition = event.target.value;
-        const filteredTasks = taskMgr.tasksList.filter(
-          (x) => x.status == filterCondition
-        );
-        console.log(filteredTasks);
-        taskMgr.refreshPage(filteredTasks);
-      } else {
-        taskMgr.refreshPage(taskMgr.tasksList);
-      }
-    }
-  }
+
   htmlTemplate() {
     const myHTML = `<div class="card" id=${this.id}>
     <div class="card-header" style=" background : lightcoral;" id="head${this.id}">
@@ -263,10 +261,10 @@ class Task {
 
 const taskMgr = new taskManager(taskcontainer);
 const task = new Task();
-task.displayTasksByCategory();
+taskMgr.displayTasksByCategory();
 const submit = submitBtn;
 
-submit.addEventListener("click", submitButtonClicked);
+submitBtn.addEventListener("click", submitButtonClicked);
 //validation call for form //
 
 
