@@ -2,10 +2,11 @@
 const taskForm= document.querySelector('[name="taskForm"]');
 const formFooter= document.querySelector('[name="formFooter"]');
 const formTitle= document.querySelector('[name="formTitle"]');
+const submitBtn =document.getElementById("submit")
 document.getElementById("addTaskBtn").addEventListener("click", resetTaskForm);
 function resetTaskForm() {
-  document.querySelector("h4.modal-title").innerText = "New Task ";
-  document.getElementById("submit").innerText = "Submit ";
+  formTitle.innerText = "New Task ";
+  submitBtn.innerText = "Submit ";
 }
 const taskcontainer = document.querySelector("#task");
 let editedTask = false;
@@ -61,9 +62,24 @@ class taskManager {
       const element = task.templateToDom();
       this.parent.append(element);
     });
-    task.attachDeleteListeners();
+    this.attachDeleteListeners();
     this.attachEditListeners();
     this.resetValidation();
+  }
+  //attach delete listeners
+  attachDeleteListeners() {
+    const deleteButtons = document.querySelectorAll("button.removeBtn");
+    console.log(deleteButtons);
+    deleteButtons.forEach(function attacher(butn) {
+      butn.addEventListener("click", taskMgr.deleteTask);
+    });
+  }
+  deleteTask() {
+    const targetId = event.target.id;
+    taskMgr.tasksList = taskMgr.tasksList.filter(
+      (taskElement) => taskElement.id != targetId
+    );
+    taskMgr.refreshPage(taskMgr.tasksList);
   }
   //validation code starts here 
   attachEditListeners() {
@@ -89,7 +105,7 @@ class taskManager {
     taskForm.taskTime.value = taskMgr.tasksList[s].time;
     taskForm.taskDate.value = taskMgr.tasksList[s].date;
     taskForm.taskStatus.value = taskMgr.tasksList[s].status;
-    document.getElementById('submit').innerText='Update ';  
+    submitBtn.innerText='Update ';  
     formTitle.innerText = "Edit Task";
     editedTask = true;
   }
@@ -98,15 +114,15 @@ class taskManager {
     
     if(field.value.length < this.minLength || field.value.length === "undefined"){
       this.setErrorFor(field , `${field.name} cannot be blank` );
-      document.getElementById("submit").disabled = true;
+      submitBtn.disabled = true;
     }
     else if (field.value.length > this.maxLength ){
       this.setErrorFor(field ,  `${field.name} is longer than 20 char!`);
-      document.getElementById("submit").disabled = true;
+      submitBtn.disabled = true;
     }
     else {
       this.setSuccessFor(field);
-      document.getElementById("submit").disabled = false;
+      submitBtn.disabled = false;
     }
     }
 
@@ -116,13 +132,13 @@ class taskManager {
       var todayDate = new Date().toISOString().slice(0, 10);
       if (taskDateValue == null || taskDateValue == "") {
         this.setErrorFor(date, "Task must have a due date");
-        document.getElementById("submit").disabled = true;
+        submitBtn.disabled = true;
       } else if (taskDateValue < todayDate) {
         this.setErrorFor(date, "Task cannot be created in past date");
-        document.getElementById("submit").disabled = true;
+        submitBtn.disabled = true;
       } else {
         this.setSuccessFor(date);
-        document.getElementById("submit").disabled = false;
+        submitBtn.disabled = false;
       }
     }
 
@@ -132,7 +148,7 @@ class taskManager {
       small.innerText = message;
       small.style.color = "red";
       formgroup.className = "form-group error";
-      document.getElementById("submit").disabled = true;
+      submitBtn.disabled = true;
     }
   
     setSuccessFor(input) {
@@ -141,7 +157,7 @@ class taskManager {
       small.innerText = "Looks good!";
       small.style.color = "green";
       formgroup.className = "form-group success";
-      document.getElementById("submit").disabled = false;
+      submitBtn.disabled = false;
     }
   
 
@@ -189,20 +205,7 @@ class Task {
 
     return myFragment;
   }
-  attachDeleteListeners() {
-    const deleteButtons = document.querySelectorAll("button.removeBtn");
-    console.log(deleteButtons);
-    deleteButtons.forEach(function attacher(butn) {
-      butn.addEventListener("click", task.deleteTask);
-    });
-  }
-  deleteTask() {
-    const targetId = event.target.id;
-    taskMgr.tasksList = taskMgr.tasksList.filter(
-      (taskElement) => taskElement.id != targetId
-    );
-    taskMgr.refreshPage(taskMgr.tasksList);
-  }
+  
   
   displayTasksByCategory() {
     document
@@ -261,7 +264,7 @@ class Task {
 const taskMgr = new taskManager(taskcontainer);
 const task = new Task();
 task.displayTasksByCategory();
-const submit = document.getElementById("submit");
+const submit = submitBtn;
 
 submit.addEventListener("click", submitButtonClicked);
 //validation call for form //
