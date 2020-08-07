@@ -44,7 +44,7 @@
           <!-- first row start -->
           <div class="col-md-7">
             <button  class="AddNewBtn with-shadow colorStyle" data-toggle="modal" data-target="#NewTask" id="addTaskBtn" ><strong>Add New Task</strong></button>
-            <button class="button-three" data-toggle="modal" name= data-target="#NewTask">Add New Task</button>
+            <button class="button-three" data-toggle="modal"  data-target="#NewTask">Add New Task</button>
             
           </div>
          
@@ -210,57 +210,60 @@
   </div>
       <!-- Add New Task Form Starts here  -->
 
-      <div class="modal fade" id="NewTask">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h4 class="modal-title">New Task</h4>
+      <div class="modal fade" id="NewTask" >
+        <div class="modal-dialog" data-backdrop = 'static' data-keyboard ="false">
+          <div class="modal-content" name='formModal'>
+            <div class="modal-header" name='formHeader'>
+              <h4 class="modal-title" name='formTitle'>New Task</h4>
               <button type="button" class="close" data-dismiss="modal" id="close">
                 <span>&times;</span>
               </button>
             </div>
             <div class="modal-body">
-              <form id="form" class="form">
+              <form id="form" name='taskForm' class="form">
+                <div id="onSubmitCheck"></div>
                 <div class="form-group " id="title">
                   <label for="Title">Subject :</label>
                   <input
-                    name = "Task Subject"
+                    required
+                    name = "taskSubject"
                     type="text"
                     class="form-control "
                     placeholder="The subject of task goes here"
                     id="TitleField" 
-                    value=""
-                  /><small class="msg"> </small>
+                     value=""
+                      /><small class="msg"> </small>
                 </div>
                 
                 <div class="form-group ">
                   <label for="Description">Task Description :</label>
                   <textarea
-                    name = "Task Description"
+                    name = "taskDescription"
                     type="text"
                     class="form-control"
                     id="DescriptionField"
                     placeholder="Give us detailed description of the task"
                     value="station"
-
+                    required
                   ></textarea>
                   <small class="msg"> </small>
                 </div>
                 <div class="form-group">
                   <label for="Assignee">Assigned to :</label>
                   <input
-                    name = "Task Assignee"
+                    name = "taskAssignee"
                     type="text"
                     class="form-control"
                     placeholder="name of assignee "
                     id="AssigneeField" 
                     value=""
+                    required
 
                   /><small class="msg"> </small>
                 </div>
                 <div class="form-group">
                   <label for="Status">Status :</label>
-                  <select name="status" style="background-color: #96d3ec" class="form-control" id="status">
+                  <select name="taskStatus" style="background-color: #96d3ec" class="form-control" id="status">
                     <option value="TO-DO" >TODO</option>
                     <option value="In-Progress">In Progress</option>
                     <option value="Review">Review</option>
@@ -270,7 +273,7 @@
                 <div class="form-group">
                   <label for="Date :">Date :</label>
                   <input class="form-control"
-                    name = "Task Due Date"
+                    name = "taskDate"
                     type="date"
                     name="date"
                     value=""
@@ -281,19 +284,17 @@
                   <label for="Time :">Time :</label>
                   <input class="form-control"
                     type="time"
-                    
+                    name='taskTime'
                     value=""
                     id="time" 
                   ></input><div ></div>
                 </div>
               </form>
             </div>
-            <div class="modal-footer">
-             
-              
-                  <button   type ="reset" class="btn btn-warning"  id="reset">Reset</button>
-                  <button  type="button" class="btn btn-danger" data-dismiss="modal" id ="cancel" >Cancel</button>
-                  <button  type="button" class="btn btn-primary" data-dismiss="modal" id ="submit">Submit</button>
+            <div class="modal-footer" name='formFooter'>
+                  <button   type ="reset" name='resetBtn' class="btn btn-warning"  id="reset">Reset</button>
+                  <button  type="button" name='cancelBtn' class="btn btn-danger" data-dismiss="modal" id ="cancel" >Cancel</button>
+                  <button  type="button" name='submitBtn' class="btn btn-primary" data-dismiss="modal" id ="submit">Submit</button>
               
             </div>
           </div>
