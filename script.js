@@ -62,14 +62,40 @@ class taskManager {
       this.parent.append(element);
     });
     task.attachDeleteListeners();
-    task.attachEditListeners();
+    this.attachEditListeners();
     this.resetValidation();
   }
   //validation code starts here 
+  attachEditListeners() {
+    const editButtons = document.querySelectorAll("button.editBtn");
+    console.log(editButtons);
+    editButtons.forEach(function attachEditLister(editButton) {
+      editButton.addEventListener("click", taskMgr.editTask);
+    });
+  }
+  editTask() {
+    const targetId = event.target.id;
+    console.log(targetId);
+    let editTask = taskMgr.tasksList.filter(
+      (taskElement) => taskElement.id == targetId
+    );
 
+    s = taskMgr.tasksList.findIndex((x) => x.id == targetId);
+    console.log(s);
+    console.log(taskMgr.tasksList[s].name);
+    taskForm.taskSubject.value= taskMgr.tasksList[s].name;
+    taskForm.taskDescription.value= taskMgr.tasksList[s].description;
+    taskForm.taskAssignee.value = taskMgr.tasksList[s].assignee;
+    taskForm.taskTime.value = taskMgr.tasksList[s].time;
+    taskForm.taskDate.value = taskMgr.tasksList[s].date;
+    taskForm.taskStatus.value = taskMgr.tasksList[s].status;
+    document.getElementById('submit').innerText='Update ';  
+    formTitle.innerText = "Edit Task";
+    editedTask = true;
+  }
   validation(input){
     const field = input;
-    console.log(field);
+    
     if(field.value.length < this.minLength || field.value.length === "undefined"){
       this.setErrorFor(field , `${field.name} cannot be blank` );
       document.getElementById("submit").disabled = true;
@@ -177,33 +203,7 @@ class Task {
     );
     taskMgr.refreshPage(taskMgr.tasksList);
   }
-  attachEditListeners() {
-    const editButtons = document.querySelectorAll("button.editBtn");
-    console.log(editButtons);
-    editButtons.forEach(function attachEditLister(editButton) {
-      editButton.addEventListener("click", task.editTask);
-    });
-  }
-  editTask() {
-    const targetId = event.target.id;
-    console.log(targetId);
-    let editTask = taskMgr.tasksList.filter(
-      (taskElement) => taskElement.id == targetId
-    );
-
-    s = taskMgr.tasksList.findIndex((x) => x.id == targetId);
-    console.log(s);
-    console.log(taskMgr.tasksList[s].name);
-    taskForm.taskSubject.value= taskMgr.tasksList[s].name;
-    taskForm.taskDescription.value= taskMgr.tasksList[s].description;
-    taskForm.taskAssignee.value = taskMgr.tasksList[s].assignee;
-    taskForm.taskTime.value = taskMgr.tasksList[s].time;
-    taskForm.taskDate.value = taskMgr.tasksList[s].date;
-    taskForm.taskStatus.value = taskMgr.tasksList[s].status;
-    document.getElementById('submit').innerText='Update ';  
-    formTitle.innerText = "Edit Task";
-    editedTask = true;
-  }
+  
   displayTasksByCategory() {
     document
       .getElementById("tasksFilter")
@@ -288,12 +288,12 @@ date1.addEventListener("input", function () {
 function submitButtonClicked(event) {
   document.getElementById("tasksFilter").value = "All Tasks";
   const form = document.querySelector("#form");
-  const name = document.querySelector("#TitleField").value;
-  const description = document.querySelector("#DescriptionField").value;
-  const assignee = document.getElementById("AssigneeField").value;
-  const status = document.getElementById("status").value;
-  const date = document.getElementById("date").value;
-  const time = document.getElementById("time").value;
+  const name = taskForm.taskSubject.value;
+  const description = taskForm.taskDescription.value;
+  const assignee = taskForm.taskAssignee.value;
+  const status = taskForm.taskStatus.value;
+  const date = taskForm.taskDate.value;
+  const time = taskForm.taskTime.value
   
   if (editedTask) {
     editedTask = false;
@@ -305,7 +305,7 @@ function submitButtonClicked(event) {
     taskMgr.tasksList[s].time = time;
     taskMgr.refreshPage(taskMgr.tasksList);
   } else {
-    taskMgr.addTask(name, description, assignee, status, date, time);
+    taskMgr.addTask(taskForm.taskSubject.value, taskForm.taskDescription.value,taskForm.taskAssignee.value, taskForm.taskStatus.value, taskForm.taskDate.value, taskForm.taskTime.value);
   }
   
   
