@@ -42,10 +42,27 @@
       <section class="mainSection" >
         <div class="row">
           <!-- first row start -->
-          <div class="col-md-7">
+          <div class="col-md-6">
             <button  class="AddNewBtn with-shadow colorStyle" data-toggle="modal" data-target="#NewTask" id="addTaskBtn" ><strong>Add New Task</strong></button>
             <button class="button-three" data-toggle="modal"  data-target="#NewTask">Add New Task</button>
             
+          </div>
+          <div class="col-md-6 offset-md-0" style="padding-left: 42px; margin-top: 25px;">
+            <button type="button" class="btn btn-primary doBadge">
+              TO DO <span class="badge badge-light badgeTodo">0</span>
+            </button>
+            <button type="button" class="btn btn-info progressBadge">
+              IN PROGRESS <span class="badge badge-light badgeInProgress" name="inProgress">0</span>
+              
+            </button>
+            <button type="button" class="btn btn-secondary reviewBadge">
+              REVIEW  <span class="badge badge-light ">0</span>
+              
+            </button>
+            <button type="button" class="btn btn-success doneBadge">
+              DONE  <span class="badge badge-light badgeDone">0</span>
+              
+            </button>
           </div>
          
           <div class="col-md-6">
@@ -231,7 +248,7 @@
                     class="form-control "
                     placeholder="The subject of task goes here"
                     id="TitleField" 
-                     value=""
+                     
                       /><small class="msg"> </small>
                 </div>
                 
