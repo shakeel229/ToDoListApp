@@ -22,6 +22,32 @@ class taskManager {
     this.maxLength = 20;
   }
 
+// this code checks all the form buttons and attach the functions that each one must perform//
+  buttonDefault(){
+    const allFormBtns = document.querySelectorAll(".formbtn");
+      allFormBtns.forEach((btn) => {
+      btn.name !== "submitBtn"? btn.addEventListener("click" , function () {taskMgr.resetValidation();}) : btn.addEventListener("click", function(){taskMgr.submitButtonClicked();} )
+    })
+  }
+// Form button default function call ends here//
+
+
+  submitButtonClicked() {
+    document.getElementById("tasksFilter").value = "All Tasks";
+   if (editedTask) {
+      editedTask = false;
+      taskMgr.tasksList[s].name = taskForm.taskSubject.value;
+      taskMgr.tasksList[s].description = taskForm.taskDescription.value;
+      taskMgr.tasksList[s].assignee = taskForm.taskAssignee.value;
+      taskMgr.tasksList[s].status = taskForm.taskStatus.value;
+      taskMgr.tasksList[s].date = taskForm.taskDate.value;
+      taskMgr.tasksList[s].time = taskForm.taskTime.value;
+      taskMgr.refreshPage(taskMgr.tasksList);
+    } else {
+      taskMgr.addTask(taskForm.taskSubject.value, taskForm.taskDescription.value,taskForm.taskAssignee.value, taskForm.taskStatus.value, taskForm.taskDate.value, taskForm.taskTime.value);
+    }
+    }
+
   alertOnSubmit(){
       alert("Please fill in all the fields , Task can't be blank");
       submitBtn.disabled = true;
@@ -37,8 +63,10 @@ class taskManager {
       !time.length
     ) {
       this.alertOnSubmit();
+      }
+
       
-    } else {
+      else {
       const task = new Task(
         `task${this.index++}`,
         name,
@@ -54,9 +82,8 @@ class taskManager {
     
   }
 }
-  refreshPage(tasksArray) {
+ refreshPage(tasksArray) {
     this.parent.innerHTML = "";
-    // this.tasksList.forEach((task)
     tasksArray.forEach((task) => {
       const element = task.templateToDom();
       this.parent.append(element);
@@ -73,24 +100,23 @@ class taskManager {
       butn.addEventListener("click", taskMgr.deleteTask);
     });
   }
+
   deleteTask() {
-    targetId=event.target.id;
+
     taskMgr.tasksList = taskMgr.tasksList.filter(
-      (taskElement) => taskElement.id != targetId
+      (taskElement) => taskElement.id != event.target.id
     );
     taskMgr.refreshPage(taskMgr.tasksList);
   }
-  //validation code starts here 
+ 
   attachEditListeners() {
     const editButtons = document.querySelectorAll("button.editBtn");
-   
     editButtons.forEach(function attachEditLister(editButton) {
       editButton.addEventListener("click", taskMgr.editTask);
     });
   }
   editTask() {
     const targetId = event.target.id;
-    
     let editTask = taskMgr.tasksList.filter(
       (taskElement) => taskElement.id == targetId
     );
@@ -106,6 +132,9 @@ class taskManager {
     formTitle.innerText = "Edit Task";
     editedTask = true;
   }
+
+
+
   displayTasksByCategory() {
     document
       .getElementById("tasksFilter")
@@ -126,19 +155,22 @@ class taskManager {
       }
     }
   }
+
+
+
+
   validation(input){
-    const field = input;
-    
-    if(field.value.length < this.minLength || field.value.length === "undefined"){
-      this.setErrorFor(field , `${field.name} cannot be blank` );
+   
+    if(input.value.length < this.minLength || input.value.length === "undefined"){
+      this.setErrorFor(input , `${input.name} cannot be blank` );
       submitBtn.disabled = true;
     }
-    else if (field.value.length > this.maxLength ){
-      this.setErrorFor(field ,  `${field.name} is longer than 20 char!`);
+    else if (input.value.length > this.maxLength ){
+      this.setErrorFor(input ,  `${input.name} is longer than 20 char!`);
       submitBtn.disabled = true;
     }
     else {
-      this.setSuccessFor(field);
+      this.setSuccessFor(input);
       submitBtn.disabled = false;
     }
     }
@@ -186,16 +218,9 @@ class taskManager {
     form.reset();
     const validationClass = document.getElementsByClassName("form-group success");
     const validationEClass = document.getElementsByClassName("form-group error");
-    while (validationClass.length ) {
-      validationClass[0].classList.remove('success');
-      }
-    while (validationEClass.length ) {
-      validationEClass[0].classList.remove('error');
-        }
-
-    
+    while (validationClass.length ) {validationClass[0].classList.remove('success');}
+    while (validationEClass.length ) {validationEClass[0].classList.remove('error');}
     const validationMsg = document.getElementsByClassName("msg");
-    
     for(var i = 0; i < validationMsg.length; i++){
     validationMsg[i].innerText = "";
    }
@@ -223,8 +248,6 @@ class Task {
     return myFragment;
   }
   
-  
-
   htmlTemplate() {
     const myHTML = `<div class="card" id=${this.id}>
     <div class="card-header" style=" background : lightcoral;" id="head${this.id}">
@@ -261,32 +284,36 @@ class Task {
 
 const taskMgr = new taskManager(taskcontainer);
 const task = new Task();
-taskMgr.displayTasksByCategory();
-const submit = submitBtn;
 
-submitBtn.addEventListener("click", submitButtonClicked);
-//validation call for form //
-
-
-
-const name1 = document.querySelector("#TitleField");
+window.addEventListener("load" , function(){
+/*const name1 = document.querySelector("#TitleField");
 const description1 = document.querySelector("#DescriptionField");
 const assignee1 = document.getElementById("AssigneeField");
-const date1 = document.getElementById("date");
-name1.addEventListener("input", function () {
-  taskMgr.validation(name1);
+const date1 = document.getElementById("date");*/
+taskForm.taskSubject.addEventListener("input", function () {
+  taskMgr.validation(taskForm.taskSubject);
 });
-description1.addEventListener("input", function () {
-  taskMgr.validation(description1);
+taskForm.taskDescription.addEventListener("input", function () {
+  taskMgr.validation(taskForm.taskDescription);
 });
-assignee1.addEventListener("input", function () {
-  taskMgr.validation(assignee1);
+taskForm.taskAssignee.addEventListener("input", function () {
+  taskMgr.validation(taskForm.taskAssignee);
+  
 });
-date1.addEventListener("input", function () {
-  taskMgr.dateValidation(date1);
+taskForm.taskDate.addEventListener("input", function () {
+  taskMgr.dateValidation(taskForm.taskDate);
+});
+taskMgr.displayTasksByCategory();
+
+taskMgr.buttonDefault();
 });
 
-function submitButtonClicked(event) {
+
+
+
+
+/*function submitButtonClicked(event) {
+  event.preventDefault();
   document.getElementById("tasksFilter").value = "All Tasks";
   const form = document.querySelector("#form");
   const name = taskForm.taskSubject.value;
@@ -310,21 +337,6 @@ function submitButtonClicked(event) {
   }
   
   
-}
+}*/
 
 
-const reset = document.getElementById("reset");
-reset.addEventListener("click", function () {
-  taskMgr.resetValidation();
-});
-
-
-const cancel = document.getElementById("cancel");
-cancel.addEventListener("click", function () {
-  taskMgr.resetValidation();
-});
-
-const closeForm = document.getElementById("close");
-closeForm.addEventListener("click", function () {
-  taskMgr.resetValidation();
-});
