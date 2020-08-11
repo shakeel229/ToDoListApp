@@ -16,7 +16,7 @@ function resetTaskForm() {
 class taskManager {
   constructor(parent) {
     this.tasksList = [];
-    this.index = 1;
+    this.index = 0;
     this.parent = parent;
     this.minLength = 1;
     this.maxLength = 20;
@@ -76,8 +76,9 @@ class taskManager {
     ) {
       this.alertOnSubmit();
     } else {
+      console.log(this.tasksList.length);
       const task = new Task(
-        `task${this.index++}`,
+        `task${this.tasksList.length ? this.tasksList.length : this.index++}`,
         name,
         description,
         assignee,
@@ -100,6 +101,7 @@ class taskManager {
     this.attachEditListeners();
     this.resetValidation();
     this.updateTasksCount(this.tasksList);
+    localStorage.setItem("tasksList", JSON.stringify(this.tasksList));
   }
   //attach delete listeners
   attachDeleteListeners() {
@@ -163,7 +165,11 @@ class taskManager {
   }
 
   checkValidation(input) {
-    if (input.name === "taskSubject" ||input.name === "taskDescription" || input.name === "taskAssignee") {
+    if (
+      input.name === "taskSubject" ||
+      input.name === "taskDescription" ||
+      input.name === "taskAssignee"
+    ) {
       if (
         input.value.length < this.minLength ||
         input.value.length === "undefined"
@@ -303,7 +309,7 @@ class Task {
     const myHTML = `<div class="card" id=${element.id}>
     <div class="card-header" style=" background : lightcoral;" id="head${element.id}">
       <h2 class="mb-0 text-left" style="text-decoration: none;">
-        <button id="button${element.id}" class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapse${this.id}" aria-expanded="false" aria-controls="collapse${this.id}">
+        <button id="button${element.id}" class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapse${element.id}" aria-expanded="false" aria-controls="collapse${element.id}">
           <strong><h5 id ="crdtitle${element.id}" class="text-center" style="color:brown;">${element.name}</h5></strong> 
         </button>
       </h2>
