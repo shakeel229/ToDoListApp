@@ -318,7 +318,7 @@ class Task {
 
   htmlTemplate(element) {
     const myHTML = `<div class="card" id=${element.id}>
-    <div class="card-header" style=" background : lightcoral;" id="head${element.id}">
+    <div class="card-header"  id="head${element.id}">
       <h2 class="mb-0 text-left" style="text-decoration: none;">
         <button id="button${element.id}" class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapse${element.id}" aria-expanded="false" aria-controls="collapse${element.id}">
           <strong><h5 id ="crdtitle${element.id}" class="text-center" style="color:brown; text-transform: capitalize;">${element.name}</h5></strong> 

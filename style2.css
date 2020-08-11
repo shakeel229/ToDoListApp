@@ -269,13 +269,22 @@ ul li:hover .linktitle {
   transition: 0s;
 }
 
-.form-group small {
-}
-
 .form-group.success input {
   border: 2px solid lightgreen;
 }
 
 .form-group.error input {
   border: 2px solid red;
+}
+
+.card:nth-child(n) {
+  background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+}
+
+.card:nth-child(2n) {
+  background-image: linear-gradient(120deg, #ff9a9e 0%, #fecfef 100%);
+}
+
+.card:nth-child(4n) {
+  background-image: linear-gradient(120deg, #ffc3a0 0%, #ffafbd 100%);
 }
