@@ -91,6 +91,18 @@ class taskManager {
       this.refreshPage(this.tasksList);
     }
   }
+
+  loadFromLocalStorage(){
+    const localTasks = JSON.parse(localStorage.getItem("tasksList") || "[]");
+     if (localTasks) {
+    localTasks.forEach((localtask) =>{
+    this.tasksList.push(localtask);
+    });
+    this.refreshPage(taskMgr.tasksList);
+    }
+
+
+  }
   refreshPage(tasksArray) {
     this.parent.innerHTML = "";
     tasksArray.forEach((taskOfArray) => {
@@ -346,18 +358,10 @@ window.addEventListener("load", function () {
   taskForm.addEventListener("input", function (event) {
     taskMgr.checkValidation(event.target);
   });
-
+  taskMgr.loadFromLocalStorage();
   taskMgr.displayTasksByCategory();
-
   taskMgr.buttonDefault();
 });
-const localTasks = JSON.parse(localStorage.getItem("tasksList") || "[]");
-if (localTasks) {
-  localTasks.forEach(pushToTasksArray);
-  function pushToTasksArray(element) {
-    taskMgr.tasksList.push(element);
-  }
-  console.log(taskMgr.tasksList);
 
-  taskMgr.refreshPage(taskMgr.tasksList);
-}
+
+
