@@ -162,24 +162,25 @@ class taskManager {
     }
   }
 
-  validation(input) {
-    if (
-      input.value.length < this.minLength ||
-      input.value.length === "undefined"
-    ) {
-      this.setErrorFor(input, `${input.name} cannot be blank`);
-      submitBtn.disabled = true;
-    } else if (input.value.length > this.maxLength) {
-      this.setErrorFor(input, `${input.name} is longer than 20 char!`);
-      submitBtn.disabled = true;
-    } else {
-      this.setSuccessFor(input);
-      submitBtn.disabled = false;
+  checkValidation(input) {
+    if (input.name != "taskDate"){
+      if (
+        input.value.length < this.minLength ||
+        input.value.length === "undefined"
+      ) {
+        this.setErrorFor(input, `${input.name} cannot be blank`);
+        submitBtn.disabled = true;
+      } else if (input.value.length > this.maxLength) {
+        this.setErrorFor(input, `${input.name} is longer than 20 char!`);
+        submitBtn.disabled = true;
+      } else {
+        this.setSuccessFor(input);
+        submitBtn.disabled = false;
+      }
     }
-  }
 
-  dateValidation(date) {
-    const taskDateValue = date.value;
+    else{
+      const taskDateValue = date.value;
     var todayDate = new Date().toISOString().slice(0, 10);
     if (taskDateValue == null || taskDateValue == "") {
       this.setErrorFor(date, "Task must have a due date");
@@ -191,7 +192,11 @@ class taskManager {
       this.setSuccessFor(date);
       submitBtn.disabled = false;
     }
+    }
+    
   }
+
+ 
 
   setErrorFor(input, message) {
     const formgroup = input.parentElement;
@@ -337,50 +342,13 @@ const taskMgr = new taskManager(taskcontainer);
 const task = new Task();
 
 window.addEventListener("load", function () {
-  /*const name1 = document.querySelector("#TitleField");
-const description1 = document.querySelector("#DescriptionField");
-const assignee1 = document.getElementById("AssigneeField");
-const date1 = document.getElementById("date");*/
-  taskForm.taskSubject.addEventListener("input", function () {
-    taskMgr.validation(taskForm.taskSubject);
+ 
+  taskForm.addEventListener("input", function (event) {
+    taskMgr.checkValidation(event.target);
   });
-  taskForm.taskDescription.addEventListener("input", function () {
-    taskMgr.validation(taskForm.taskDescription);
-  });
-  taskForm.taskAssignee.addEventListener("input", function () {
-    taskMgr.validation(taskForm.taskAssignee);
-  });
-  taskForm.taskDate.addEventListener("input", function () {
-    taskMgr.dateValidation(taskForm.taskDate);
-  });
+  
   taskMgr.displayTasksByCategory();
 
   taskMgr.buttonDefault();
 });
 
-/*function submitButtonClicked(event) {
-  event.preventDefault();
-  document.getElementById("tasksFilter").value = "All Tasks";
-  const form = document.querySelector("#form");
-  const name = taskForm.taskSubject.value;
-  const description = taskForm.taskDescription.value;
-  const assignee = taskForm.taskAssignee.value;
-  const status = taskForm.taskStatus.value;
-  const date = taskForm.taskDate.value;
-  const time = taskForm.taskTime.value
-  
-  if (editedTask) {
-    editedTask = false;
-    taskMgr.tasksList[s].name = name;
-    taskMgr.tasksList[s].description = description;
-    taskMgr.tasksList[s].assignee = assignee;
-    taskMgr.tasksList[s].status = status;
-    taskMgr.tasksList[s].date = date;
-    taskMgr.tasksList[s].time = time;
-    taskMgr.refreshPage(taskMgr.tasksList);
-  } else {
-    taskMgr.addTask(taskForm.taskSubject.value, taskForm.taskDescription.value,taskForm.taskAssignee.value, taskForm.taskStatus.value, taskForm.taskDate.value, taskForm.taskTime.value);
-  }
-  
-  
-}*/
