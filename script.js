@@ -321,7 +321,7 @@ class Task {
     <div class="card-header" style=" background : lightcoral;" id="head${element.id}">
       <h2 class="mb-0 text-left" style="text-decoration: none;">
         <button id="button${element.id}" class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapse${element.id}" aria-expanded="false" aria-controls="collapse${element.id}">
-          <strong><h5 id ="crdtitle${element.id}" class="text-center" style="color:brown;">${element.name}</h5></strong> 
+          <strong><h5 id ="crdtitle${element.id}" class="text-center" style="color:brown; text-transform: capitalize;">${element.name}</h5></strong> 
         </button>
       </h2>
     </div>
@@ -329,10 +329,10 @@ class Task {
       <div class="card-body" style="width: rem; " >
         
         <ul class="list-group " style = "background: lightyellow;">
-          <li class="list-group-item" style = "background: lightyellow;" id ="assignedto1"><strong>Description :</strong> ${element.description}</li>
-          <li class="list-group-item" style = "background: lightyellow;" id ="assignedto1"><strong>Assigned to: </strong>${element.assignee}</li>
-          <li class="list-group-item" style = "background: lightyellow;" id="dateInCard"><strong>Date : </strong>${element.date}</li>
-          <li class="list-group-item" style = "background: lightyellow;" id="time1"><strong>Time :</strong> ${element.time} </li>
+          <li class="list-group-item" style = "background: lightyellow; text-transform: capitalize;" id ="assignedto1"><strong>Description :</strong> ${element.description}</li>
+          <li class="list-group-item" style = "background: lightyellow; text-transform: capitalize;" id ="assignedto1"><strong>Assigned to: </strong>${element.assignee}</li>
+          <li class="list-group-item" style = "background: lightyellow; text-transform: capitalize;" id="dateInCard"><strong>Date : </strong>${element.date}</li>
+          <li class="list-group-item" style = "background: lightyellow; text-transform: capitalize;" id="time1"><strong>Time :</strong> ${element.time} </li>
           <li class="list-group-item"style = "background: lightyellow;">
           <strong> Status : ${element.status}</strong>
           </li>
