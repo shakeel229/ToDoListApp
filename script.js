@@ -163,7 +163,7 @@ class taskManager {
   }
 
   checkValidation(input) {
-    if (input.name != "taskDate") {
+    if (input.name === "taskSubject" ||input.name === "taskDescription" || input.name === "taskAssignee") {
       if (
         input.value.length < this.minLength ||
         input.value.length === "undefined"
