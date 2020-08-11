@@ -92,16 +92,15 @@ class taskManager {
     }
   }
 
-  loadFromLocalStorage(){
+  loadFromLocalStorage() {
     const localTasks = JSON.parse(localStorage.getItem("tasksList") || "[]");
-     if (localTasks) {
-    localTasks.forEach((localtask) =>{
-    this.tasksList.push(localtask);
-    });
-    this.refreshPage(taskMgr.tasksList);
+    if (localTasks.length) {
+      localTasks.forEach((localtask) => {
+        this.tasksList.push(localtask);
+      });
+      console.log("fetching local tasks");
+      this.refreshPage(taskMgr.tasksList);
     }
-
-
   }
   refreshPage(tasksArray) {
     this.parent.innerHTML = "";
@@ -362,6 +361,3 @@ window.addEventListener("load", function () {
   taskMgr.displayTasksByCategory();
   taskMgr.buttonDefault();
 });
-
-
-
