@@ -92,8 +92,8 @@ class taskManager {
   }
   refreshPage(tasksArray) {
     this.parent.innerHTML = "";
-    tasksArray.forEach((task) => {
-      const element = task.templateToDom();
+    tasksArray.forEach((taskOfArray) => {
+      const element = task.templateToDom(taskOfArray);
       this.parent.append(element);
     });
     this.attachDeleteListeners();
@@ -163,7 +163,7 @@ class taskManager {
   }
 
   checkValidation(input) {
-    if (input.name != "taskDate"){
+    if (input.name != "taskDate") {
       if (
         input.value.length < this.minLength ||
         input.value.length === "undefined"
@@ -177,30 +177,25 @@ class taskManager {
         this.setSuccessFor(input);
         submitBtn.disabled = false;
       }
-    }
-
-    else{
-      const taskDateValue = date.value;
-    var todayDate = new Date().toISOString().slice(0, 10);
-    if (taskDateValue == null || taskDateValue == "") {
-      this.setErrorFor(date, "Task must have a due date");
-      submitBtn.disabled = true;
-    } else if (taskDateValue < todayDate) {
-      this.setErrorFor(date, "Task cannot be created in past date");
-      submitBtn.disabled = true;
     } else {
-      this.setSuccessFor(date);
-      submitBtn.disabled = false;
+      const taskDateValue = date.value;
+      var todayDate = new Date().toISOString().slice(0, 10);
+      if (taskDateValue == null || taskDateValue == "") {
+        this.setErrorFor(date, "Task must have a due date");
+        submitBtn.disabled = true;
+      } else if (taskDateValue < todayDate) {
+        this.setErrorFor(date, "Task cannot be created in past date");
+        submitBtn.disabled = true;
+      } else {
+        this.setSuccessFor(date);
+        submitBtn.disabled = false;
+      }
     }
-    }
-    
   }
-
- 
 
   setErrorFor(input, message) {
     const formgroup = input.parentElement;
-    const small = formgroup.querySelector("small");
+    const small = formgroup.querySelector(".msg");
     small.innerText = message;
     small.style.color = "red";
     formgroup.className = "form-group error";
@@ -209,7 +204,7 @@ class taskManager {
 
   setSuccessFor(input) {
     const formgroup = input.parentElement;
-    const small = formgroup.querySelector("small");
+    const small = formgroup.querySelector(".msg");
     small.innerText = "Looks good!";
     small.style.color = "green";
     formgroup.className = "form-group success";
@@ -296,38 +291,38 @@ class Task {
     this.time = time;
   }
 
-  templateToDom() {
-    const myHTML = this.htmlTemplate();
+  templateToDom(taskElement) {
+    const myHTML = this.htmlTemplate(taskElement);
     const myFragment = document.createRange().createContextualFragment(myHTML);
     console.log("Check" + myFragment);
 
     return myFragment;
   }
 
-  htmlTemplate() {
-    const myHTML = `<div class="card" id=${this.id}>
-    <div class="card-header" style=" background : lightcoral;" id="head${this.id}">
+  htmlTemplate(element) {
+    const myHTML = `<div class="card" id=${element.id}>
+    <div class="card-header" style=" background : lightcoral;" id="head${element.id}">
       <h2 class="mb-0 text-left" style="text-decoration: none;">
-        <button id="button${this.id}" class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapse${this.id}" aria-expanded="false" aria-controls="collapse${this.id}">
-          <strong><h5 id ="crdtitle${this.id}" class="text-center" style="color:brown;">${this.name}</h5></strong> 
+        <button id="button${element.id}" class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapse${this.id}" aria-expanded="false" aria-controls="collapse${this.id}">
+          <strong><h5 id ="crdtitle${element.id}" class="text-center" style="color:brown;">${element.name}</h5></strong> 
         </button>
       </h2>
     </div>
-    <div id="collapse${this.id}" class="collapse " style="background-color: lightyellow;"aria-labelledby="head${this.id}" >
+    <div id="collapse${element.id}" class="collapse " style="background-color: lightyellow;"aria-labelledby="head${element.id}" >
       <div class="card-body" style="width: rem; " >
         
         <ul class="list-group " style = "background: lightyellow;">
-          <li class="list-group-item" style = "background: lightyellow;" id ="assignedto1"><strong>Description :</strong> ${this.description}</li>
-          <li class="list-group-item" style = "background: lightyellow;" id ="assignedto1"><strong>Assigned to: </strong>${this.assignee}</li>
-          <li class="list-group-item" style = "background: lightyellow;" id="dateInCard"><strong>Date : </strong>${this.date}</li>
-          <li class="list-group-item" style = "background: lightyellow;" id="time1"><strong>Time :</strong> ${this.time} </li>
+          <li class="list-group-item" style = "background: lightyellow;" id ="assignedto1"><strong>Description :</strong> ${element.description}</li>
+          <li class="list-group-item" style = "background: lightyellow;" id ="assignedto1"><strong>Assigned to: </strong>${element.assignee}</li>
+          <li class="list-group-item" style = "background: lightyellow;" id="dateInCard"><strong>Date : </strong>${element.date}</li>
+          <li class="list-group-item" style = "background: lightyellow;" id="time1"><strong>Time :</strong> ${element.time} </li>
           <li class="list-group-item"style = "background: lightyellow;">
-          <strong> Status : ${this.status}</strong>
+          <strong> Status : ${element.status}</strong>
           </li>
           <li class="list-group-item" style = "background: lightyellow;">
-          <button class="btn btn-primary editBtn" data-toggle="modal" data-target = "#NewTask" id="${this.id}">Edit</button>
+          <button class="btn btn-primary editBtn" data-toggle="modal" data-target = "#NewTask" id="${element.id}">Edit</button>
 
-          <button class="btn btn-danger removeBtn"  id="${this.id}">Delete</button></li>
+          <button class="btn btn-danger removeBtn"  id="${element.id}">Delete</button></li>
       
         </ul>
         
@@ -342,13 +337,21 @@ const taskMgr = new taskManager(taskcontainer);
 const task = new Task();
 
 window.addEventListener("load", function () {
- 
   taskForm.addEventListener("input", function (event) {
     taskMgr.checkValidation(event.target);
   });
-  
+
   taskMgr.displayTasksByCategory();
 
   taskMgr.buttonDefault();
 });
+const localTasks = JSON.parse(localStorage.getItem("tasksList") || "[]");
+if (localTasks) {
+  localTasks.forEach(pushToTasksArray);
+  function pushToTasksArray(element) {
+    taskMgr.tasksList.push(element);
+  }
+  console.log(taskMgr.tasksList);
 
+  taskMgr.refreshPage(taskMgr.tasksList);
+}
