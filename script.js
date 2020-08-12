@@ -138,10 +138,9 @@ class taskManager {
   }
   editTask() {
     const targetId = event.target.id;
-    let editTask = taskMgr.tasksList.filter(
-      (taskElement) => taskElement.id == targetId
-    );
-
+    // let editTask = taskMgr.tasksList.find(
+    //   (taskElement) => taskElement.id == targetId
+    // );
     s = taskMgr.tasksList.findIndex((x) => x.id == targetId);
     taskForm.taskSubject.value = taskMgr.tasksList[s].name;
     taskForm.taskDescription.value = taskMgr.tasksList[s].description;
