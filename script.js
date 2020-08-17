@@ -4,6 +4,7 @@ const formFooter = document.querySelector('[name="formFooter"]');
 const formTitle = document.querySelector('[name="formTitle"]');
 const submitBtn = document.getElementById("submit");
 const taskcontainer = document.querySelector("#task");
+const upcomingCards = document.querySelector(".upcomingSection");
 let editedTask = false;
 let s = null;
 document.getElementById("addTaskBtn").addEventListener("click", resetTaskForm);
@@ -104,9 +105,19 @@ class taskManager {
   }
   refreshPage(tasksArray) {
     this.parent.innerHTML = "";
+    upcomingCards.innerHTML = `<h2 class="Padding20 ">Upcoming Tasks</h2>`;
+    const recentDate = new Date().toISOString().slice(0, 10);
     tasksArray.forEach((taskOfArray) => {
       const element = task.templateToDom(taskOfArray);
-      this.parent.append(element);
+      const cardDate = new Date(taskOfArray.date).toISOString().slice(0, 10);
+      //   .toISOString()
+      //   .slice(0, 10));
+      if (recentDate === cardDate) {
+        this.parent.append(element);
+      } else {
+        console.log("date is different one");
+        upcomingCards.appendChild(element);
+      }
     });
     this.attachDeleteListeners();
     this.attachEditListeners();
