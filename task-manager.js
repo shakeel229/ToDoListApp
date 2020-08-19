@@ -1,18 +1,8 @@
 import Task from "./task";
-
+const task = new Task();
 const upcomingCards = document.querySelector(".upcomingSection");
-const task = new Task(
-  "task",
-  "taskTitle",
-  "taskDesc",
-  "assignee task",
-  "status taask",
-  "date task",
-  "time task"
-);
-const taskMangr = new taskManager();
-/* Task Manager class for the add task , delete task , update task */
-export default class taskManager {
+const submitBtn = document.getElementById("submit");
+export class TaskManager {
   constructor(parent) {
     this.tasksList = [];
     this.index = 0;
@@ -21,48 +11,7 @@ export default class taskManager {
     this.maxLength = 20;
   }
 
-  // this code checks all the form buttons and attach the functions that each one must perform//
-  buttonDefault() {
-    const allFormBtns = document.querySelectorAll(".formbtn");
-    allFormBtns.forEach((btn) => {
-      btn.name !== "submitBtn"
-        ? btn.addEventListener("click", function () {
-            this.resetValidation();
-          })
-        : btn.addEventListener("click", function () {
-            this.submitButtonClicked();
-          });
-    });
-  }
   // Form button default function call ends here//
-
-  submitButtonClicked() {
-    document.getElementById("tasksFilter").value = "All Tasks";
-    if (editedTask) {
-      editedTask = false;
-      this.tasksList[s].name = taskForm.taskSubject.value;
-      this.tasksList[s].description = taskForm.taskDescription.value;
-      this.tasksList[s].assignee = taskForm.taskAssignee.value;
-      this.tasksList[s].status = taskForm.taskStatus.value;
-      this.tasksList[s].date = taskForm.taskDate.value;
-      this.tasksList[s].time = taskForm.taskTime.value;
-      this.refreshPage(this.tasksList);
-    } else {
-      this.addTask(
-        taskForm.taskSubject.value,
-        taskForm.taskDescription.value,
-        taskForm.taskAssignee.value,
-        taskForm.taskStatus.value,
-        taskForm.taskDate.value,
-        taskForm.taskTime.value
-      );
-    }
-  }
-
-  alertOnSubmit() {
-    alert("Please fill in all the fields , Task can't be blank");
-    submitBtn.disabled = true;
-  }
 
   addTask(name, description, assignee, status, date, time) {
     if (
@@ -73,7 +22,7 @@ export default class taskManager {
       !date.length ||
       !time.length
     ) {
-      this.alertOnSubmit();
+      fieldsForm.alertOnSubmit();
     } else {
       console.log(this.tasksList.length);
       const task = new Task(
@@ -127,8 +76,8 @@ export default class taskManager {
   attachDeleteListeners() {
     const deleteButtons = document.querySelectorAll("button.removeBtn");
 
-    deleteButtons.forEach(function attacher(butn) {
-      butn.addEventListener("click", taskMangr.deleteTask);
+    deleteButtons.forEach((butn) => {
+      butn.addEventListener("click", this.deleteTask);
     });
   }
 
@@ -141,22 +90,22 @@ export default class taskManager {
 
   attachEditListeners() {
     const editButtons = document.querySelectorAll("button.editBtn");
-    editButtons.forEach(function attachEditLister(editButton) {
+    editButtons.forEach((editButton) => {
       editButton.addEventListener("click", this.editTask);
     });
   }
   editTask() {
     const targetId = event.target.id;
-    // let editTask = this.tasksList.find(
+    // let editTask = taskMgr.tasksList.find(
     //   (taskElement) => taskElement.id == targetId
     // );
     s = this.tasksList.findIndex((x) => x.id == targetId);
-    taskForm.taskSubject.value = this.tasksList[s].name;
-    taskForm.taskDescription.value = this.tasksList[s].description;
-    taskForm.taskAssignee.value = this.tasksList[s].assignee;
-    taskForm.taskTime.value = this.tasksList[s].time;
-    taskForm.taskDate.value = this.tasksList[s].date;
-    taskForm.taskStatus.value = this.tasksList[s].status;
+    taskForm.taskSubject.value = taskMgr.tasksList[s].name;
+    taskForm.taskDescription.value = taskMgr.tasksList[s].description;
+    taskForm.taskAssignee.value = taskMgr.tasksList[s].assignee;
+    taskForm.taskTime.value = taskMgr.tasksList[s].time;
+    taskForm.taskDate.value = taskMgr.tasksList[s].date;
+    taskForm.taskStatus.value = taskMgr.tasksList[s].status;
     submitBtn.innerText = "Update ";
     formTitle.innerText = "Edit Task";
     editedTask = true;
@@ -172,13 +121,13 @@ export default class taskManager {
       if (category != "All Tasks") {
         console.log("inside if of category chosing");
         const filterCondition = event.target.value;
-        const filteredTasks = this.tasksList.filter(
+        const filteredTasks = taskMgr.tasksList.filter(
           (x) => x.status == filterCondition
         );
         console.log(filteredTasks);
-        this.refreshPage(filteredTasks);
+        taskMgr.refreshPage(filteredTasks);
       } else {
-        this.refreshPage(this.tasksList);
+        taskMgr.refreshPage(taskMgr.tasksList);
       }
     }
   }
@@ -294,11 +243,11 @@ export default class taskManager {
     inProgressBadge.innerHTML = inProgressCount;
     const reviewBadge = document.querySelector(".reviewBadge");
     const reviewCount = `REVIEW  <span class="badge badge-light badgeReview">${review}</span>
-    `;
+  `;
     reviewBadge.innerHTML = reviewCount;
     const doneBadge = document.querySelector(".doneBadge");
     const doneCount = `DONE  <span class="badge badge-light badgeDone">${done}</span>
-      `;
+    `;
     doneBadge.innerHTML = doneCount;
   }
   // reset validation ends here//

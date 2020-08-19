@@ -1,5 +1,6 @@
 //global variable for form to acces fields anywhere in code
 import Task from "./task";
+import { TaskManager } from "./task-manager";
 
 const taskForm = document.querySelector('[name="taskForm"]');
 const formFooter = document.querySelector('[name="formFooter"]');
@@ -19,18 +20,18 @@ function resetTaskForm() {
 }
 
 class TaskForm {
-  constructor() {}
+  constructor() { }
   // this code checks all the form buttons and attach the functions that each one must perform//
   buttonDefault() {
     const allFormBtns = document.querySelectorAll(".formbtn");
     allFormBtns.forEach((btn) => {
       btn.name !== "submitBtn"
         ? btn.addEventListener("click", function () {
-            taskMgr.resetValidation();
-          })
+          taskMgr.resetValidation();
+        })
         : btn.addEventListener("click", function () {
-            fieldsForm.submitButtonClicked();
-          });
+          fieldsForm.submitButtonClicked();
+        });
     });
   }
   submitButtonClicked() {
@@ -61,7 +62,7 @@ class TaskForm {
   }
 }
 /* Task Manager class for the add task , delete task , update task */
-export default class taskManager {
+/*export default class taskManager {
   constructor(parent) {
     this.tasksList = [];
     this.index = 0;
@@ -310,10 +311,10 @@ export default class taskManager {
     doneBadge.innerHTML = doneCount;
   }
   // reset validation ends here//
-}
+}*/
 
 window.addEventListener("load", function () {
-  taskMgr = new taskManager(taskcontainer);
+  taskMgr = new TaskManager(taskcontainer);
   task = new Task();
   fieldsForm = new TaskForm();
   taskForm.addEventListener("input", function (event) {
