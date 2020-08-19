@@ -9,6 +9,7 @@ const taskcontainer = document.querySelector("#task");
 const upcomingCards = document.querySelector(".upcomingSection");
 let taskMgr;
 let task;
+let fieldsForm;
 let editedTask = false;
 let s = null;
 document.getElementById("addTaskBtn").addEventListener("click", resetTaskForm);
@@ -17,16 +18,8 @@ function resetTaskForm() {
   submitBtn.innerText = "Submit ";
 }
 
-/* Task Manager class for the add task , delete task , update task */
-export default class taskManager {
-  constructor(parent) {
-    this.tasksList = [];
-    this.index = 0;
-    this.parent = parent;
-    this.minLength = 1;
-    this.maxLength = 20;
-  }
-
+class TaskForm {
+  constructor() {}
   // this code checks all the form buttons and attach the functions that each one must perform//
   buttonDefault() {
     const allFormBtns = document.querySelectorAll(".formbtn");
@@ -40,6 +33,17 @@ export default class taskManager {
           });
     });
   }
+}
+/* Task Manager class for the add task , delete task , update task */
+export default class taskManager {
+  constructor(parent) {
+    this.tasksList = [];
+    this.index = 0;
+    this.parent = parent;
+    this.minLength = 1;
+    this.maxLength = 20;
+  }
+
   // Form button default function call ends here//
 
   submitButtonClicked() {
@@ -313,10 +317,11 @@ export default class taskManager {
 window.addEventListener("load", function () {
   taskMgr = new taskManager(taskcontainer);
   task = new Task();
+  fieldsForm = new TaskForm();
   taskForm.addEventListener("input", function (event) {
     taskMgr.checkValidation(event.target);
   });
   taskMgr.loadFromLocalStorage();
   taskMgr.displayTasksByCategory();
-  taskMgr.buttonDefault();
+  fieldsForm.buttonDefault();
 });
