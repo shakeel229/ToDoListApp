@@ -1,0 +1,33 @@
+{
+  "name": "ToDoListApp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.js",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shakeel229/ToDoListApp.git"
+  },
+  "keywords": [],
+  "author": "shakeel229",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shakeel229/ToDoListApp/issues"
+  },
+  "homepage": "https://github.com/shakeel229/ToDoListApp#readme",
+  "devDependencies": {
+    "@babel/core": "^7.11.1",
+    "@babel/preset-env": "^7.11.0",
+    "babel-jest": "^26.3.0",
+    "jest": "^26.4.0",
+    "parcel": "^1.12.4",
+    "parcel-bundler": "^1.12.4"
+  },
+  "dependencies": {
+    "src": "^1.1.2"
+  }
+}

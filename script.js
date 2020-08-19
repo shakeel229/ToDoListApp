@@ -5,6 +5,8 @@ const formTitle = document.querySelector('[name="formTitle"]');
 const submitBtn = document.getElementById("submit");
 const taskcontainer = document.querySelector("#task");
 const upcomingCards = document.querySelector(".upcomingSection");
+let taskMgr;
+let task;
 let editedTask = false;
 let s = null;
 document.getElementById("addTaskBtn").addEventListener("click", resetTaskForm);
@@ -14,7 +16,7 @@ function resetTaskForm() {
 }
 
 /* Task Manager class for the add task , delete task , update task */
-class taskManager {
+export default class taskManager {
   constructor(parent) {
     this.tasksList = [];
     this.index = 0;
@@ -360,10 +362,9 @@ class Task {
   }
 }
 
-const taskMgr = new taskManager(taskcontainer);
-const task = new Task();
-
 window.addEventListener("load", function () {
+  taskMgr = new taskManager(taskcontainer);
+  task = new Task();
   taskForm.addEventListener("input", function (event) {
     taskMgr.checkValidation(event.target);
   });
