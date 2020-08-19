@@ -2,6 +2,9 @@ import Task from "./task";
 const task = new Task();
 const upcomingCards = document.querySelector(".upcomingSection");
 const submitBtn = document.getElementById("submit");
+let s = null;
+const formTitle = document.querySelector('[name="formTitle"]');
+let editedTask = false;
 export class TaskManager {
   constructor(parent) {
     this.tasksList = [];
@@ -22,7 +25,7 @@ export class TaskManager {
       !date.length ||
       !time.length
     ) {
-      fieldsForm.alertOnSubmit();
+      this.alertOnSubmit();
     } else {
       console.log(this.tasksList.length);
       const task = new Task(
@@ -77,24 +80,44 @@ export class TaskManager {
     const deleteButtons = document.querySelectorAll("button.removeBtn");
 
     deleteButtons.forEach((butn) => {
-      butn.addEventListener("click", this.deleteTask);
+      butn.addEventListener("click", () => {
+        this.tasksList = this.tasksList.filter(
+          (taskElement) => taskElement.id != event.target.id
+        );
+        this.refreshPage(this.tasksList);
+      });
     });
   }
 
-  deleteTask() {
+  /*deleteTask() {
     this.tasksList = this.tasksList.filter(
       (taskElement) => taskElement.id != event.target.id
     );
     this.refreshPage(this.tasksList);
-  }
+  }*/
 
   attachEditListeners() {
     const editButtons = document.querySelectorAll("button.editBtn");
     editButtons.forEach((editButton) => {
-      editButton.addEventListener("click", this.editTask);
+      editButton.addEventListener("click", () => {
+        const targetId = event.target.id;
+        // let editTask = taskMgr.tasksList.find(
+        //   (taskElement) => taskElement.id == targetId
+        // );
+        s = this.tasksList.findIndex((x) => x.id == targetId);
+        taskForm.taskSubject.value = this.tasksList[s].name;
+        taskForm.taskDescription.value = this.tasksList[s].description;
+        taskForm.taskAssignee.value = this.tasksList[s].assignee;
+        taskForm.taskTime.value = this.tasksList[s].time;
+        taskForm.taskDate.value = this.tasksList[s].date;
+        taskForm.taskStatus.value = this.tasksList[s].status;
+        submitBtn.innerText = "Update ";
+        formTitle.innerText = "Edit Task";
+        editedTask = true;
+      });
     });
   }
-  editTask() {
+  /*editTask() {
     const targetId = event.target.id;
     // let editTask = taskMgr.tasksList.find(
     //   (taskElement) => taskElement.id == targetId
@@ -109,7 +132,7 @@ export class TaskManager {
     submitBtn.innerText = "Update ";
     formTitle.innerText = "Edit Task";
     editedTask = true;
-  }
+  }*/
 
   displayTasksByCategory() {
     document
@@ -251,4 +274,8 @@ export class TaskManager {
     doneBadge.innerHTML = doneCount;
   }
   // reset validation ends here//
+  alertOnSubmit() {
+    alert("Please fill in all the fields , Task can't be blank");
+    submitBtn.disabled = true;
+  }
 }
