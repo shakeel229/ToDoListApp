@@ -29,23 +29,10 @@ class TaskForm {
             taskMgr.resetValidation();
           })
         : btn.addEventListener("click", function () {
-            taskMgr.submitButtonClicked();
+            fieldsForm.submitButtonClicked();
           });
     });
   }
-}
-/* Task Manager class for the add task , delete task , update task */
-export default class taskManager {
-  constructor(parent) {
-    this.tasksList = [];
-    this.index = 0;
-    this.parent = parent;
-    this.minLength = 1;
-    this.maxLength = 20;
-  }
-
-  // Form button default function call ends here//
-
   submitButtonClicked() {
     document.getElementById("tasksFilter").value = "All Tasks";
     if (editedTask) {
@@ -68,11 +55,22 @@ export default class taskManager {
       );
     }
   }
-
   alertOnSubmit() {
     alert("Please fill in all the fields , Task can't be blank");
     submitBtn.disabled = true;
   }
+}
+/* Task Manager class for the add task , delete task , update task */
+export default class taskManager {
+  constructor(parent) {
+    this.tasksList = [];
+    this.index = 0;
+    this.parent = parent;
+    this.minLength = 1;
+    this.maxLength = 20;
+  }
+
+  // Form button default function call ends here//
 
   addTask(name, description, assignee, status, date, time) {
     if (
@@ -83,7 +81,7 @@ export default class taskManager {
       !date.length ||
       !time.length
     ) {
-      this.alertOnSubmit();
+      fieldsForm.alertOnSubmit();
     } else {
       console.log(this.tasksList.length);
       const task = new Task(
