@@ -29,5 +29,8 @@
   },
   "dependencies": {
     "src": "^1.1.2"
-  }
+  },
+  "browserslist": [
+    "last 1 Chrome version"
+  ]
 }
