@@ -2,9 +2,10 @@ import Task from "./task";
 const task = new Task();
 const upcomingCards = document.querySelector(".upcomingSection");
 const submitBtn = document.getElementById("submit");
-let s = null;
+var s = null;
 const formTitle = document.querySelector('[name="formTitle"]');
-let editedTask = false;
+var editedTask = false;
+
 export class TaskManager {
   constructor(parent) {
     this.tasksList = [];
@@ -39,6 +40,7 @@ export class TaskManager {
       );
 
       this.tasksList.push(task);
+      console.log(this.tasksList);
       this.refreshPage(this.tasksList);
     }
   }
@@ -101,10 +103,13 @@ export class TaskManager {
     editButtons.forEach((editButton) => {
       editButton.addEventListener("click", () => {
         const targetId = event.target.id;
+        console.log(targetId);
         // let editTask = taskMgr.tasksList.find(
         //   (taskElement) => taskElement.id == targetId
         // );
+
         s = this.tasksList.findIndex((x) => x.id == targetId);
+        console.log(s);
         taskForm.taskSubject.value = this.tasksList[s].name;
         taskForm.taskDescription.value = this.tasksList[s].description;
         taskForm.taskAssignee.value = this.tasksList[s].assignee;
@@ -155,58 +160,6 @@ export class TaskManager {
     }
   }
 
-  checkValidation(input) {
-    if (
-      input.name === "taskSubject" ||
-      input.name === "taskDescription" ||
-      input.name === "taskAssignee"
-    ) {
-      if (
-        input.value.length < this.minLength ||
-        input.value.length === "undefined"
-      ) {
-        this.setErrorFor(input, `${input.name} cannot be blank`);
-        submitBtn.disabled = true;
-      } else if (input.value.length > this.maxLength) {
-        this.setErrorFor(input, `${input.name} is longer than 20 char!`);
-        submitBtn.disabled = true;
-      } else {
-        this.setSuccessFor(input);
-        submitBtn.disabled = false;
-      }
-    } else {
-      const taskDateValue = date.value;
-      var todayDate = new Date().toISOString().slice(0, 10);
-      if (taskDateValue == null || taskDateValue == "") {
-        this.setErrorFor(date, "Task must have a due date");
-        submitBtn.disabled = true;
-      } else if (taskDateValue < todayDate) {
-        this.setErrorFor(date, "Task cannot be created in past date");
-        submitBtn.disabled = true;
-      } else {
-        this.setSuccessFor(date);
-        submitBtn.disabled = false;
-      }
-    }
-  }
-
-  setErrorFor(input, message) {
-    const formgroup = input.parentElement;
-    const small = formgroup.querySelector(".msg");
-    small.innerText = message;
-    small.style.color = "red";
-    formgroup.className = "form-group error";
-    submitBtn.disabled = true;
-  }
-
-  setSuccessFor(input) {
-    const formgroup = input.parentElement;
-    const small = formgroup.querySelector(".msg");
-    small.innerText = "Looks good!";
-    small.style.color = "green";
-    formgroup.className = "form-group success";
-    submitBtn.disabled = false;
-  }
 
   //validation code ends here//
 
@@ -279,3 +232,6 @@ export class TaskManager {
     submitBtn.disabled = true;
   }
 }
+
+export { editedTask };
+export { s };

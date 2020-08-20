@@ -29,4 +29,28 @@ describe("Test Task Planner Actions", function () {
     //expect(task).toContain(obn);
     //expect(document.body.innerHTML).toBe(html);
   });
+
+
+  test("html to string () ", () => {
+    const task = new Task(
+      "task1",
+      "grocery shopping",
+      "visit coles",
+      "shakeel",
+      "pending",
+      "08/08/20",
+      "12:30 Pm"
+    );
+
+    const htmlToString = task.htmlTemplate();
+    expect(htmlToString).toContain("task1");
+    expect(htmlToString).toContain("shakeel");
+    expect(htmlToString).toContain("08/08/20");
+    expect(htmlToString).toContain("visit coles");
+    expect(htmlToString).toContain("grocery shopping");
+    expect(htmlToString).toContain("pending");
+    expect(htmlToString).toContain("12:30 Pm");
+
+  })
+
 });
