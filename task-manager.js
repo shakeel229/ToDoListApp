@@ -104,43 +104,53 @@ export class TaskManager {
   attachEditListeners() {
     const editButtons = document.querySelectorAll("button.editBtn");
     editButtons.forEach((editButton) => {
-      editButton.addEventListener("click", this.editTask);
+      editButton.addEventListener("click", () => {
+        const targetId = event.currentTarget.id;
+        console.log(this.tasksList, event.target.id, targetId);
+        s = this.tasksList.findIndex((x) => x.id == targetId);
+        taskForm.taskSubject.value = this.tasksList[s].name;
+        taskForm.taskDescription.value = this.tasksList[s].description;
+        taskForm.taskAssignee.value = this.tasksList[s].assignee;
+        taskForm.taskTime.value = this.tasksList[s].time;
+        taskForm.taskDate.value = this.tasksList[s].date;
+        taskForm.taskStatus.value = this.tasksList[s].status;
+        submitBtn.innerText = "Update ";
+        formTitle.innerText = "Edit Task";
+        editedTask = true;
+      });
     });
   }
-  editTask() {
+  editTasks(arrayOfTasks) {
     const targetId = event.currentTarget.id;
-    console.log(this.tasksList);
-    s = this.tasksList.findIndex((x) => x.id == targetId);
-    taskForm.taskSubject.value = taskMgr.tasksList[s].name;
-    taskForm.taskDescription.value = taskMgr.tasksList[s].description;
-    taskForm.taskAssignee.value = taskMgr.tasksList[s].assignee;
-    taskForm.taskTime.value = taskMgr.tasksList[s].time;
-    taskForm.taskDate.value = taskMgr.tasksList[s].date;
-    taskForm.taskStatus.value = taskMgr.tasksList[s].status;
+    console.log(arrayOfTasks, event.target.id, targetId);
+    s = arrayOfTasks.findIndex((x) => x.id == targetId);
+    taskForm.taskSubject.value = arrayOfTasks[s].name;
+    taskForm.taskDescription.value = arrayOfTasks[s].description;
+    taskForm.taskAssignee.value = arrayOfTasks[s].assignee;
+    taskForm.taskTime.value = arrayOfTasks[s].time;
+    taskForm.taskDate.value = arrayOfTasks[s].date;
+    taskForm.taskStatus.value = arrayOfTasks[s].status;
     submitBtn.innerText = "Update ";
     formTitle.innerText = "Edit Task";
     editedTask = true;
   }
 
   displayTasksByCategory() {
-    document
-      .getElementById("tasksFilter")
-      .addEventListener("change", filterTasks);
-    function filterTasks() {
+    document.getElementById("tasksFilter").addEventListener("change", () => {
       console.log(event.target.value);
       const category = event.target.value;
       if (category != "All Tasks") {
         console.log("inside if of category chosing");
         const filterCondition = event.target.value;
-        const filteredTasks = taskMgr.tasksList.filter(
+        const filteredTasks = this.tasksList.filter(
           (x) => x.status == filterCondition
         );
         console.log(filteredTasks);
-        taskMgr.refreshPage(filteredTasks);
+        this.refreshPage(filteredTasks);
       } else {
-        taskMgr.refreshPage(taskMgr.tasksList);
+        this.refreshPage(this.tasksList);
       }
-    }
+    });
   }
 
   //validation code ends here//
@@ -192,21 +202,21 @@ export class TaskManager {
       }
     });
 
-    const toDoBadge = document.querySelector(".doBadge");
+    document.querySelector(
+      ".doBadge"
+    ).innerHTML = `TO DO <span class="badge badge-light badgeTodo">${toDo}</span>`;
 
-    const toDoCount = `TO DO <span class="badge badge-light badgeTodo">${toDo}</span>`;
-    toDoBadge.innerHTML = toDoCount;
-    const inProgressBadge = document.querySelector(".progressBadge");
-    const inProgressCount = ` IN PROGRESS <span class="badge badge-light badgeInProgress" name="inProgress">${inProgress}</span>`;
-    inProgressBadge.innerHTML = inProgressCount;
-    const reviewBadge = document.querySelector(".reviewBadge");
-    const reviewCount = `REVIEW  <span class="badge badge-light badgeReview">${review}</span>
-  `;
-    reviewBadge.innerHTML = reviewCount;
-    const doneBadge = document.querySelector(".doneBadge");
-    const doneCount = `DONE  <span class="badge badge-light badgeDone">${done}</span>
+    document.querySelector(
+      ".progressBadge"
+    ).innerHTML = ` IN PROGRESS <span class="badge badge-light badgeInProgress" name="inProgress">${inProgress}</span>`;
+    const reviewBadge = (document.querySelector(
+      ".reviewBadge"
+    ).innerHTML = `REVIEW  <span class="badge badge-light badgeReview">${review}</span>
+  `);
+    document.querySelector(
+      ".doneBadge"
+    ).innerHTML = `DONE  <span class="badge badge-light badgeDone">${done}</span>
     `;
-    doneBadge.innerHTML = doneCount;
   }
   // reset validation ends here//
   alertOnSubmit() {
