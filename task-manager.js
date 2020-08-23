@@ -15,8 +15,6 @@ export class TaskManager {
     this.maxLength = 20;
   }
 
-  // Form button default function call ends here//
-
   addTask(name, description, assignee, status, date, time) {
     if (
       !name.length ||
@@ -104,12 +102,7 @@ export class TaskManager {
       editButton.addEventListener("click", () => {
         const targetId = event.target.id;
         console.log(targetId);
-        // let editTask = taskMgr.tasksList.find(
-        //   (taskElement) => taskElement.id == targetId
-        // );
-
         s = this.tasksList.findIndex((x) => x.id == targetId);
-        console.log(s);
         taskForm.taskSubject.value = this.tasksList[s].name;
         taskForm.taskDescription.value = this.tasksList[s].description;
         taskForm.taskAssignee.value = this.tasksList[s].assignee;
@@ -159,7 +152,6 @@ export class TaskManager {
       }
     }
   }
-
 
   //validation code ends here//
 
