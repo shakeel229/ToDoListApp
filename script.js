@@ -117,7 +117,7 @@ class TaskForm {
 }
 
 window.addEventListener("load", function () {
-  taskMgr = new TaskManager(taskcontainer);
+  taskMgr = new TaskManager(taskcontainer, upcomingCards);
   task = new Task();
   fieldsForm = new TaskForm();
   taskForm.addEventListener("input", function (event) {

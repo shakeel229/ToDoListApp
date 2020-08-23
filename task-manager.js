@@ -2,17 +2,17 @@ import Task from "./task";
 const task = new Task();
 const upcomingCards = document.querySelector(".upcomingSection");
 const form = document.querySelector("form");
-console.warn(form);
 const submitBtn = document.getElementById("submit");
 var s = null;
 const formTitle = document.querySelector('[name="formTitle"]');
 var editedTask = false;
 
 export class TaskManager {
-  constructor(parent) {
+  constructor(parent, upcomingCards) {
     this.tasksList = [];
     this.index = 0;
     this.parent = parent;
+    this.upcomingCards = upcomingCards;
     this.minLength = 1;
     this.maxLength = 20;
   }
@@ -57,10 +57,11 @@ export class TaskManager {
   }
   refreshPage(tasksArray) {
     this.parent.innerHTML = "";
-    upcomingCards.innerHTML = `<h2 class="Padding20 ">Upcoming Tasks</h2>`;
+    this.upcomingCards.innerHTML = `<h2 class="Padding20 ">Upcoming Tasks</h2>`;
     const recentDate = new Date().toISOString().slice(0, 10);
     tasksArray.forEach((taskOfArray) => {
       const element = task.templateToDom(taskOfArray);
+      console.log(taskOfArray.date);
       const cardDate = new Date(taskOfArray.date).toISOString().slice(0, 10);
       //   .toISOString()
       //   .slice(0, 10));
@@ -68,7 +69,7 @@ export class TaskManager {
         this.parent.append(element);
       } else {
         console.log("date is different one");
-        upcomingCards.appendChild(element);
+        this.upcomingCards.appendChild(element);
       }
     });
     this.attachDeleteListeners();
