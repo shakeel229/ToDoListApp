@@ -1,6 +1,8 @@
 import Task from "./task";
 const task = new Task();
 const upcomingCards = document.querySelector(".upcomingSection");
+const form = document.querySelector("form");
+console.warn(form);
 const submitBtn = document.getElementById("submit");
 var s = null;
 const formTitle = document.querySelector('[name="formTitle"]');
@@ -105,25 +107,12 @@ export class TaskManager {
     const editButtons = document.querySelectorAll("button.editBtn");
     editButtons.forEach((editButton) => {
       editButton.addEventListener("click", () => {
-        const targetId = event.currentTarget.id;
-        console.log(this.tasksList, event.target.id, targetId);
-        s = this.tasksList.findIndex((x) => x.id == targetId);
-        taskForm.taskSubject.value = this.tasksList[s].name;
-        taskForm.taskDescription.value = this.tasksList[s].description;
-        taskForm.taskAssignee.value = this.tasksList[s].assignee;
-        taskForm.taskTime.value = this.tasksList[s].time;
-        taskForm.taskDate.value = this.tasksList[s].date;
-        taskForm.taskStatus.value = this.tasksList[s].status;
-        submitBtn.innerText = "Update ";
-        formTitle.innerText = "Edit Task";
-        editedTask = true;
+        this.editTasks(this.tasksList);
       });
     });
   }
   editTasks(arrayOfTasks) {
-    const targetId = event.currentTarget.id;
-    console.log(arrayOfTasks, event.target.id, targetId);
-    s = arrayOfTasks.findIndex((x) => x.id == targetId);
+    s = arrayOfTasks.findIndex((x) => x.id == event.currentTarget.id);
     taskForm.taskSubject.value = arrayOfTasks[s].name;
     taskForm.taskDescription.value = arrayOfTasks[s].description;
     taskForm.taskAssignee.value = arrayOfTasks[s].assignee;
@@ -132,7 +121,7 @@ export class TaskManager {
     taskForm.taskStatus.value = arrayOfTasks[s].status;
     submitBtn.innerText = "Update ";
     formTitle.innerText = "Edit Task";
-    editedTask = true;
+    form.dataset.edited = true;
   }
 
   displayTasksByCategory() {

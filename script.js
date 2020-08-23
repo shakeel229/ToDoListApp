@@ -4,7 +4,6 @@ import { TaskManager } from "./task-manager";
 import { editedTask } from "./task-manager";
 import { s } from "./task-manager";
 
-
 const taskForm = document.querySelector('[name="taskForm"]');
 const formFooter = document.querySelector('[name="formFooter"]');
 const formTitle = document.querySelector('[name="formTitle"]');
@@ -23,25 +22,26 @@ function resetTaskForm() {
 }
 
 class TaskForm {
-  constructor() { }
+  constructor() {}
   // this code checks all the form buttons and attach the functions that each one must perform//
   buttonDefault() {
     const allFormBtns = document.querySelectorAll(".formbtn");
     allFormBtns.forEach((btn) => {
       btn.name !== "submitBtn"
         ? btn.addEventListener("click", function () {
-          taskMgr.resetValidation();
-        })
+            taskMgr.resetValidation();
+          })
         : btn.addEventListener("click", function () {
-          fieldsForm.submitButtonClicked();
-        });
+            fieldsForm.submitButtonClicked();
+          });
     });
   }
   submitButtonClicked() {
     document.getElementById("tasksFilter").value = "All Tasks";
     console.log(editedTask);
-    if (editedTask) {
-      //editedTask = false;
+    if (taskForm.dataset.edited === "true") {
+      console.warn("inside edit task section");
+      taskForm.dataset.edited = false;
       taskMgr.tasksList[s].name = taskForm.taskSubject.value;
       taskMgr.tasksList[s].description = taskForm.taskDescription.value;
       taskMgr.tasksList[s].assignee = taskForm.taskAssignee.value;
@@ -113,9 +113,6 @@ class TaskForm {
     formgroup.className = "form-group success";
     submitBtn.disabled = false;
   }
-
-
-
 }
 
 window.addEventListener("load", function () {
