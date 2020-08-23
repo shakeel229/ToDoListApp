@@ -84,6 +84,11 @@ export class TaskManager {
         this.tasksList = this.tasksList.filter(
           (taskElement) => taskElement.id != event.target.id
         );
+        let id = 0;
+        this.tasksList.forEach((taskObject) => {
+          taskObject.id = `task${id}`;
+          id++;
+        });
         this.refreshPage(this.tasksList);
       });
     });
@@ -99,27 +104,12 @@ export class TaskManager {
   attachEditListeners() {
     const editButtons = document.querySelectorAll("button.editBtn");
     editButtons.forEach((editButton) => {
-      editButton.addEventListener("click", () => {
-        const targetId = event.target.id;
-        console.log(targetId);
-        s = this.tasksList.findIndex((x) => x.id == targetId);
-        taskForm.taskSubject.value = this.tasksList[s].name;
-        taskForm.taskDescription.value = this.tasksList[s].description;
-        taskForm.taskAssignee.value = this.tasksList[s].assignee;
-        taskForm.taskTime.value = this.tasksList[s].time;
-        taskForm.taskDate.value = this.tasksList[s].date;
-        taskForm.taskStatus.value = this.tasksList[s].status;
-        submitBtn.innerText = "Update ";
-        formTitle.innerText = "Edit Task";
-        editedTask = true;
-      });
+      editButton.addEventListener("click", this.editTask);
     });
   }
-  /*editTask() {
-    const targetId = event.target.id;
-    // let editTask = taskMgr.tasksList.find(
-    //   (taskElement) => taskElement.id == targetId
-    // );
+  editTask() {
+    const targetId = event.currentTarget.id;
+    console.log(this.tasksList);
     s = this.tasksList.findIndex((x) => x.id == targetId);
     taskForm.taskSubject.value = taskMgr.tasksList[s].name;
     taskForm.taskDescription.value = taskMgr.tasksList[s].description;
@@ -130,7 +120,7 @@ export class TaskManager {
     submitBtn.innerText = "Update ";
     formTitle.innerText = "Edit Task";
     editedTask = true;
-  }*/
+  }
 
   displayTasksByCategory() {
     document
