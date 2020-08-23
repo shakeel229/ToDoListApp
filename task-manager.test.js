@@ -1,7 +1,10 @@
 import path from "path";
+import Task from "./task.js";
+
 import { TaskManager } from "./task-manager";
 import fs from "fs";
 const html = fs.readFileSync(path.resolve(__dirname, "./index.html"), "utf8");
+const taskcontainer = document.querySelector("#task");
 describe("Test Cases of Task Manager Class", function () {
   beforeAll(function () {
     document.body.innerHTML = html.toString();

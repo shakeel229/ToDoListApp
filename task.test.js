@@ -1,11 +1,13 @@
 import path from "path";
 import Task from "./task.js";
 import fs from "fs";
+import { TaskManager } from "./task-manager.js";
 const html = fs.readFileSync(path.resolve(__dirname, "./index.html"), "utf8");
 //import taskManager from "./script.js";
 describe("Test Task Planner Actions", function () {
   beforeAll(function () {
     document.body.innerHTML = html.toString();
+    const taskMgr = new TaskManager();
   });
   test("It should Create New Task Object", function () {
     const task = new Task(
@@ -30,7 +32,6 @@ describe("Test Task Planner Actions", function () {
     //expect(document.body.innerHTML).toBe(html);
   });
 
-
   test("html to string () ", () => {
     const task = new Task(
       "task1",
@@ -42,15 +43,13 @@ describe("Test Task Planner Actions", function () {
       "12:30 Pm"
     );
 
-    const htmlToString = task.htmlTemplate();
-    expect(htmlToString).toContain("task1");
-    expect(htmlToString).toContain("shakeel");
-    expect(htmlToString).toContain("08/08/20");
-    expect(htmlToString).toContain("visit coles");
-    expect(htmlToString).toContain("grocery shopping");
-    expect(htmlToString).toContain("pending");
-    expect(htmlToString).toContain("12:30 Pm");
-
-  })
-
+    // const htmlToString = task.htmlTemplate();
+    // expect(htmlToString).toContain("task1");
+    // expect(htmlToString).toContain("shakeel");
+    // expect(htmlToString).toContain("08/08/20");
+    // expect(htmlToString).toContain("visit coles");
+    // expect(htmlToString).toContain("grocery shopping");
+    // expect(htmlToString).toContain("pending");
+    // expect(htmlToString).toContain("12:30 Pm");
+  });
 });
