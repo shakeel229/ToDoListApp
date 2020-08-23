@@ -42,12 +42,13 @@ class TaskForm {
     if (taskForm.dataset.edited === "true") {
       console.warn("inside edit task section");
       taskForm.dataset.edited = false;
-      taskMgr.tasksList[s].name = taskForm.taskSubject.value;
-      taskMgr.tasksList[s].description = taskForm.taskDescription.value;
-      taskMgr.tasksList[s].assignee = taskForm.taskAssignee.value;
-      taskMgr.tasksList[s].status = taskForm.taskStatus.value;
-      taskMgr.tasksList[s].date = taskForm.taskDate.value;
-      taskMgr.tasksList[s].time = taskForm.taskTime.value;
+      const index = taskForm.dataset.editIndex;
+      taskMgr.tasksList[index].name = taskForm.taskSubject.value;
+      taskMgr.tasksList[index].description = taskForm.taskDescription.value;
+      taskMgr.tasksList[index].assignee = taskForm.taskAssignee.value;
+      taskMgr.tasksList[index].status = taskForm.taskStatus.value;
+      taskMgr.tasksList[index].date = taskForm.taskDate.value;
+      taskMgr.tasksList[index].time = taskForm.taskTime.value;
       taskMgr.refreshPage(taskMgr.tasksList);
     } else {
       taskMgr.addTask(

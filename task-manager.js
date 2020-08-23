@@ -122,6 +122,7 @@ export class TaskManager {
     submitBtn.innerText = "Update ";
     formTitle.innerText = "Edit Task";
     form.dataset.edited = true;
+    form.dataset.editIndex = s;
   }
 
   displayTasksByCategory() {
