@@ -95,19 +95,19 @@ export class TaskManager {
       id++;
     });
     this.tasksList = arrayOfTasks;
-    console.table(this.tasksList);
+
     this.refreshPage(this.tasksList);
   }
   attachEditListeners() {
     const editButtons = document.querySelectorAll("button.editBtn");
     editButtons.forEach((editButton) => {
       editButton.addEventListener("click", () => {
-        this.editTasks(this.tasksList);
+        this.editTasks(this.tasksList, event.currentTarget.id);
       });
     });
   }
-  editTasks(arrayOfTasks) {
-    s = arrayOfTasks.findIndex((x) => x.id == event.currentTarget.id);
+  editTasks(arrayOfTasks, targetId) {
+    s = arrayOfTasks.findIndex((x) => x.id == targetId);
     taskForm.taskSubject.value = arrayOfTasks[s].name;
     taskForm.taskDescription.value = arrayOfTasks[s].description;
     taskForm.taskAssignee.value = arrayOfTasks[s].assignee;
