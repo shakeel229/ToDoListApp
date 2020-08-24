@@ -22,16 +22,11 @@ function resetTaskForm() {
   submitBtn.innerText = "Submit ";
 }*/
 
-
-
-
-
 export class TaskForm {
   constructor(tskform) {
     this.tskform = tskform;
     this.minLength = 1;
     this.maxLength = 20;
-
   }
   // this code checks all the form buttons and attach the functions that each one must perform//
   buttonDefault() {
@@ -39,11 +34,11 @@ export class TaskForm {
     allFormBtns.forEach((btn) => {
       btn.name !== "submitBtn"
         ? btn.addEventListener("click", function () {
-          taskMgr.resetValidation();
-        })
+            taskMgr.resetValidation();
+          })
         : btn.addEventListener("click", function () {
-          fieldsForm.submitButtonClicked();
-        });
+            fieldsForm.submitButtonClicked();
+          });
     });
   }
   submitButtonClicked() {
@@ -83,13 +78,19 @@ export class TaskForm {
         input.value.length === "undefined"
       ) {
         this.setErrorFor(input, `${input.name} cannot be blank`);
-        if (submitBtn) { submitBtn.disabled = true };
+        if (submitBtn) {
+          submitBtn.disabled = true;
+        }
       } else if (input.value.length > this.maxLength) {
         this.setErrorFor(input, `${input.name} is longer than 20 char!`);
-        if (submitBtn) { submitBtn.disabled = true };
+        if (submitBtn) {
+          submitBtn.disabled = true;
+        }
       } else {
         this.setSuccessFor(input);
-        if (submitBtn) { submitBtn.disabled = false };
+        if (submitBtn) {
+          submitBtn.disabled = false;
+        }
       }
     } else {
       const taskDateValue = date.value;
@@ -97,13 +98,19 @@ export class TaskForm {
 
       if (taskDateValue == null || taskDateValue == "") {
         this.setErrorFor(date, "Task must have a due date");
-        if (submitBtn) { submitBtn.disabled = true };
+        if (submitBtn) {
+          submitBtn.disabled = true;
+        }
       } else if (taskDateValue < todayDate) {
         this.setErrorFor(date, "Task cannot be created in past date");
-        if (submitBtn) { submitBtn.disabled = true };
+        if (submitBtn) {
+          submitBtn.disabled = true;
+        }
       } else {
         this.setSuccessFor(date);
-        if (submitBtn) { submitBtn.disabled = false };
+        if (submitBtn) {
+          submitBtn.disabled = false;
+        }
       }
     }
   }
@@ -114,7 +121,9 @@ export class TaskForm {
     small.innerText = message;
     small.style.color = "red";
     formgroup.className = "form-group error";
-    if (submitBtn) { submitBtn.disabled = true };
+    if (submitBtn) {
+      submitBtn.disabled = true;
+    }
   }
 
   setSuccessFor(input) {
@@ -123,12 +132,14 @@ export class TaskForm {
     small.innerText = "Looks good!";
     small.style.color = "green";
     formgroup.className = "form-group success";
-    if (submitBtn) { submitBtn.disabled = true };
+    if (submitBtn) {
+      submitBtn.disabled = true;
+    }
   }
 }
 
 window.addEventListener("load", function () {
-  taskMgr = new TaskManager(taskcontainer, upcomingCards);
+  taskMgr = new TaskManager(taskcontainer, upcomingCards, taskForm);
   task = new Task();
   fieldsForm = new TaskForm();
   taskForm.addEventListener("input", function (event) {

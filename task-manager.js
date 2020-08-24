@@ -1,6 +1,5 @@
 import Task from "./task";
 const task = new Task();
-const upcomingCards = document.querySelector(".upcomingSection");
 const form = document.querySelector("form");
 const submitBtn = document.getElementById("submit");
 var s = null;
@@ -8,11 +7,12 @@ const formTitle = document.querySelector('[name="formTitle"]');
 var editedTask = false;
 
 export class TaskManager {
-  constructor(parent, upcomingCards) {
+  constructor(todayTasksContainer, upcomingTasksContainer, taskForm) {
     this.tasksList = [];
     this.index = 0;
-    this.parent = parent;
-    this.upcomingCards = upcomingCards;
+    this.todayTasksContainer = todayTasksContainer;
+    this.upcomingTasksContainer = upcomingTasksContainer;
+    this.taskForm = taskForm;
     this.minLength = 1;
     this.maxLength = 20;
   }
@@ -40,7 +40,6 @@ export class TaskManager {
       );
 
       this.tasksList.push(task);
-      console.log(this.tasksList);
       this.refreshPage(this.tasksList);
     }
   }
@@ -56,20 +55,18 @@ export class TaskManager {
     }
   }
   refreshPage(tasksArray) {
-    this.parent.innerHTML = "";
-    this.upcomingCards.innerHTML = `<h2 class="Padding20 ">Upcoming Tasks</h2>`;
+    this.todayTasksContainer.innerHTML = "";
+    this.upcomingTasksContainer.innerHTML = `<h2 class="Padding20">Upcoming Tasks</h2>`;
     const recentDate = new Date().toISOString().slice(0, 10);
     tasksArray.forEach((taskOfArray) => {
       const element = task.templateToDom(taskOfArray);
       console.log(taskOfArray.date);
       const cardDate = new Date(taskOfArray.date).toISOString().slice(0, 10);
-      //   .toISOString()
-      //   .slice(0, 10));
       if (recentDate === cardDate) {
-        this.parent.append(element);
+        this.todayTasksContainer.append(element);
       } else {
         console.log("date is different one");
-        this.upcomingCards.appendChild(element);
+        this.upcomingTasksContainer.appendChild(element);
       }
     });
     this.attachDeleteListeners();
@@ -84,26 +81,23 @@ export class TaskManager {
 
     deleteButtons.forEach((butn) => {
       butn.addEventListener("click", () => {
-        this.tasksList = this.tasksList.filter(
-          (taskElement) => taskElement.id != event.target.id
-        );
-        let id = 0;
-        this.tasksList.forEach((taskObject) => {
-          taskObject.id = `task${id}`;
-          id++;
-        });
-        this.refreshPage(this.tasksList);
+        this.deleteTask(this.tasksList, event.target.id);
       });
     });
   }
-
-  /*deleteTask() {
-    this.tasksList = this.tasksList.filter(
-      (taskElement) => taskElement.id != event.target.id
+  deleteTask(arrayOfTasks, targetId) {
+    arrayOfTasks = arrayOfTasks.filter(
+      (taskElement) => taskElement.id != targetId
     );
+    let id = 0;
+    arrayOfTasks.forEach((taskObject) => {
+      taskObject.id = `task${id}`;
+      id++;
+    });
+    this.tasksList = arrayOfTasks;
+    console.table(this.tasksList);
     this.refreshPage(this.tasksList);
-  }*/
-
+  }
   attachEditListeners() {
     const editButtons = document.querySelectorAll("button.editBtn");
     editButtons.forEach((editButton) => {
@@ -149,7 +143,7 @@ export class TaskManager {
   // this code deals with clearing the validation classesand message when a form is launched again - for repo//
 
   resetValidation() {
-    form.reset();
+    this.taskForm.reset();
     const validationClass = document.getElementsByClassName(
       "form-group success"
     );

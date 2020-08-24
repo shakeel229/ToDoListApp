@@ -11,12 +11,39 @@ describe("Test Cases of Task Manager Class", function () {
     document.body.innerHTML = html.toString();
     taskContainer = document.getElementById("task");
     const upcomingCards = document.querySelector(".upcomingSection");
-
-    taskMgr = new TaskManager(taskContainer, upcomingCards);
+    const form = document.querySelector("form");
+    taskMgr = new TaskManager(taskContainer, upcomingCards, form);
   });
-  test("Adding New Task to Array of tasks", function () {
-    console.log(taskContainer);
+  test("Adding New Task to Array of tasks and DOM", function () {
     taskMgr.addTask(
+      "task1",
+      "Grocery Shopping",
+      "go to coles",
+      "shakeel anjum",
+      "2020-10-05",
+      "pending",
+      "21:32"
+    );
+    //task added to tasks list
+    expect(taskMgr.tasksList.length).toBe(1);
+    //today tasks DIV is empty because date is future one
+    expect(taskMgr.todayTasksContainer.innerHTML).toBe("");
+    //upcoming tasks DIV have two elements 1 is the task and 1 is the heading of DIV 'Upcoming Tasks'
+    expect(taskMgr.upcomingTasksContainer.childElementCount).toBe(2);
+    expect(taskMgr.upcomingTasksContainer.innerHTML).toContain("shakeel anjum");
+  });
+  test("Delete Task from Tasks List and DOM as well", function () {
+    const deleteButton = document.querySelector("button.removeBtn");
+    deleteButton.click();
+
+    expect(taskMgr.tasksList.length).toBe(0);
+    //today tasks DIV is empty because date is future one
+    expect(taskMgr.todayTasksContainer.innerHTML).toBe("");
+    //upcoming tasks DIV have two elements 1 is the task and 1 is the heading of DIV 'Upcoming Tasks'
+    expect(taskMgr.upcomingTasksContainer.childElementCount).toBe(1);
+  });
+});
+/**taskMgr.addTask(
       "task1",
       "grocery shopping",
       "visit coles",
@@ -24,8 +51,4 @@ describe("Test Cases of Task Manager Class", function () {
       "pending",
       "2020-09-05",
       "20:34"
-    );
-
-    expect(taskMgr.tasksList.length).toBe(1);
-  });
-});
+    ); */
