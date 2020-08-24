@@ -10,30 +10,40 @@ const formTitle = document.querySelector('[name="formTitle"]');
 const submitBtn = document.getElementById("submit");
 const taskcontainer = document.querySelector("#task");
 const upcomingCards = document.querySelector(".upcomingSection");
+const tskbtn = document.getElementById("addTaskBtn");
 let taskMgr;
 let task;
 let fieldsForm;
 //let editedTask;
 //let s = null;
-document.getElementById("addTaskBtn").addEventListener("click", resetTaskForm);
+/*document.getElementById("addTaskBtn").addEventListener("click", resetTaskForm);
 function resetTaskForm() {
   formTitle.innerText = "New Task ";
   submitBtn.innerText = "Submit ";
-}
+}*/
 
-class TaskForm {
-  constructor() {}
+
+
+
+
+export class TaskForm {
+  constructor(tskform) {
+    this.tskform = tskform;
+    this.minLength = 1;
+    this.maxLength = 20;
+
+  }
   // this code checks all the form buttons and attach the functions that each one must perform//
   buttonDefault() {
     const allFormBtns = document.querySelectorAll(".formbtn");
     allFormBtns.forEach((btn) => {
       btn.name !== "submitBtn"
         ? btn.addEventListener("click", function () {
-            taskMgr.resetValidation();
-          })
+          taskMgr.resetValidation();
+        })
         : btn.addEventListener("click", function () {
-            fieldsForm.submitButtonClicked();
-          });
+          fieldsForm.submitButtonClicked();
+        });
     });
   }
   submitButtonClicked() {
@@ -73,26 +83,27 @@ class TaskForm {
         input.value.length === "undefined"
       ) {
         this.setErrorFor(input, `${input.name} cannot be blank`);
-        submitBtn.disabled = true;
+        if (submitBtn) { submitBtn.disabled = true };
       } else if (input.value.length > this.maxLength) {
         this.setErrorFor(input, `${input.name} is longer than 20 char!`);
-        submitBtn.disabled = true;
+        if (submitBtn) { submitBtn.disabled = true };
       } else {
         this.setSuccessFor(input);
-        submitBtn.disabled = false;
+        if (submitBtn) { submitBtn.disabled = false };
       }
     } else {
       const taskDateValue = date.value;
       var todayDate = new Date().toISOString().slice(0, 10);
+
       if (taskDateValue == null || taskDateValue == "") {
         this.setErrorFor(date, "Task must have a due date");
-        submitBtn.disabled = true;
+        if (submitBtn) { submitBtn.disabled = true };
       } else if (taskDateValue < todayDate) {
         this.setErrorFor(date, "Task cannot be created in past date");
-        submitBtn.disabled = true;
+        if (submitBtn) { submitBtn.disabled = true };
       } else {
         this.setSuccessFor(date);
-        submitBtn.disabled = false;
+        if (submitBtn) { submitBtn.disabled = false };
       }
     }
   }
@@ -103,7 +114,7 @@ class TaskForm {
     small.innerText = message;
     small.style.color = "red";
     formgroup.className = "form-group error";
-    submitBtn.disabled = true;
+    if (submitBtn) { submitBtn.disabled = true };
   }
 
   setSuccessFor(input) {
@@ -112,7 +123,7 @@ class TaskForm {
     small.innerText = "Looks good!";
     small.style.color = "green";
     formgroup.className = "form-group success";
-    submitBtn.disabled = false;
+    if (submitBtn) { submitBtn.disabled = true };
   }
 }
 
@@ -126,4 +137,8 @@ window.addEventListener("load", function () {
   taskMgr.loadFromLocalStorage();
   taskMgr.displayTasksByCategory();
   fieldsForm.buttonDefault();
+  tskbtn.addEventListener("click", () => {
+    formTitle.innerText = "New Task ";
+    submitBtn.innerText = "Submit ";
+  });
 });
