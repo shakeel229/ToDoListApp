@@ -4,10 +4,12 @@ const form = document.querySelector("form");
 const submitBtn = document.getElementById("submit");
 var s = null;
 const formTitle = document.querySelector('[name="formTitle"]');
-var editedTask = false;
+const taskfilter = document.getElementById("tasksFilter");
+console.log(taskfilter);
+var editedTask = false;;
 
 export class TaskManager {
-  constructor(todayTasksContainer, upcomingTasksContainer, taskForm) {
+  constructor(todayTasksContainer, upcomingTasksContainer, taskForm, taskfilter) {
     this.tasksList = [];
     this.index = 0;
     this.todayTasksContainer = todayTasksContainer;
@@ -15,6 +17,9 @@ export class TaskManager {
     this.taskForm = taskForm;
     this.minLength = 1;
     this.maxLength = 20;
+    this.taskfilter = taskfilter;
+    this.loadFromLocalStorage();
+
   }
 
   addTask(name, description, assignee, status, date, time) {
@@ -73,6 +78,8 @@ export class TaskManager {
     this.attachEditListeners();
     this.resetValidation();
     this.updateTasksCount(this.tasksList);
+    this.displayTasksByCategory();
+
     localStorage.setItem("tasksList", JSON.stringify(this.tasksList));
   }
   //attach delete listeners
@@ -120,7 +127,7 @@ export class TaskManager {
     form.dataset.editIndex = s;
   }
 
-  displayTasksByCategory() {
+  displayTasksByCategory(taskfilter) {
     document.getElementById("tasksFilter").addEventListener("change", () => {
       console.log(event.target.value);
       const category = event.target.value;

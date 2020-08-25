@@ -2,6 +2,7 @@
 import Task from "./task";
 import { TaskManager } from "./task-manager";
 import { editedTask } from "./task-manager";
+import { TaskForm } from "./task-form";
 import { s } from "./task-manager";
 
 const taskForm = document.querySelector('[name="taskForm"]');
@@ -22,7 +23,7 @@ function resetTaskForm() {
   submitBtn.innerText = "Submit ";
 }*/
 
-export class TaskForm {
+/*export class TaskForm {
   constructor(tskform) {
     this.tskform = tskform;
     this.minLength = 1;
@@ -34,11 +35,11 @@ export class TaskForm {
     allFormBtns.forEach((btn) => {
       btn.name !== "submitBtn"
         ? btn.addEventListener("click", function () {
-            taskMgr.resetValidation();
-          })
+          taskMgr.resetValidation();
+        })
         : btn.addEventListener("click", function () {
-            fieldsForm.submitButtonClicked();
-          });
+          fieldsForm.submitButtonClicked();
+        });
     });
   }
   submitButtonClicked() {
@@ -136,7 +137,7 @@ export class TaskForm {
       submitBtn.disabled = true;
     }
   }
-}
+}*/
 
 window.addEventListener("load", function () {
   taskMgr = new TaskManager(taskcontainer, upcomingCards, taskForm);
@@ -145,8 +146,8 @@ window.addEventListener("load", function () {
   taskForm.addEventListener("input", function (event) {
     fieldsForm.checkValidation(event.target);
   });
-  taskMgr.loadFromLocalStorage();
-  taskMgr.displayTasksByCategory();
+  //taskMgr.loadFromLocalStorage();
+  // taskMgr.displayTasksByCategory();
   fieldsForm.buttonDefault();
   tskbtn.addEventListener("click", () => {
     formTitle.innerText = "New Task ";

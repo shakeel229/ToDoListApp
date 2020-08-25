@@ -1,15 +1,16 @@
 //import React from 'react';
 import path from "path";
-import { TaskForm } from "./script";
+import { TaskForm } from "./task-form";
+import { TaskManager } from "./task-manager";
+//import { TaskManager } from "./task-manager";
 import fs from "fs";
-import { get } from "http";
+
 const htmlDom = fs.readFileSync(path.resolve(__dirname, "./index.html"), "utf8");
 
 describe("Unit test for TaskForm Class", () => {
     beforeAll(() => {
         jest.clearAllMocks();
         document.body.innerHTML = htmlDom.toString();
-
 
     })
 
@@ -38,7 +39,7 @@ describe("Unit test for TaskForm Class", () => {
         const inputParent = document.getElementById("title");
         expect(inputParent.classList).toContain("success");
     })
-    test("test the task subject validation negative testcase - this will always fail(delibrate)", () => {
+    /*test("test the task subject validation negative testcase - this will always fail(delibrate)", () => {
 
         const taskform = document.getElementById("form");
         let taskfrm = new TaskForm(taskform);
@@ -48,7 +49,7 @@ describe("Unit test for TaskForm Class", () => {
         taskfrm.checkValidation(input);
         const inputParent = document.getElementById("title");
         expect(inputParent.classList).toContain("error");
-    })
+    })*/
     test("test the task Description validation", () => {
 
         const taskform = document.getElementById("form");
