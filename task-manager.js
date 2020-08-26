@@ -2,14 +2,18 @@ import Task from "./task";
 const task = new Task();
 const form = document.querySelector("form");
 const submitBtn = document.getElementById("submit");
-var s = null;
+
 const formTitle = document.querySelector('[name="formTitle"]');
 const taskfilter = document.getElementById("tasksFilter");
 console.log(taskfilter);
-var editedTask = false;;
 
 export class TaskManager {
-  constructor(todayTasksContainer, upcomingTasksContainer, taskForm, taskfilter) {
+  constructor(
+    todayTasksContainer,
+    upcomingTasksContainer,
+    taskForm,
+    taskfilter
+  ) {
     this.tasksList = [];
     this.index = 0;
     this.todayTasksContainer = todayTasksContainer;
@@ -19,7 +23,6 @@ export class TaskManager {
     this.maxLength = 20;
     this.taskfilter = taskfilter;
     this.loadFromLocalStorage();
-
   }
 
   addTask(name, description, assignee, status, date, time) {
@@ -114,17 +117,17 @@ export class TaskManager {
     });
   }
   editTasks(arrayOfTasks, targetId) {
-    s = arrayOfTasks.findIndex((x) => x.id == targetId);
-    taskForm.taskSubject.value = arrayOfTasks[s].name;
-    taskForm.taskDescription.value = arrayOfTasks[s].description;
-    taskForm.taskAssignee.value = arrayOfTasks[s].assignee;
-    taskForm.taskTime.value = arrayOfTasks[s].time;
-    taskForm.taskDate.value = arrayOfTasks[s].date;
-    taskForm.taskStatus.value = arrayOfTasks[s].status;
+    const index = arrayOfTasks.findIndex((x) => x.id == targetId);
+    taskForm.taskSubject.value = arrayOfTasks[index].name;
+    taskForm.taskDescription.value = arrayOfTasks[index].description;
+    taskForm.taskAssignee.value = arrayOfTasks[index].assignee;
+    taskForm.taskTime.value = arrayOfTasks[index].time;
+    taskForm.taskDate.value = arrayOfTasks[index].date;
+    taskForm.taskStatus.value = arrayOfTasks[index].status;
     submitBtn.innerText = "Update ";
     formTitle.innerText = "Edit Task";
     form.dataset.edited = true;
-    form.dataset.editIndex = s;
+    form.dataset.editIndex = index;
   }
 
   displayTasksByCategory(taskfilter) {
@@ -216,6 +219,3 @@ export class TaskManager {
     submitBtn.disabled = true;
   }
 }
-
-export { editedTask };
-export { s };

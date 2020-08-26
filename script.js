@@ -1,10 +1,7 @@
 //global variable for form to acces fields anywhere in code
 import Task from "./task";
 import { TaskManager } from "./task-manager";
-import { editedTask } from "./task-manager";
 import { TaskForm } from "./task-form";
-import { s } from "./task-manager";
-
 const taskForm = document.querySelector('[name="taskForm"]');
 const formFooter = document.querySelector('[name="formFooter"]');
 const formTitle = document.querySelector('[name="formTitle"]');
@@ -12,8 +9,7 @@ const submitBtn = document.getElementById("submit");
 const taskcontainer = document.querySelector("#task");
 const upcomingCards = document.querySelector(".upcomingSection");
 const tskbtn = document.getElementById("addTaskBtn");
-let taskMgr;
-let task;
+
 let fieldsForm;
 //let editedTask;
 //let s = null;
