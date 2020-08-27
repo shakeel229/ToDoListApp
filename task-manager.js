@@ -129,9 +129,7 @@ export class TaskManager {
     form.dataset.edited = true;
     form.dataset.editIndex = index;
   }
-  callForEdit(array, targetid) {
-    this.editTasks(array, targetid);
-  }
+
   displayTasksByCategory(taskfilter) {
     document.getElementById("tasksFilter").addEventListener("change", () => {
       console.log(event.target.value);

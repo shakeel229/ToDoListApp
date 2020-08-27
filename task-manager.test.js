@@ -35,7 +35,7 @@ describe("Test Cases of Task Manager Class", function () {
   test("Update Task from tasks List and DOM as well", function () {
     //const deleteButton = document.querySelector("button.removeBtn");
     //deleteButton.click();
-    taskMgr.callForEdit(taskMgr.tasksList, "task0");
+    taskMgr.editTasks(taskMgr.tasksList, "task0");
     //expect(taskMgr.tasksList.length).toBe(0);
     //today tasks DIV is empty because date is future one
     expect(taskMgr.todayTasksContainer.innerHTML).toBe("");
