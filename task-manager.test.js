@@ -32,6 +32,16 @@ describe("Test Cases of Task Manager Class", function () {
     expect(taskMgr.upcomingTasksContainer.childElementCount).toBe(2);
     expect(taskMgr.upcomingTasksContainer.innerHTML).toContain("shakeel anjum");
   });
+  test("Update Task from tasks List and DOM as well", function () {
+    //const deleteButton = document.querySelector("button.removeBtn");
+    //deleteButton.click();
+    taskMgr.callForEdit(taskMgr.tasksList, "task0");
+    //expect(taskMgr.tasksList.length).toBe(0);
+    //today tasks DIV is empty because date is future one
+    expect(taskMgr.todayTasksContainer.innerHTML).toBe("");
+    //upcoming tasks DIV have no tasks 1 is the heading of DIV 'Upcoming Tasks'
+    expect(taskMgr.upcomingTasksContainer.childElementCount).toBe(2);
+  });
   test("Delete Task from Tasks List and DOM as well", function () {
     //const deleteButton = document.querySelector("button.removeBtn");
     //deleteButton.click();

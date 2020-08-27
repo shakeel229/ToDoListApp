@@ -136,8 +136,8 @@ function resetTaskForm() {
 }*/
 
 window.addEventListener("load", function () {
-  taskMgr = new TaskManager(taskcontainer, upcomingCards, taskForm);
-  task = new Task();
+  const taskMgr = new TaskManager(taskcontainer, upcomingCards, taskForm);
+  const task = new Task();
   fieldsForm = new TaskForm();
   taskForm.addEventListener("input", function (event) {
     fieldsForm.checkValidation(event.target);

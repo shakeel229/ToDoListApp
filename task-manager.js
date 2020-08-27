@@ -118,18 +118,20 @@ export class TaskManager {
   }
   editTasks(arrayOfTasks, targetId) {
     const index = arrayOfTasks.findIndex((x) => x.id == targetId);
-    taskForm.taskSubject.value = arrayOfTasks[index].name;
-    taskForm.taskDescription.value = arrayOfTasks[index].description;
-    taskForm.taskAssignee.value = arrayOfTasks[index].assignee;
-    taskForm.taskTime.value = arrayOfTasks[index].time;
-    taskForm.taskDate.value = arrayOfTasks[index].date;
-    taskForm.taskStatus.value = arrayOfTasks[index].status;
+    this.taskForm.taskSubject.value = arrayOfTasks[index].name;
+    this.taskForm.taskDescription.value = arrayOfTasks[index].description;
+    this.taskForm.taskAssignee.value = arrayOfTasks[index].assignee;
+    this.taskForm.taskTime.value = arrayOfTasks[index].time;
+    this.taskForm.taskDate.value = arrayOfTasks[index].date;
+    this.taskForm.taskStatus.value = arrayOfTasks[index].status;
     submitBtn.innerText = "Update ";
     formTitle.innerText = "Edit Task";
     form.dataset.edited = true;
     form.dataset.editIndex = index;
   }
-
+  callForEdit(array, targetid) {
+    this.editTasks(array, targetid);
+  }
   displayTasksByCategory(taskfilter) {
     document.getElementById("tasksFilter").addEventListener("change", () => {
       console.log(event.target.value);
