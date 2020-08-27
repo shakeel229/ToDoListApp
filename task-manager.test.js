@@ -36,15 +36,13 @@ describe("Test Cases of Task Manager Class", function () {
     
     const form1 = document.getElementById("form");
     taskMgr.editTasks(taskMgr.tasksList, "task0", `${document.getElementById("form")}`);
-    //expect(taskMgr.tasksList.length).toBe(0);
-    //today tasks DIV is empty because date is future one
     expect(taskMgr.todayTasksContainer.innerHTML).toBe("");
     //upcoming tasks DIV have no tasks 1 is the heading of DIV 'Upcoming Tasks'
     expect(taskMgr.upcomingTasksContainer.childElementCount).toBe(2);
   });
   test("Delete Task from Tasks List and DOM as well", function () {
     //const deleteButton = document.querySelector("button.removeBtn");
-    //deleteButton.click();
+    
     taskMgr.deleteTask(taskMgr.tasksList, "task0");
     expect(taskMgr.tasksList.length).toBe(0);
     //today tasks DIV is empty because date is future one
@@ -53,12 +51,3 @@ describe("Test Cases of Task Manager Class", function () {
     expect(taskMgr.upcomingTasksContainer.childElementCount).toBe(1);
   });
 });
-/**taskMgr.addTask(
-      "task1",
-      "grocery shopping",
-      "visit coles",
-      "shakeel",
-      "pending",
-      "2020-09-05",
-      "20:34"
-    ); */

@@ -13,7 +13,7 @@ export default class Task {
   templateToDom(taskElement) {
     const myHTML = this.htmlTemplate(taskElement);
     const myFragment = document.createRange().createContextualFragment(myHTML);
-    //console.log("Check" + myFragment);
+    
 
     return myFragment;
   }

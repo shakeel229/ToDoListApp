@@ -80,7 +80,7 @@ export class TaskManager {
 
     localStorage.setItem("tasksList", JSON.stringify(this.tasksList));
   }
-  //attach delete listeners
+  
   attachDeleteListeners() {
     const deleteButtons = document.querySelectorAll("button.removeBtn");
 
@@ -226,7 +226,7 @@ export class TaskManager {
     ).innerHTML = `DONE  <span class="badge badge-light badgeDone">${done}</span>
     `;
   }
-  // reset validation ends here//
+  
   alertOnSubmit() {
     alert("Please fill in all the fields , Task can't be blank");
     submitBtn.disabled = true;

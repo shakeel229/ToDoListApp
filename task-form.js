@@ -1,12 +1,8 @@
 import { TaskManager } from "./task-manager";
-import { editedTask } from "./task-manager";
 const taskForm = document.querySelector('[name="taskForm"]');
-const formFooter = document.querySelector('[name="formFooter"]');
-const formTitle = document.querySelector('[name="formTitle"]');
 const submitBtn = document.getElementById("submit");
 const taskcontainer = document.querySelector("#task");
 const upcomingCards = document.querySelector(".upcomingSection");
-const tskbtn = document.getElementById("addTaskBtn");
 const taskfilter = document.getElementById("tasksFilter");
 const taskMgr = new TaskManager(
   taskcontainer,
