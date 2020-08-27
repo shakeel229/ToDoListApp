@@ -2,12 +2,9 @@ import Task from "./task";
 const task = new Task();
 const form = document.querySelector("form");
 let submitBtn = document.getElementById("submit");
-//const title = document.getElementById("TitleField");
 const formTitle = document.querySelector('[name="formTitle"]');
 const taskfilter = document.getElementById("tasksFilter");
 const title = document.getElementById("TitleField");
-
-console.log(taskfilter);
 
 export class TaskManager {
   constructor(
@@ -38,7 +35,6 @@ export class TaskManager {
     ) {
       this.alertOnSubmit();
     } else {
-      console.log(this.tasksList.length);
       const task = new Task(
         `task${this.tasksList.length ? this.tasksList.length : this.index++}`,
         name,
@@ -60,7 +56,6 @@ export class TaskManager {
       localTasks.forEach((localtask) => {
         this.tasksList.push(localtask);
       });
-      console.log("fetching local tasks");
       this.refreshPage(this.tasksList);
     }
   }
@@ -70,12 +65,10 @@ export class TaskManager {
     const recentDate = new Date().toISOString().slice(0, 10);
     tasksArray.forEach((taskOfArray) => {
       const element = task.templateToDom(taskOfArray);
-      console.log(taskOfArray.date);
       const cardDate = new Date(taskOfArray.date).toISOString().slice(0, 10);
       if (recentDate === cardDate) {
         this.todayTasksContainer.append(element);
       } else {
-        console.log("date is different one");
         this.upcomingTasksContainer.appendChild(element);
       }
     });
@@ -115,7 +108,6 @@ export class TaskManager {
     editButtons.forEach((editButton) => {
       editButton.addEventListener("click", () => {
         this.editTasks(this.tasksList, event.currentTarget.id, this.taskForm);
-        console.log(this.taskForm);
       });
     });
   }
@@ -127,45 +119,49 @@ export class TaskManager {
     const time = document.getElementById("time");
     const date = document.getElementById("date");
     const stat = document.getElementById("status");
-    
-    console.log(taskform);
+
     const index = arrayOfTasks.findIndex((x) => x.id == targetId);
-    
-    if(title){title.value = arrayOfTasks[index].name;}
-    if(desc){desc.value = arrayOfTasks[index].description;}
+
+    if (title) {
+      title.value = arrayOfTasks[index].name;
+    }
+    if (desc) {
+      desc.value = arrayOfTasks[index].description;
+    }
     title.value = arrayOfTasks[index].name;
     desc.value = arrayOfTasks[index].description;
     assignee.value = arrayOfTasks[index].assignee;
     time.value = arrayOfTasks[index].time;
     date.value = arrayOfTasks[index].date;
     stat.value = arrayOfTasks[index].status;
-    if(submitBtn){submitBtn.innerText = "Update ";}
-    if(formTitle){formTitle.innerText = "Edit Task";}
-    if(form.dataset){form.dataset.edited = true;}
-    if(form.dataset) {form.dataset.editIndex = index;}
-    
-    
+    if (submitBtn) {
+      submitBtn.innerText = "Update ";
+    }
+    if (formTitle) {
+      formTitle.innerText = "Edit Task";
+    }
+    if (form.dataset) {
+      form.dataset.edited = true;
+    }
+    if (form.dataset) {
+      form.dataset.editIndex = index;
+    }
   }
 
   displayTasksByCategory(taskfilter) {
     document.getElementById("tasksFilter").addEventListener("change", () => {
-      console.log(event.target.value);
       const category = event.target.value;
       if (category != "All Tasks") {
-        console.log("inside if of category chosing");
         const filterCondition = event.target.value;
         const filteredTasks = this.tasksList.filter(
           (x) => x.status == filterCondition
         );
-        console.log(filteredTasks);
         this.refreshPage(filteredTasks);
       } else {
         this.refreshPage(this.tasksList);
       }
     });
   }
-
-  //validation code ends here//
 
   // this code deals with clearing the validation classesand message when a form is launched again - for repo//
 
@@ -210,7 +206,7 @@ export class TaskManager {
           done += 1;
           break;
         default:
-        // code block
+        // nothing
       }
     });
 
