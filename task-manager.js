@@ -1,10 +1,12 @@
 import Task from "./task";
 const task = new Task();
 const form = document.querySelector("form");
-const submitBtn = document.getElementById("submit");
-
+let submitBtn = document.getElementById("submit");
+//const title = document.getElementById("TitleField");
 const formTitle = document.querySelector('[name="formTitle"]');
 const taskfilter = document.getElementById("tasksFilter");
+const title = document.getElementById("TitleField");
+
 console.log(taskfilter);
 
 export class TaskManager {
@@ -112,22 +114,37 @@ export class TaskManager {
     const editButtons = document.querySelectorAll("button.editBtn");
     editButtons.forEach((editButton) => {
       editButton.addEventListener("click", () => {
-        this.editTasks(this.tasksList, event.currentTarget.id);
+        this.editTasks(this.tasksList, event.currentTarget.id, this.taskForm);
+        console.log(this.taskForm);
       });
     });
   }
-  editTasks(arrayOfTasks, targetId) {
+  editTasks(arrayOfTasks, targetId, tskfrm) {
+    const taskform = tskfrm;
+    const title = document.getElementById("TitleField");
+    const desc = document.getElementById("DescriptionField");
+    const assignee = document.getElementById("AssigneeField");
+    const time = document.getElementById("time");
+    const date = document.getElementById("date");
+    const stat = document.getElementById("status");
+    
+    console.log(taskform);
     const index = arrayOfTasks.findIndex((x) => x.id == targetId);
-    this.taskForm.taskSubject.value = arrayOfTasks[index].name;
-    this.taskForm.taskDescription.value = arrayOfTasks[index].description;
-    this.taskForm.taskAssignee.value = arrayOfTasks[index].assignee;
-    this.taskForm.taskTime.value = arrayOfTasks[index].time;
-    this.taskForm.taskDate.value = arrayOfTasks[index].date;
-    this.taskForm.taskStatus.value = arrayOfTasks[index].status;
-    submitBtn.innerText = "Update ";
-    formTitle.innerText = "Edit Task";
-    form.dataset.edited = true;
-    form.dataset.editIndex = index;
+    
+    if(title){title.value = arrayOfTasks[index].name;}
+    if(desc){desc.value = arrayOfTasks[index].description;}
+    title.value = arrayOfTasks[index].name;
+    desc.value = arrayOfTasks[index].description;
+    assignee.value = arrayOfTasks[index].assignee;
+    time.value = arrayOfTasks[index].time;
+    date.value = arrayOfTasks[index].date;
+    stat.value = arrayOfTasks[index].status;
+    if(submitBtn){submitBtn.innerText = "Update ";}
+    if(formTitle){formTitle.innerText = "Edit Task";}
+    if(form.dataset){form.dataset.edited = true;}
+    if(form.dataset) {form.dataset.editIndex = index;}
+    
+    
   }
 
   displayTasksByCategory(taskfilter) {

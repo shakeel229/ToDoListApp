@@ -11,7 +11,7 @@ describe("Test Cases of Task Manager Class", function () {
     document.body.innerHTML = html.toString();
     taskContainer = document.getElementById("task");
     const upcomingCards = document.querySelector(".upcomingSection");
-    const form = document.querySelector("form");
+    const form = document.getElementById("form");
     taskMgr = new TaskManager(taskContainer, upcomingCards, form);
   });
   test("Adding New Task to Array of tasks and DOM", function () {
@@ -33,9 +33,9 @@ describe("Test Cases of Task Manager Class", function () {
     expect(taskMgr.upcomingTasksContainer.innerHTML).toContain("shakeel anjum");
   });
   test("Update Task from tasks List and DOM as well", function () {
-    //const deleteButton = document.querySelector("button.removeBtn");
-    //deleteButton.click();
-    taskMgr.editTasks(taskMgr.tasksList, "task0");
+    
+    const form1 = document.getElementById("form");
+    taskMgr.editTasks(taskMgr.tasksList, "task0", `${document.getElementById("form")}`);
     //expect(taskMgr.tasksList.length).toBe(0);
     //today tasks DIV is empty because date is future one
     expect(taskMgr.todayTasksContainer.innerHTML).toBe("");
