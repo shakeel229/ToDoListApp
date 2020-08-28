@@ -60,7 +60,8 @@ describe("Unit test for TaskForm Class", () => {
     let taskfrm = new TaskForm(taskform);
     const input = document.getElementById("date");
     console.log(input);
-    document.getElementById("date").value = "2020-08-25";
+    const todayDate = new Date().toISOString().slice(0, 10);
+    document.getElementById("date").value = todayDate;
     taskfrm.checkValidation(input);
     const inputParent = document.getElementById("dueDate");
     expect(inputParent.classList).toContain("success");
