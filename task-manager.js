@@ -80,7 +80,7 @@ export class TaskManager {
 
     localStorage.setItem("tasksList", JSON.stringify(this.tasksList));
   }
-  
+
   attachDeleteListeners() {
     const deleteButtons = document.querySelectorAll("button.removeBtn");
 
@@ -107,11 +107,15 @@ export class TaskManager {
     const editButtons = document.querySelectorAll("button.editBtn");
     editButtons.forEach((editButton) => {
       editButton.addEventListener("click", () => {
-        this.editTasks(this.tasksList, event.currentTarget.id, this.taskForm);
+        this.editTaskForm(
+          this.tasksList,
+          event.currentTarget.id,
+          this.taskForm
+        );
       });
     });
   }
-  editTasks(arrayOfTasks, targetId, tskfrm) {
+  editTaskForm(arrayOfTasks, targetId, tskfrm) {
     const taskform = tskfrm;
     const title = document.getElementById("TitleField");
     const desc = document.getElementById("DescriptionField");
@@ -146,6 +150,14 @@ export class TaskManager {
     if (form.dataset) {
       form.dataset.editIndex = index;
     }
+  }
+  updateTask(index, title, description, assignee, status, date, time) {
+    this.tasksList[index].name = title;
+    this.tasksList[index].description = description;
+    this.tasksList[index].assignee = assignee;
+    this.tasksList[index].time = time;
+    this.tasksList[index].date = date;
+    this.tasksList[index].status = status;
   }
 
   displayTasksByCategory(taskfilter) {
@@ -226,7 +238,7 @@ export class TaskManager {
     ).innerHTML = `DONE  <span class="badge badge-light badgeDone">${done}</span>
     `;
   }
-  
+
   alertOnSubmit() {
     alert("Please fill in all the fields , Task can't be blank");
     submitBtn.disabled = true;

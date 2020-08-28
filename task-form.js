@@ -37,12 +37,27 @@ export class TaskForm {
     if (taskForm.dataset.edited === "true") {
       taskForm.dataset.edited = false;
       const index = taskForm.dataset.editIndex;
-      taskMgr.tasksList[index].name = taskForm.taskSubject.value;
-      taskMgr.tasksList[index].description = taskForm.taskDescription.value;
-      taskMgr.tasksList[index].assignee = taskForm.taskAssignee.value;
-      taskMgr.tasksList[index].status = taskForm.taskStatus.value;
-      taskMgr.tasksList[index].date = taskForm.taskDate.value;
-      taskMgr.tasksList[index].time = taskForm.taskTime.value;
+      const title = taskForm.taskSubject.value;
+      const description = taskForm.taskDescription.value;
+      const assignee = taskForm.taskAssignee.value;
+      const status = taskForm.taskStatus.value;
+      const date = taskForm.taskDate.value;
+      const time = taskForm.taskTime.value;
+      taskMgr.updateTask(
+        index,
+        title,
+        description,
+        assignee,
+        status,
+        date,
+        time
+      );
+      // taskMgr.tasksList[index].name = taskForm.taskSubject.value;
+      // taskMgr.tasksList[index].description = taskForm.taskDescription.value;
+      // taskMgr.tasksList[index].assignee = taskForm.taskAssignee.value;
+      // taskMgr.tasksList[index].status = taskForm.taskStatus.value;
+      // taskMgr.tasksList[index].date = taskForm.taskDate.value;
+      // taskMgr.tasksList[index].time = taskForm.taskTime.value;
       taskMgr.refreshPage(taskMgr.tasksList);
     } else {
       taskMgr.addTask(
