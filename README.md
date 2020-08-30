@@ -21,7 +21,7 @@ This Task Planner App. provides following basic features
 4. delete tasks from tasks list.
 5. Currently Tasks are stored in Browsers local storage.
 
-## Info
+## Info :clipboard:
 
 The code has been written into Javascript classes and following are the three major Classes in Project
 
@@ -58,5 +58,3 @@ npm run start
 ```
 npm run build
 ```
-
-:clipboard:
