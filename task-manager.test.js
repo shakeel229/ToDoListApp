@@ -16,12 +16,11 @@ describe("Test Cases of Task Manager Class", function () {
   });
   test("Adding New Task to Array of tasks and DOM", function () {
     taskMgr.addTask(
-      "task1",
-      "Grocery Shopping",
-      "go to coles",
+      "shopping",
+      "Grocery Shopping from coles",
       "shakeel anjum",
-      "2020-10-05",
       "pending",
+      "2020-10-05",
       "21:32"
     );
     //task added to tasks list
@@ -31,18 +30,27 @@ describe("Test Cases of Task Manager Class", function () {
     //upcoming tasks DIV have two elements 1 is the task and 1 is the heading of DIV 'Upcoming Tasks'
     expect(taskMgr.upcomingTasksContainer.childElementCount).toBe(2);
     expect(taskMgr.upcomingTasksContainer.innerHTML).toContain("shakeel anjum");
+    expect(taskMgr.upcomingTasksContainer.innerHTML).toContain("2020-10-05");
   });
   test("Update Task from tasks List and DOM as well", function () {
-    
     const form1 = document.getElementById("form");
-    taskMgr.editTasks(taskMgr.tasksList, "task0", `${document.getElementById("form")}`);
+    taskMgr.updateTask(
+      "0",
+      "Go gor Walk",
+      "go to park",
+      "Ayushi karn",
+      "review",
+      "2025-12-06",
+      "20:30"
+    );
+    console.log(taskMgr.tasksList[0]);
     expect(taskMgr.todayTasksContainer.innerHTML).toBe("");
     //upcoming tasks DIV have no tasks 1 is the heading of DIV 'Upcoming Tasks'
     expect(taskMgr.upcomingTasksContainer.childElementCount).toBe(2);
   });
   test("Delete Task from Tasks List and DOM as well", function () {
     //const deleteButton = document.querySelector("button.removeBtn");
-    
+
     taskMgr.deleteTask(taskMgr.tasksList, "task0");
     expect(taskMgr.tasksList.length).toBe(0);
     //today tasks DIV is empty because date is future one

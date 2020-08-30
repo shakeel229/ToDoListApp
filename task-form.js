@@ -52,13 +52,6 @@ export class TaskForm {
         date,
         time
       );
-      // taskMgr.tasksList[index].name = taskForm.taskSubject.value;
-      // taskMgr.tasksList[index].description = taskForm.taskDescription.value;
-      // taskMgr.tasksList[index].assignee = taskForm.taskAssignee.value;
-      // taskMgr.tasksList[index].status = taskForm.taskStatus.value;
-      // taskMgr.tasksList[index].date = taskForm.taskDate.value;
-      // taskMgr.tasksList[index].time = taskForm.taskTime.value;
-      taskMgr.refreshPage(taskMgr.tasksList);
     } else {
       taskMgr.addTask(
         taskForm.taskSubject.value,

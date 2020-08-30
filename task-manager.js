@@ -143,7 +143,7 @@ export class TaskManager {
       submitBtn.innerText = "Update ";
     }
     if (resetBtn) {
-      resetBtn.classList.add("hidden") ;
+      resetBtn.classList.add("hidden");
     }
     if (formTitle) {
       formTitle.innerText = "Edit Task";
@@ -156,13 +156,13 @@ export class TaskManager {
     }
   }
   updateTask(index, title, description, assignee, status, date, time) {
-    
     this.tasksList[index].name = title;
     this.tasksList[index].description = description;
     this.tasksList[index].assignee = assignee;
     this.tasksList[index].time = time;
     this.tasksList[index].date = date;
     this.tasksList[index].status = status;
+    this.refreshPage(this.tasksList);
   }
 
   displayTasksByCategory(taskfilter) {
