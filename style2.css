@@ -288,3 +288,6 @@ ul li:hover .linktitle {
 .card:nth-child(4n) {
   background-image: linear-gradient(120deg, #ffc3a0 0%, #ffafbd 100%);
 }
+.hidden {
+  visibility: hidden;
+}

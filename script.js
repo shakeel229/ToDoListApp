@@ -9,6 +9,7 @@ const submitBtn = document.getElementById("submit");
 const taskcontainer = document.querySelector("#task");
 const upcomingCards = document.querySelector(".upcomingSection");
 const tskbtn = document.getElementById("addTaskBtn");
+let resetBtn = document.getElementById("reset");
 
 window.addEventListener("load", function () {
   const taskMgr = new TaskManager(taskcontainer, upcomingCards, taskForm);
@@ -22,5 +23,8 @@ window.addEventListener("load", function () {
   tskbtn.addEventListener("click", () => {
     formTitle.innerText = "New Task ";
     submitBtn.innerText = "Submit ";
+    taskForm.dataset.edited = false;
+    
+    //resetBtn.classList.remove("hidden") ;
   });
 });
