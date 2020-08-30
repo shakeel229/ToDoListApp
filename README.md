@@ -2,11 +2,12 @@
 
 ## Technologies
 
-Following Technologies have been used to develop this Calculator
+Following Technologies have been used to develop this Application
 
 1. HTML 5
-2. Bootstrap
-3. JavaScript
+2. CSS 3
+3. Bootstrap
+4. JavaScript
 
 #### Application is Live here [Netlity Link](https://taskplanner229.netlify.app/)
 
@@ -59,7 +60,3 @@ npm run build
 ```
 
 :clipboard:
-
-## Note
-
-This task was completed by following the tutorial at the following tutorial at [freecodecamp.org](https://zellwk.com/blog/calculator-part-3/)
