@@ -36,21 +36,15 @@ export class TaskForm {
     document.getElementById("tasksFilter").value = "All Tasks";
     if (taskForm.dataset.edited === "true") {
       taskForm.dataset.edited = false;
-      const index = taskForm.dataset.editIndex;
-      const title = taskForm.taskSubject.value;
-      const description = taskForm.taskDescription.value;
-      const assignee = taskForm.taskAssignee.value;
-      const status = taskForm.taskStatus.value;
-      const date = taskForm.taskDate.value;
-      const time = taskForm.taskTime.value;
+      console.log(taskForm.dataset.editIndex);
       taskMgr.updateTask(
-        index,
-        title,
-        description,
-        assignee,
-        status,
-        date,
-        time
+        taskForm.dataset.editIndex,
+        taskForm.taskSubject.value,
+        taskForm.taskDescription.value,
+        taskForm.taskAssignee.value,
+        taskForm.taskStatus.value,
+        taskForm.taskDate.value,
+        taskForm.taskTime.value
       );
     } else {
       taskMgr.addTask(

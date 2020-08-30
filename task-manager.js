@@ -108,52 +108,22 @@ export class TaskManager {
     const editButtons = document.querySelectorAll("button.editBtn");
     editButtons.forEach((editButton) => {
       editButton.addEventListener("click", () => {
-        this.editTaskForm(
-          this.tasksList,
-          event.currentTarget.id,
-          this.taskForm
-        );
+        this.editTaskForm(event.currentTarget.id);
       });
     });
   }
-  editTaskForm(arrayOfTasks, targetId, tskfrm) {
-    const taskform = tskfrm;
-    const title = document.getElementById("TitleField");
-    const desc = document.getElementById("DescriptionField");
-    const assignee = document.getElementById("AssigneeField");
-    const time = document.getElementById("time");
-    const date = document.getElementById("date");
-    const stat = document.getElementById("status");
-
-    const index = arrayOfTasks.findIndex((x) => x.id == targetId);
-
-    if (title) {
-      title.value = arrayOfTasks[index].name;
-    }
-    if (desc) {
-      desc.value = arrayOfTasks[index].description;
-    }
-    title.value = arrayOfTasks[index].name;
-    desc.value = arrayOfTasks[index].description;
-    assignee.value = arrayOfTasks[index].assignee;
-    time.value = arrayOfTasks[index].time;
-    date.value = arrayOfTasks[index].date;
-    stat.value = arrayOfTasks[index].status;
-    if (submitBtn) {
-      submitBtn.innerText = "Update ";
-    }
-    if (resetBtn) {
-      resetBtn.classList.add("hidden");
-    }
-    if (formTitle) {
-      formTitle.innerText = "Edit Task";
-    }
-    if (form.dataset) {
-      form.dataset.edited = true;
-    }
-    if (form.dataset) {
-      form.dataset.editIndex = index;
-    }
+  editTaskForm(targetId) {
+    this.taskForm.dataset.edited = "true";
+    const s = this.tasksList.findIndex((x) => x.id == targetId);
+    this.taskForm.dataset.editIndex = s;
+    this.taskForm.taskSubject.value = this.tasksList[s].name;
+    this.taskForm.taskDescription.value = this.tasksList[s].description;
+    this.taskForm.taskAssignee.value = this.tasksList[s].assignee;
+    this.taskForm.taskTime.value = this.tasksList[s].time;
+    this.taskForm.taskDate.value = this.tasksList[s].date;
+    this.taskForm.taskStatus.value = this.tasksList[s].status;
+    submitBtn.innerText = "Update ";
+    formTitle.innerText = "Edit Task";
   }
   updateTask(index, title, description, assignee, status, date, time) {
     this.tasksList[index].name = title;
