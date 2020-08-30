@@ -36,17 +36,19 @@ describe("Test Cases of Task Manager Class", function () {
     const form1 = document.getElementById("form");
     taskMgr.updateTask(
       "0",
-      "Go gor Walk",
+      "Go for Walk",
       "go to park",
       "Ayushi karn",
       "review",
       "2025-12-06",
       "20:30"
     );
-    console.log(taskMgr.tasksList[0]);
     expect(taskMgr.todayTasksContainer.innerHTML).toBe("");
-    //upcoming tasks DIV have no tasks 1 is the heading of DIV 'Upcoming Tasks'
+    //upcoming tasks DIV have 2 elements 1 is task 1 is the heading of DIV 'Upcoming Tasks'
     expect(taskMgr.upcomingTasksContainer.childElementCount).toBe(2);
+    expect(taskMgr.tasksList.length).toBe(1);
+    expect(taskMgr.upcomingTasksContainer.innerHTML).toContain("Go for Walk");
+    expect(taskMgr.upcomingTasksContainer.innerHTML).toContain("review");
   });
   test("Delete Task from Tasks List and DOM as well", function () {
     //const deleteButton = document.querySelector("button.removeBtn");
