@@ -25,6 +25,5 @@ window.addEventListener("load", function () {
     submitBtn.innerText = "Submit ";
     taskForm.dataset.edited = false;
     
-    //resetBtn.classList.remove("hidden") ;
   });
 });

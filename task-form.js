@@ -17,7 +17,7 @@ export class TaskForm {
   constructor(tskform) {
     this.tskform = tskform;
     this.minLength = 1;
-    this.maxLength = 20;
+    this.maxLength = 8;
   }
   // this code checks all the form buttons and attach the functions that each one must perform//
   buttonDefault() {
@@ -32,6 +32,7 @@ export class TaskForm {
           });
     });
   }
+  // call this method when the submit or update button is clicked//
   submitButtonClicked() {
     document.getElementById("tasksFilter").value = "All Tasks";
     if (taskForm.dataset.edited === "true") {
@@ -57,7 +58,7 @@ export class TaskForm {
       );
     }
   }
-
+//this method checks the vcalidation conditions for all the input fields// 
   checkValidation(input) {
     if (
       input.name === "taskSubject" ||
@@ -105,7 +106,7 @@ export class TaskForm {
       }
     }
   }
-
+// these two methods sets the error or success class to the input field when the validation passes or fails//
   setErrorFor(input, message) {
     const formgroup = input.parentElement;
     const small = formgroup.querySelector(".msg");
