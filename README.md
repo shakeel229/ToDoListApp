@@ -1,4 +1,4 @@
-# Task Planner Application By Shakeel and Ayushi
+# Task Planner Application By Shakeel and Ayushi 🏦
 
 ## Technologies
 
@@ -35,7 +35,7 @@ The Testing of The all Javascript classes and methods has been done Using Jest.j
 
 ## Link to live Page :computer:
 
-Repo is Live at Netlify [Netlity Link](https://javascript-calculator-shakeel.netlify.app/){:target="\_blank"}
+Repo is Live at Netlify [Netlity Link](https://taskplanner229.netlify.app/)
 
 ![Demo UI Page!](/demo.png "Landing Page")
 
