@@ -17,7 +17,7 @@ export class TaskForm {
   constructor(tskform) {
     this.tskform = tskform;
     this.minLength = 1;
-    this.maxLength = 8;
+    this.maxLength = 15;
   }
   // this code checks all the form buttons and attach the functions that each one must perform//
   buttonDefault() {
@@ -74,7 +74,7 @@ export class TaskForm {
           submitBtn.disabled = true;
         }
       } else if (input.value.length > this.maxLength) {
-        this.setErrorFor(input, `${input.name} is longer than 20 char!`);
+        this.setErrorFor(input, `${input.name} is longer than 15 char!`);
         if (submitBtn) {
           submitBtn.disabled = true;
         }
