@@ -74,7 +74,7 @@ export class TaskForm {
           submitBtn.disabled = true;
         }
       } else if (input.value.length > this.maxLength) {
-        this.setErrorFor(input, `${input.name} is longer than 20 char!`);
+        this.setErrorFor(input, `${input.name} is longer than 8 char!`);
         if (submitBtn) {
           submitBtn.disabled = true;
         }
