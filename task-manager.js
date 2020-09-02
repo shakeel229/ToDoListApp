@@ -63,7 +63,9 @@ export class TaskManager {
   refreshPage(tasksArray) {
     this.todayTasksContainer.innerHTML = "";
     this.upcomingTasksContainer.innerHTML = `<h2 class="Padding20">Upcoming Tasks</h2>`;
-    const recentDate = new Date().toISOString().slice(0, 10);
+    const recentDate = "2020-09-03";
+    // new Date().toISOString().slice(0, 10);
+    console.log(recentDate);
     tasksArray.forEach((taskOfArray) => {
       const element = task.templateToDom(taskOfArray);
       const cardDate = new Date(taskOfArray.date).toISOString().slice(0, 10);
